@@ -76,7 +76,7 @@ const Categories = () => {
     });
 
     content = (
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4  ">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-0  ">
         <div className="col-span-2">
           {filteredNews.map((article, index) => {
             
