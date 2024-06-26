@@ -83,14 +83,14 @@ const Categories = () => {
             return (
               <article
                 key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-0"
+                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
               >
                 <figure className="post-thumbnail">
-                  <a className=" block w-full" href={`/news/${article.title}`}>
+                  <a className=" block w-full lg:w-[400px]" href={`/news/${article.title}`}>
                     <img src={article.imageUrl} alt={article.title} className="  object-cover" />
                   </a>
                 </figure>
-                <div className="pr-0 lg:pt-2 flex flex-col justify-start">
+                <div className="pr-2 lg:p-4 flex flex-col justify-start">
                   <span className=" block text-sm text-gray-500 mb-2"></span>
                   <header className="entry-header">
                     <h2 className="entry-title text-xl font-semibold mb-2">
