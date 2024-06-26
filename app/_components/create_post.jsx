@@ -128,16 +128,7 @@ const CreatePost = () => {
     }
   };
 
-  useEffect(() => {
-    // Dynamically import ReactQuill only on the client-side
-    import('react-quill')
-      .then(({ default: ReactQuill }) => {
-        setEditorLoaded(true);
-      })
-      .catch((error) => {
-        console.error('Error loading ReactQuill:', error);
-      });
-  }, []);
+ 
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
