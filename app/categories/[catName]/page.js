@@ -83,10 +83,10 @@ const Categories = () => {
             return (
               <article
                 key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-4 w-full mb-4"
+                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-0"
               >
                 <figure className="post-thumbnail">
-                  <a className=" block w-[400px]" href={`/news/${article.title}`}>
+                  <a className=" block w-full" href={`/news/${article.title}`}>
                     <img src={article.imageUrl} alt={article.title} className="  object-cover" />
                   </a>
                 </figure>
