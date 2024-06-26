@@ -1,10 +1,15 @@
-import CreatePost from '../../_components/create_post'
-import React from 'react'
+"use client";
+import CreatePost from "../../_components/create_post";
+import { Provider } from "react-redux";
+import { store } from "../../_redux/news/store";
+import React from "react";
 
 const CreateNews = () => {
   return (
-    <div><CreatePost/></div>
-  )
-}
+    <Provider store={store}>
+      <CreatePost />
+    </Provider>
+  );
+};
 
-export default CreateNews
+export default CreateNews;

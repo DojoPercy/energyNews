@@ -1,38 +1,35 @@
-'use client';
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, FileInput, Select, TextInput } from 'flowbite-react';
-import { storage } from '../../config/firebaseconfig'; // Import storage from Firebase config
-import ReactQuill from 'react-quill';
+import { storage } from '../../config/firebaseconfig';
 import 'react-quill/dist/quill.snow.css';
 import { addNews } from '../_redux/news/newSlice';
 import { categories } from '../../lib/categories';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; // Import necessary storage functions
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 
 const CreatePost = () => {
   const dispatch = useDispatch();
   const news = useSelector(state => state.news.news);
   const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState(''); // State for summary
+  const [summary, setSummary] = useState('');
   const [category, setCategory] = useState('uncategorized');
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [editorHtml, setEditorHtml] = useState('');
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
-  const [uploading, setUploading] = useState(false); // State to track upload status
-  const [uploadProgress, setUploadProgress] = useState(0); // State to track upload progress
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
   const [publishImmediately, setPublishImmediately] = useState(false);
+  const [editorLoaded, setEditorLoaded] = useState(false);
+
+  const user = useKindeBrowserClient();
 
   const handleCheckboxChange = () => {
     setPublishImmediately(!publishImmediately);
-
   };
-
-  const user = useKindeBrowserClient();
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -55,7 +52,7 @@ const CreatePost = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     // Start upload process
-    if (imageFile != '') {
+    if (imageFile) {
       try {
         const newNewsItem = {
           title,
@@ -77,7 +74,7 @@ const CreatePost = () => {
         dispatch(addNews(newNewsItem));
         // Reset form fields if needed
         setTitle('');
-        setSummary(''); // Reset summary
+        setSummary('');
         setCategory('uncategorized');
         setImageFile(null);
         setImageUrl('');
@@ -86,6 +83,8 @@ const CreatePost = () => {
       } catch (error) {
         console.error('Error creating post:', error);
       }
+    } else {
+      setShowImageUploadNotice(true);
     }
   };
 
@@ -126,6 +125,17 @@ const CreatePost = () => {
       setShowImageUploadNotice(true); // Show notice if upload fails
     }
   };
+
+  useEffect(() => {
+    // Dynamically import ReactQuill only on the client-side
+    import('react-quill')
+      .then(({ default: ReactQuill }) => {
+        setEditorLoaded(true);
+      })
+      .catch((error) => {
+        console.error('Error loading ReactQuill:', error);
+      });
+  }, []);
 
   return (
     <div className="p-3 max-w-3xl mx-auto min-h-screen">
@@ -200,25 +210,27 @@ const CreatePost = () => {
             ))}
           </div>
         </div>
-        <ReactQuill
-          theme="snow"
-          value={editorHtml}
-          onChange={setEditorHtml}
-          className="mb-12 h-72"
-          placeholder='Write your post content here...'
-        />
+        {editorLoaded && typeof window !== 'undefined' && (
+          <ReactQuill
+            theme="snow"
+            value={editorHtml}
+            onChange={setEditorHtml}
+            className="mb-12 h-72"
+            placeholder='Write your post content here...'
+          />
+        )}
         <div className="flex items-center">
-      <input
-        type="checkbox"
-        id="publish-checkbox"
-        checked={publishImmediately}
-        onChange={handleCheckboxChange}
-        className="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
-      />
-      <label htmlFor="publish-checkbox" className="ml-2 block text-sm leading-5 text-gray-900">
-        Publish Right Away
-      </label>
-    </div>
+          <input
+            type="checkbox"
+            id="publish-checkbox"
+            checked={publishImmediately}
+            onChange={handleCheckboxChange}
+            className="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out"
+          />
+          <label htmlFor="publish-checkbox" className="ml-2 block text-sm leading-5 text-gray-900">
+            Publish Right Away
+          </label>
+        </div>
         <Button type="submit" gradientDuoTone="purpleToBlue" size="lg">
           Create Post
         </Button>
