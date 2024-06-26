@@ -94,7 +94,7 @@ const Categories = () => {
                   <span className=" block text-sm text-gray-500 mb-2"></span>
                   <header className="entry-header">
                     <h2 className="entry-title text-xl font-semibold mb-2">
-                      <a href={`/news/${article.id}`} className="hover:underline">
+                      <a href={`/news/${article.title}`} className="hover:underline">
                         {article.title}
                       </a>
                     </h2>
@@ -148,7 +148,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="containe ">
+    <div className="container mx-auto ">
       <div className="flex items-center text-gray-500 text-sm">
         <a href="/" className="hover:underline">
           Home
