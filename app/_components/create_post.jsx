@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, FileInput, Select, TextInput } from 'flowbite-react';
 import { storage } from '../../config/firebaseconfig';
-import 'react-quill/dist/quill.snow.css';
+
 import { addNews } from '../_redux/news/newSlice';
 import { categories } from '../../lib/categories';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
@@ -126,9 +126,9 @@ const CreatePost = () => {
     }
   };
 
-  useEffect(() => {
+ useEffect(() => {
     // Dynamically import ReactQuill only on the client-side
-    import('react-quill')
+    import ('react-quill/dist/quill.snow.css')
       .then(({ default: ReactQuill }) => {
         setEditorLoaded(true);
       })
