@@ -148,7 +148,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="containe mx-auto">
       <div className="flex items-center text-gray-500 text-sm">
         <a href="/" className="hover:underline">
           Home
