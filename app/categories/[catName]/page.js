@@ -90,7 +90,7 @@ const Categories = () => {
                     <img src={article.imageUrl} alt={article.title} className="  object-cover" />
                   </a>
                 </figure>
-                <div className="pr-2 lg:p-4 flex flex-col justify-start">
+                <div className="pr-0 lg:pt-2 flex flex-col justify-start">
                   <span className=" block text-sm text-gray-500 mb-2"></span>
                   <header className="entry-header">
                     <h2 className="entry-title text-xl font-semibold mb-2">
