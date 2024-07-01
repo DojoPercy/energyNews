@@ -251,7 +251,7 @@ const SingleNews = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <div className="flex items-center text-gray-500 text-xs lg:text-sm">
         <a href="/" className="hover:underline">
           Home
