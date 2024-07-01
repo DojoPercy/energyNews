@@ -15,7 +15,7 @@ const AdminHeader = () => {
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient(); // Replace with actual condition for admin access
 
   return (
-    <header className="text-gray-900 bg-white shadow-md">
+    <header className="text-gray-900 bg-white shadow-md fixed w-full z-10 top-0">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Left Side: Logo and Name */}
        <Link href={'/'}>
