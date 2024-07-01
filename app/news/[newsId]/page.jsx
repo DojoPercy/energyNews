@@ -114,7 +114,7 @@ const SingleNews = () => {
       const article = filteredNews[0];
 
       content = (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 p-2 lg:gap-6 lg:p-4 relative">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
               <ClipLoader size={50} color={"#123abc"} loading={true} />

@@ -16,10 +16,9 @@ export default function AdminLayout({ children }) {
   return (
     <Provider store={store}>
       <AdminHeader />
-      <div className="flex">
-        
+      <div className="flex mt-20">
         <Sidebar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded} />
-        <section className={`flex-grow p-4 transition-margin duration-300 ${isSidebarExpanded ? 'ml-80' : 'ml-20'}`}>
+        <section className={`flex-grow p-4 transition-margin duration-300 w-full ${isSidebarExpanded ? 'ml-80' : 'ml-20'} sm:ml-20`}>
           {children}
         </section>
       </div>
