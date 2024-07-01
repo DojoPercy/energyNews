@@ -134,7 +134,7 @@ const SingleNews = () => {
                   </h2>
                 </header>
                 <span className="block text-sm text-gray-500 mb-2"></span>
-                <a className="block w-[650px]" href={`/news/${article.id}`}>
+                <a className="block w-full" href={`/news/${article.id}`}>
                   <img
                     src={article.imageUrl}
                     alt={article.title}
