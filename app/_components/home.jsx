@@ -12,14 +12,10 @@ const Categories = () => {
   const dispatch = useDispatch();
   const news = useSelector((state) => state.news.news);
   const newsStatus = useSelector((state) => state.news.status);
-  const loading = useSelector((state) => state.news.loading);
+  const loading = false;
   const error = useSelector((state) => state.news.error);
 
-  useEffect(() => {
-    if (newsStatus === "idle") {
-      dispatch(fetchNews());
-    }
-  }, [newsStatus, dispatch]);
+ 
 
   const truncateString = (str, num) => {
     if (!str || typeof str !== "string") {
