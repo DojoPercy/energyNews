@@ -52,7 +52,7 @@ const Header = () => {
         <LoginSignupButtons isAuthenticated={isAuthenticated} />
       </div>
       <header
-        className={`text-gray-900 bg-white  ${
+        className={`text-gray-900 bg-blueTheme  ${
           isSticky ? "" : ""
         }`}
       >
