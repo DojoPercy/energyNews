@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import { Button, FileInput, Select, TextInput } from 'flowbite-react';// Assuming FileInput component is defined
 import Ad from '../../../lib/models/ads'; 
