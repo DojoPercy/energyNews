@@ -9,7 +9,7 @@ import {
 } from "@kinde-oss/kinde-auth-nextjs";
 import { LogOut } from "lucide-react";
 import Link from "next/link";
-import { FaPen } from "react-icons/fa";
+import { FaPen, FaPlus } from "react-icons/fa";
 
 const AdminHeader = () => {
   const { user, isAuthenticated, getPermission } = useKindeBrowserClient(); // Replace with actual condition for admin access
@@ -25,8 +25,8 @@ const AdminHeader = () => {
           <div className="border border-blue-500 text-black rounded-lg p-3 mt-2 flex justify-center items-center mr-2">
             <Link href="/admin/createpost">
               <span className="flex items-center">
-                <FaPen className="text-blue-500 text-xl mr-2 w-6" />
-                <span>Create Post</span>
+                <FaPlus/>
+                
               </span>
             </Link>
           </div>
