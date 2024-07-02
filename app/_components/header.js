@@ -32,7 +32,6 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-     
       if (window.scrollY > 200) {
         setIsSticky(true);
       } else {
@@ -49,41 +48,67 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center pb-2 transition-all duration-2000 ease-in-out">
+      <div className="flex justify-between items-center pb-2 transition-all duration-2000 ease-in-out  ">
         <LoginSignupButtons isAuthenticated={isAuthenticated} />
       </div>
-      <header className={`text-gray-900 bg-white ${isSticky ? "" : ""}`}>
-        <div className="w-full flex flex-col">
-          <div className="container mx-auto flex items-center justify-between p-4">
+      <header
+        className={`text-gray-900 bg-white  ${
+          isSticky ? "" : ""
+        }`}
+      >
+        <div className="w-full flex flex-col ">
+          <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-7xl ">
+            <Link href="/">
+              <img src="/logo.png" alt="Logo" className="h-20 flex" />
+            </Link>
+
+            <Link href="/" className=" ">
+              <img
+                src="/ads_by_logo.png"
+                alt="Logo"
+                className=" lg:h-36 flex"
+              />
+            </Link>
+          </div>
+          {/* Mobile Screen Nav */}
+          <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out border border-gray-200 "> 
             <div className="flex justify-between items-center">
               <button
                 onClick={toggleMenu}
                 className="text-gray-800 focus:outline-none"
               >
-                <FaBars />
+                <div className="flex items-center space-x-3">
+                <FaBars className=" w-5 h-5" />
+                <h3>
+                  Home
+                </h3>
+                </div>
               </button>
             </div>
-            <Link href="/">
-              <img src="/logo.png" alt="Logo" className="h-16 flex" />
-            </Link>
             <div className="flex-shrink-0">
               <button className="text-gray-800 focus:outline-none">
                 <FaSearch />
               </button>
             </div>
           </div>
-          <Divider />
-          <div className="hidden lg:flex items-center w-full space-x-4 mx-auto my-0">
-            <div className="flex justify-center items-center space-x-16 font-semibold text-md w-full">
-              {navItems.map((item, index) => (
-                <NavLink key={index} href={item.href} dropdownItems={item.dropdownItems}>
-                  {item.title}
-                  <FaChevronDown />
-                </NavLink>
-              ))}
+
+          <div className=" ">
+            <div className="hidden lg:flex items-center w-full space-x-4  my-0 border border-white   bg-blueTheme text-white justify-between ">
+              <div className="flex justify-start items-start  space-x-0 font-normal text-md lg:mx-auto lg:max-w-7xl w-full pl-10">
+                {navItems.map((item, index) => (
+                  <NavLink
+                    key={index}
+                    href={item.href}
+                    dropdownItems={item.dropdownItems}
+                  >
+                    {item.title}
+                    <FaChevronDown className="h-2" />
+                  </NavLink>
+                ))}
+              </div>
+
             </div>
           </div>
-          <Divider />
         </div>
         <nav
           className={`absolute w-[80%] lg:w-[50%] h-screen inset-x-0 shadow-md top-0 bg-white z-50 transform ${
@@ -102,9 +127,13 @@ const Header = () => {
                 <FaTimes />
               </button>
             </div>
-            <div className="mt-4 w-full">
+            <div className="mt-4 w-full   ">
               {navItems.map((item, index) => (
-                <MobileNavLink key={index} href={item.href} dropdownItems={item.dropdownItems}>
+                <MobileNavLink
+                  key={index}
+                  href={item.href}
+                  dropdownItems={item.dropdownItems}
+                >
                   {item.title}
                 </MobileNavLink>
               ))}
@@ -138,13 +167,17 @@ const Header = () => {
           isSticky ? "visible" : "invisible"
         }`}
       >
-        <div className="container mx-auto flex items-center justify-between p-4">
+        <div className="container mx-auto  flex items-center justify-between p-4">
           <Link href="/">
             <img src="/logo.png" alt="Logo" className="h-16 flex" />
           </Link>
           <div className="flex items-center space-x-4">
             {navItems.map((item, index) => (
-              <NavLink key={index} href={item.href} dropdownItems={item.dropdownItems}>
+              <NavLink
+                key={index}
+                href={item.href}
+                dropdownItems={item.dropdownItems}
+              >
                 {item.title}
                 <FaChevronDown />
               </NavLink>
@@ -165,22 +198,25 @@ const NavLink = ({ href, children, dropdownItems }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="flex items-center  space-x-2 border border-white px-3 py-2">
       <div
         className="relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <a href={`/categories/${href}`} className="text-gray-800 hover:text-gray-600 flex space-x-2 justify-center items-center">
+        <a
+          href={`/categories/${href}`}
+          className="text-white hover:text-gray-600 flex justify-start  flex-col space-x-2  items-center"
+        >
           {children}
         </a>
         {dropdownItems && isDropdownOpen && (
-          <div className="absolute left-0 mt-0 w-48 z-50 bg-gray-800 shadow-lg rounded-md py-2">
+          <div className="absolute left-0 mt-0 w-48 z-50 bg-white shadow-lg rounded-md py-2">
             {dropdownItems.map((item, index) => (
               <a
                 key={index}
-                href={`/categories/${item.toLowerCase().replace(/ /g, '_')}`}
-                className="block px-4 py-2 text-gray-200 hover:bg-gray-600"
+                href={`/categories/${item.toLowerCase().replace(/ /g, "_")}`}
+                className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >
                 {item}
               </a>
@@ -215,7 +251,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
           {dropdownItems.map((item, index) => (
             <a
               key={index}
-              href={`/categories/${item.toLowerCase().replace(/ /g, '_')}`}
+              href={`/categories/${item.toLowerCase().replace(/ /g, "_")}`}
               className="block py-2 text-gray-800 hover:bg-gray-200"
             >
               {item}
@@ -229,17 +265,23 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
 
 const LoginSignupButtons = ({ isAuthenticated }) => (
   <>
-    <div className="bg-black w-full py-5 relative">
-      <div className="absolute right-10 top-2">
+    <div className="bg-blueTheme w-full py-5 relative">
+      <div className="absolute right-10 top-2  lg:max-w-7xl lg:mx-auto">
         {!isAuthenticated ? (
           <LoginLink>
-            <span variant="outline" className="text-white text-md p-1 bg-gray-800">
+            <span
+              variant="outline"
+              className="text-white text-md p-1 bg-gray-800"
+            >
               Login
             </span>
           </LoginLink>
         ) : (
           <LogoutLink>
-            <span variant="outline" className="text-white text-md px-5 py-1 bg-gray-800">
+            <span
+              variant="outline"
+              className="text-white text-md px-5 py-1 bg-gray-800"
+            >
               Log Out
             </span>
           </LogoutLink>

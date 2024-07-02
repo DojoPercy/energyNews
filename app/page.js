@@ -1,4 +1,4 @@
-
+"use client";
 import React from 'react';
 import { Provider } from "react-redux";
 import { store } from "../app/_redux/news/store";
@@ -9,8 +9,10 @@ const Home = () => {
   return (
   
     <Provider store={store}>
-        <Header />
-        <div className="flex flex-col mx-auto w-[90%]">  <Categories/></div>
+       <div className='w-full'>
+       <Header />
+       <div className="flex flex-col mx-auto lg:max-w-7xl lg:mx-auto ">  <Categories/></div>
+       </div>
       </Provider>
   )
 }
