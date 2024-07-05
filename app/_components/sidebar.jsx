@@ -41,10 +41,10 @@ const Sidebar = ({ isExpanded, setIsExpanded }) => {
           </Link>
         </li>
         <li className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
-          <Link href="/settings" className="flex justify-center items-center">
+          <Link href="/admin/ads" className="flex justify-center items-center">
            
               <FaCog className="text-xl" />
-              {isExpanded && <span className="ml-4">Setting</span>}
+              {isExpanded && <span className="ml-4">Ads Management</span>}
             
           </Link>
         </li>

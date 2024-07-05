@@ -190,7 +190,7 @@ const CreatePost = () => {
             onChange={(e) => setNewTag(e.target.value)}
             className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
           />
-          <Button type="button" onClick={handleAddTag} gradientDuoTone="purpleToBlue" size="sm">
+          <Button type="button" onClick={handleAddTag} gradientDuoTone="purpleToBlue" size="sm" className='bg-gradient-to-t bg-gray-600 p-3'>
             Add Tag
           </Button>
           <div className="flex flex-wrap gap-2 mt-2">
@@ -220,7 +220,7 @@ const CreatePost = () => {
         Publish Right Away
       </label>
     </div>
-        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg">
+        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg" className='bg-gray-600 p-3'>
           Create Post
         </Button>
       </form>

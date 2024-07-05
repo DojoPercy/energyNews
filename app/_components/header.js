@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import {
   LoginLink,
+  RegisterLink,
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
@@ -52,7 +53,7 @@ const Header = () => {
         <LoginSignupButtons isAuthenticated={isAuthenticated} />
       </div>
       <header
-        className={`text-gray-900 bg-blueTheme  ${
+        className={`text-gray-900 bg-white  ${
           isSticky ? "" : ""
         }`}
       >
@@ -110,6 +111,7 @@ const Header = () => {
             </div>
           </div>
         </div>
+        {/* sidemnue */}
         <nav
           className={`absolute w-[80%] lg:w-[50%] h-screen inset-x-0 shadow-md top-0 bg-white z-50 transform ${
             menuOpen ? "-translate-x-0" : "-translate-x-full"
@@ -156,12 +158,15 @@ const Header = () => {
                 </Button>
               </LoginLink>
             )}
-            <Button variant="outline" href="/signup">
-              Sign Up
-            </Button>
+            <RegisterLink>
+                <Button variant="outline" href="/login">
+                  Sign UP
+                </Button>
+              </RegisterLink>
           </div>
         </nav>
       </header>
+      {/* mobile header */}
       <header
         className={`hidden lg:flex fixed top-0 left-0 right-0 bg-white shadow-md z-50 ${
           isSticky ? "visible" : "invisible"
@@ -286,6 +291,17 @@ const LoginSignupButtons = ({ isAuthenticated }) => (
             </span>
           </LogoutLink>
         )}
+        
+      </div>
+      <div className="absolute right-28 top-2  lg:max-w-7xl lg:mx-auto">
+      <RegisterLink>
+            <span
+              variant="outline"
+              className="text-white text-md p-1 bg-gray-800"
+            >
+              Sign Up
+            </span>
+          </RegisterLink>
       </div>
     </div>
   </>

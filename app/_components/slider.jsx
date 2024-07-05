@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 const Slider = ({ sliders }) => {
-  console.log(sliders);
+  
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef(null);
 

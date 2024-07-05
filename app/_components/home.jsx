@@ -1,8 +1,9 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews } from "../_redux/news/newSlice";
+import { fetchAd } from "../_redux/news/ads";
 import { ClipLoader } from "react-spinners";
 import NewsShimmer from "../../lib/shimmer/news_shimmer";
 import { FaChevronRight } from "react-icons/fa";
@@ -12,15 +13,26 @@ const Categories = () => {
   const { catName } = useParams();
   const dispatch = useDispatch();
   const news = useSelector((state) => state.news.news);
+  const ads = useSelector((state) => state.ads.ads);
+  const adsStatus = useSelector((state) => state.ads.adsStatus);
   const newsStatus = useSelector((state) => state.news.status);
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
-
+ 
   useEffect(() => {
     if (newsStatus === "idle") {
       dispatch(fetchNews());
+      dispatch(fetchAd());
+      
     }
+
+
   }, [newsStatus, dispatch]);
+  
+  
+  
+
+
 
   const truncateString = (str, num) => {
     if (!str || typeof str !== "string") {
@@ -111,7 +123,7 @@ const Categories = () => {
               </div>
             </div>
             <div className="p-4 w-[100%] lg:w-[60%]   mx-auto">
-              <img src="/banner.png" alt="banner.png" className=" w-[95%] mx-auto" />
+              <img src={ads.bannerAds} alt="banner.png" className=" w-[95%] mx-auto" />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6  lg:p-2  ">
               {/* Main Content - 2/3 width */}
@@ -194,7 +206,7 @@ const Categories = () => {
                   )}
                 </div>
               </div>
-              <div className="lg:col-span-3 mt-10">
+              <div className="lg:col-span-3 lg:mt-10">
                 <h2 className="text-2xl font-bold text-gray-900">
                   Latest News
                 </h2>
@@ -205,9 +217,9 @@ const Categories = () => {
               <div className="lg:col-span-1 lg:flex flex-col hidden mt-4 ">
                 <div>
                   <div className="flex flex-col items-center justify-center space-y-2">
-                    <img src="/lexar.gif" alt="Lexar" />
-                    <img src="/banner-EC.jpg" alt="Lexar" />
-                    <img src="/Dell-Banner.jpg" alt="Lexar" />
+                    <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
+                    <img src={ads.squareAds.SquareAd_2}alt="Lexar" />
+                    <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
                   </div>
                 </div>
               </div>

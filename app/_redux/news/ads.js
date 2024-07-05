@@ -3,29 +3,37 @@ import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebaseconfig';
 
 const initialState = {
-  ad: null,
+  ads: {
+    adsLogo: 'adsLogo',
+    bannerAds: 'bannerAds',
+    squareAds: {
+      SquareAd_1: 'squareAd1',
+      SquareAd_2: 'squareAd2',
+      SquareAd_3: 'squareAd3'
+    }
+  },
   status: 'idle',
   loading: false,
   error: null,
 };
 
-export const fetchAd = createAsyncThunk('ad/fetchAd', async () => {
+export const fetchAd = createAsyncThunk('ads/fetchAd', async () => {
   try {
-    const adDocRef = doc(db, 'ad', 'single_ad_document_id');
+    const adDocRef = doc(db, 'ads', 'single_ad_document_id');
     const adDocSnap = await getDoc(adDocRef);
     if (adDocSnap.exists()) {
-      return adDocSnap.data();
+      return adDocSnap.data(); // Return plain object
     } else {
       return null;
     }
   } catch (error) {
-    throw new Error('Failed to fetch ad: ' + error.message);
+    throw new Error('Failed to fetch ads: ' + error.message);
   }
 });
 
-export const saveAd = createAsyncThunk('ad/saveAd', async (adData) => {
+export const saveAd = createAsyncThunk('ads/saveAd', async (adData) => {
   try {
-    const adDocRef = doc(db, 'ad', 'single_ad_document_id');
+    const adDocRef = doc(db, 'ads', 'single_ad_document_id');
     const adDocSnap = await getDoc(adDocRef);
 
     if (adDocSnap.exists()) {
@@ -36,12 +44,12 @@ export const saveAd = createAsyncThunk('ad/saveAd', async (adData) => {
 
     return adData;
   } catch (error) {
-    throw new Error('Failed to save ad: ' + error.message);
+    throw new Error('Failed to save ads: ' + error.message);
   }
 });
 
 const adsSlice = createSlice({
-  name: 'ad',
+  name: 'ads',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -52,7 +60,7 @@ const adsSlice = createSlice({
       })
       .addCase(fetchAd.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.ad = action.payload;
+        state.ads = action.payload;
         state.loading = false;
       })
       .addCase(fetchAd.rejected, (state, action) => {
@@ -62,10 +70,14 @@ const adsSlice = createSlice({
       })
       .addCase(saveAd.pending, (state) => {
         state.loading = true;
+        state.error = null;
+        state.status = 'loading';
       })
       .addCase(saveAd.fulfilled, (state, action) => {
-        state.ad = action.payload;
+        state.ads = action.payload;
         state.loading = false;
+        state.error = null;
+        state.status ='succeeded';
       })
       .addCase(saveAd.rejected, (state, action) => {
         state.loading = false;
