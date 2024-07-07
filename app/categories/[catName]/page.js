@@ -6,6 +6,8 @@ import { fetchNews } from "../../_redux/news/newSlice";
 
 import NewsShimmer from "../../../lib/shimmer/news_shimmer";
 import { FaChevronRight } from "react-icons/fa";
+import RecentCategoryNews from "@/app/_components/recentcategories";
+import { ClipLoader } from "react-spinners";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -63,7 +65,9 @@ const Categories = () => {
   let content;
 
   if (loading) {
-    content = <NewsShimmer />;
+    content =(<div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+    <ClipLoader size={50} color={"#123abc"} loading={true} />
+  </div>)
   } else if (newsStatus === "succeeded") {
     const filteredNews = news
     .filter((item) => item.category === catName && item.isPublished === true)
@@ -116,30 +120,9 @@ const Categories = () => {
             );
           })}
         </div>
-        <div className="hidden lg:block col-span-1  overflow-y-auto h-screen ">
+        <div className="hidden lg:block col-span-1  overflow-y-auto   ">
           {/* Right Section Content */}
-          <div className="p-4">
-            <h3 className="text-lg font-semibold mb-4">Read Next</h3>
-            {/* Replace with your read next content */}
-            <ul className="divide-y divide-gray-200">
-              <li className="py-2">
-                <a href="#" className="text-blue-600 hover:underline">
-                  Article 1
-                </a>
-              </li>
-              <li className="py-2">
-                <a href="#" className="text-blue-600 hover:underline">
-                  Article 2
-                </a>
-              </li>
-              <li className="py-2">
-                <a href="#" className="text-blue-600 hover:underline">
-                  Article 3
-                </a>
-              </li>
-              {/* Add more articles as needed */}
-            </ul>
-          </div>
+          <RecentCategoryNews news={news} category="industry_updates" /> 
         </div>
       </div>
     );

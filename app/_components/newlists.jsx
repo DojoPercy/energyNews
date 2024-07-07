@@ -13,6 +13,7 @@ import Link from "next/link";
 import { FaPen } from "react-icons/fa";
 import Analytics from "./anaylstics";
 import NewsShimmer from "../../lib/shimmer/news_shimmer";
+import { ClipLoader } from "react-spinners";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -27,22 +28,23 @@ const NewsList = () => {
       dispatch(fetchNews());
     }
   }, [newsStatus, dispatch]);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = window.scrollY;
-      const shouldShowButton = scrollHeight > 500; 
-
+      const shouldShowButton = scrollHeight > 500;
       setShowButton(shouldShowButton);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const handleDeleteNews = (newsId) => {
     dispatch(deleteNews(newsId));
   };
 
-  const handleUpdateNews = (currnetNewsItem, newsItem) => {
+  const handleUpdateNews = (currentNewsItem, newsItem) => {
     dispatch(updateNews(newsItem));
   };
 
@@ -53,18 +55,13 @@ const NewsList = () => {
       isPublished: !currentStatus, // Toggle the current publish status
     };
 
-    // Assuming dispatch is available in your component or action creator
     dispatch(updateNews({ updatedFields: updatedNewsItem }));
   };
- 
-    
-  
-  
-  
-    const scrollToTop = () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });}
-    
-  
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const truncateString = (str, num) => {
     if (!str || typeof str !== "string") {
       return "";
@@ -89,13 +86,17 @@ const NewsList = () => {
     const sanitizedHtml = DOMPurify.sanitize(htmlString);
     return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
   };
-  const sortedNews = news.slice().sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));;
-  
+
+  const sortedNews = news.slice().sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
   let content;
 
   if (loading) {
-    content = <NewsShimmer />;
+    content = (
+      <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+        <ClipLoader size={50} color={"#123abc"} loading={true} />
+      </div>
+    );
   } else if (newsStatus === "succeeded") {
     content = (
       <>
@@ -142,20 +143,20 @@ const NewsList = () => {
                     {newsItem.isPublished ? "Yes" : "No"}
                   </td>
                   <td className="py-2 px-4 border-b">{newsItem.likes}</td>
-                  <td className="py-2 px-4 border-b">
+                  <td className="py-2 px-4 border-b flex flex-col space-y-2">
                     <Link href={`/admin/editpost/${newsItem.id}`}>
                       <span className="text-blue-500 hover:underline">
                         Edit
                       </span>
                     </Link>
                     <button
-                      className="ml-2 text-red-500 hover:underline"
+                      className="text-red-500 hover:underline"
                       onClick={() => handleDeleteNews(newsItem.id)}
                     >
                       Delete
                     </button>
                     <button
-                      className="ml-2 text-yellow-500 hover:underline"
+                      className="text-yellow-500 hover:underline"
                       onClick={() =>
                         handleTogglePublish(
                           newsItem.id,
@@ -179,22 +180,17 @@ const NewsList = () => {
   }
 
   return (
-    <div>
-      <h2>News List</h2>
+    <div className="p-4">
+      <h2 className="text-lg font-bold mb-4">News List</h2>
       {content}
-      
-
- {showButton ? (
-    <button
-      onClick={scrollToTop}
-      className="fixed bottom-4 right-4 flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-    >
-      <span>Scroll to Top</span>
-    </button>
-  )  : null}
-
-
-
+      {showButton && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-4 right-4 flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        >
+          <span>Scroll to Top</span>
+        </button>
+      )}
     </div>
   );
 };

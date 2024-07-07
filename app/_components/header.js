@@ -93,7 +93,7 @@ const Header = () => {
             </div>
           </div>
 
-          <div className=" ">
+          <div className=" ni">
             <div className="hidden lg:flex items-center w-full space-x-4  my-0 border border-white   bg-blueTheme text-white justify-between ">
               <div className="flex justify-start items-start  space-x-0 font-normal text-md lg:mx-auto lg:max-w-7xl w-full pl-10">
                 {navItems.map((item, index) => (
@@ -176,15 +176,16 @@ const Header = () => {
           <Link href="/">
             <img src="/logo.png" alt="Logo" className="h-16 flex" />
           </Link>
-          <div className="flex items-center space-x-4">
+          <div className="flex flex-row items-center space-x-4">
             {navItems.map((item, index) => (
               <NavLink
                 key={index}
                 href={item.href}
                 dropdownItems={item.dropdownItems}
+                isSticky={isSticky}
               >
                 {item.title}
-                <FaChevronDown />
+                <FaChevronDown height={2} />
               </NavLink>
             ))}
           </div>
@@ -199,7 +200,7 @@ const Header = () => {
   );
 };
 
-const NavLink = ({ href, children, dropdownItems }) => {
+const NavLink = ({ href, children, dropdownItems , isSticky}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
@@ -209,10 +210,10 @@ const NavLink = ({ href, children, dropdownItems }) => {
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-        <a
-          href={`/categories/${href}`}
-          className="text-white hover:text-gray-600 flex justify-start  flex-col space-x-2  items-center"
-        >
+      <a
+  href={`/categories/${href}`}
+  className={`text-black ${isSticky ? 'text-black' : 'text-white'} hover:text-gray-600 flex justify-start flex-col items-center`}
+>
           {children}
         </a>
         {dropdownItems && isDropdownOpen && (

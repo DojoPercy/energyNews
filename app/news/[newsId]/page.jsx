@@ -13,6 +13,7 @@ import {
 
 import NewsShimmer from "../../../lib/shimmer/news_shimmer";
 import { FaChevronRight, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
+import RelatedNews from "@/app/_components/relatedNews";
 
 const SingleNews = () => {
   const { newsId } = useParams();
@@ -218,28 +219,8 @@ const SingleNews = () => {
           </div>
 
           {/* Right Section Content (Read Next) */}
-          <div className="hidden lg:block col-span-1 overflow-y-auto h-screen">
-            <div className="p-4">
-              <h3 className="text-lg font-semibold mb-4">Read Next</h3>
-              <ul className="divide-y divide-gray-200">
-                <li className="py-2">
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Article 1
-                  </a>
-                </li>
-                <li className="py-2">
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Article 2
-                  </a>
-                </li>
-                <li className="py-2">
-                  <a href="#" className="text-blue-600 hover:underline">
-                    Article 3
-                  </a>
-                </li>
-                {/* Add more articles as needed */}
-              </ul>
-            </div>
+          <div className=" col-span-1 overflow-y-auto ">
+          <RelatedNews category={filteredNews.category} currentNewsTitle={decodeURIComponent(newsId)} news={news} />
           </div>
         </div>
       );

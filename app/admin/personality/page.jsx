@@ -3,7 +3,7 @@ import React from 'react'
 
 const Personality = () => {
   return (
-    <div><BestPersonalityForm/></div>
+    <div className='mt-40'><BestPersonalityForm/></div>
   )
 }
 

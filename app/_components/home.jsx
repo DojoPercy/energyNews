@@ -8,6 +8,9 @@ import { ClipLoader } from "react-spinners";
 import NewsShimmer from "../../lib/shimmer/news_shimmer";
 import { FaChevronRight } from "react-icons/fa";
 import Slider from "./slider";
+import RecentDigitalIssue from "./digitalissuebox";
+import RecentCategoryNews from "./recentcategories";
+import PersonalityofWeek from "./personality_of_week";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -18,21 +21,13 @@ const Categories = () => {
   const newsStatus = useSelector((state) => state.news.status);
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
- 
+
   useEffect(() => {
     if (newsStatus === "idle") {
       dispatch(fetchNews());
       dispatch(fetchAd());
-      
     }
-
-
   }, [newsStatus, dispatch]);
-  
-  
-  
-
-
 
   const truncateString = (str, num) => {
     if (!str || typeof str !== "string") {
@@ -86,14 +81,14 @@ const Categories = () => {
       .sort((a, b) => {
         const dateA = new Date(a.publishDate);
         const dateB = new Date(b.publishDate);
-        return dateB - dateA; // Sorts in descending order (latest date first)
+        return dateB - dateA;
       });
 
     const latestArticle = filteredNews[0];
     const topRightContent = filteredNews[1];
     const bottomRightContent = filteredNews[2];
 
-    const allOtherArticles = filteredNews.slice(3, 6);
+    const allOtherArticles = filteredNews.slice(3, 8);
 
     content = (
       <>
@@ -104,7 +99,6 @@ const Categories = () => {
         )}
         {latestArticle && (
           <div className="container mx-auto px-0 lg:px-4 py-2 lg:py-10">
-            
             <div>
               <div class="relative overflow-hidden whitespace-nowrap bg-blueTheme text-gray-400 border border-gray-200">
                 <div class="absolute top-0 left-0 h-full flex items-center z-10">
@@ -116,14 +110,23 @@ const Categories = () => {
                   {news.map((headline, index) => (
                     <span className="mx-4" key={index}>
                       <i className="fa fa-angle-double-right"></i>{" "}
-                      <a href={`/news/${headline.title}`} className="text-[12px]">{headline.title}</a>
+                      <a
+                        href={`/news/${headline.title}`}
+                        className="text-[12px]"
+                      >
+                        {headline.title}
+                      </a>
                     </span>
                   ))}
                 </div>
               </div>
             </div>
             <div className="p-4 w-[100%] lg:w-[60%]   mx-auto">
-              <img src={ads.bannerAds} alt="banner.png" className=" w-[95%] mx-auto" />
+              <img
+                src={ads.bannerAds}
+                alt="banner.png"
+                className=" w-[95%] mx-auto"
+              />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6  lg:p-2  ">
               {/* Main Content - 2/3 width */}
@@ -210,15 +213,15 @@ const Categories = () => {
                 <h2 className="text-2xl font-bold text-gray-900">
                   Latest News
                 </h2>
-              {news &&  <Slider sliders={news} />}
+                {news && <Slider sliders={news} />}
               </div>
               {/* Right Column - 1/3 width */}
-              
+
               <div className="lg:col-span-1 lg:flex flex-col hidden mt-4 ">
                 <div>
                   <div className="flex flex-col items-center justify-center space-y-2">
                     <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
-                    <img src={ads.squareAds.SquareAd_2}alt="Lexar" />
+                    <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
                     <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
                   </div>
                 </div>
@@ -227,56 +230,86 @@ const Categories = () => {
           </div>
         )}
 
-        <section className="mb-8 max-w-7xl mx-auto p-6 lg:p-2">
-          <h2 className="text-lg lg:text-2xl font-bold mb-4">
-            Featured Articles
-          </h2>
-          {allOtherArticles.map((article, index) => (
-            <article
-              key={index}
-              className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
-            >
-              <figure className="post-thumbnail">
-                <a
-                  className="block w-full lg:w-[400px]"
-                  href={`/news/${article.title}`}
-                >
-                  <img
-                    src={article.imageUrl}
-                    alt={article.title}
-                    className="object-cover"
-                  />
-                </a>
-              </figure>
-              <div className="pr-2 lg:p-4 flex flex-col justify-start">
-                <header className="entry-header">
-                  <h2 className="entry-title text-xl font-semibold mb-2">
-                    <a
-                      href={`/news/${article.title}`}
-                      className="hover:underline"
-                    >
-                      {article.title}
-                    </a>
-                  </h2>
-                </header>
-                <div className="flex space-x-2 text-sm text-gray-500 mb-4">
-                  <span className="by_line block">
-                    by{" "}
-                    <strong>
-                      <i>{article.author}</i>
-                    </strong>
-                  </span>
-                  <span className="font-semibold">|</span>
-                  <span className="posted-on block">{article.publishDate}</span>
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6  lg:p-2">
+          <div className="lg:col-span-1 hidden lg:block">
+            <RecentDigitalIssue />
+           <div className="ml-1">
+           <RecentCategoryNews news={news} category="industry_updates" /> 
+           </div>
+          </div>
+          <section className="mb-8 max-w-7xl mx-auto p-6 lg:p-2 lg:col-span-3 col-span-1">
+            <h2 className="text-lg lg:text-2xl font-bold mb-4">
+              Featured Articles
+            </h2>
+            {allOtherArticles.map((article, index) => (
+              <article
+                key={index}
+                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
+              >
+                <figure className="post-thumbnail">
+                  <a
+                    className="block w-full lg:w-[400px]"
+                    href={`/news/${article.title}`}
+                  >
+                    <img
+                      src={article.imageUrl}
+                      alt={article.title}
+                      className="object-cover"
+                    />
+                  </a>
+                </figure>
+                <div className="pr-2 lg:p-4 flex flex-col justify-start">
+                  <header className="entry-header">
+                    <h2 className="entry-title text-xl font-semibold mb-2">
+                      <a
+                        href={`/news/${article.title}`}
+                        className="hover:underline"
+                      >
+                        {article.title}
+                      </a>
+                    </h2>
+                  </header>
+                  <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                    <span className="by_line block">
+                      by{" "}
+                      <strong>
+                        <i>{article.author}</i>
+                      </strong>
+                    </span>
+                    <span className="font-semibold">|</span>
+                    <span className="posted-on block">
+                      {article.publishDate}
+                    </span>
+                  </div>
+                  <div className="entry-content">
+                    <p>{getShortSummary(article.summary)}</p>
+                  </div>
                 </div>
-                <div className="entry-content">
-                  <p>{getShortSummary(article.summary)}</p>
-                </div>
-              </div>
-            </article>
-          ))}
-        </section>
-          
+              </article>
+            ))}
+            <PersonalityofWeek/>
+          </section>
+
+          <section className="">
+            <div className="lg:col-span-1 hidden lg:block">
+              <RecentCategoryNews news={news} category="global_news" />
+            </div>
+          </section>
+        </div>
+        <div className="flex flex-col lg:hidden p-4 justify-around">
+          <RecentCategoryNews news={news} category="global_news" />
+          <div className="mt-5">
+            <RecentCategoryNews news={news} category="industry_updates" />
+          </div>
+          <div className="mt-5">
+            <RecentDigitalIssue />
+          </div>
+          <div className=" mt-5 flex flex-col items-center justify-center space-y-2">
+            <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
+            <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
+            <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
+          </div>
+        </div>
       </>
     );
   }

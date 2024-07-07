@@ -29,12 +29,13 @@ const Slider = ({ sliders }) => {
   const nextSlide = () => {
     setCurrent(current === sliders.length - 1 ? 0 : current + 1);
   };
+  const maxSlider = sliders.slice(0,8);
 
   return (
     <div className="relative max-w-3xl h-[60%] mx-auto hover:cursor-pointer">
       <div className="overflow-hidden relative h-[500px]">
-        {sliders &&
-          sliders.map((slide, index) => (
+        {maxSlider &&
+          maxSlider.map((slide, index) => (
             <div
               key={slide.id}
               className={`absolute inset-0 transition-transform transform ${
@@ -71,7 +72,7 @@ const Slider = ({ sliders }) => {
         </button>
       </div>      <div className="flex justify-center mt-4 ">
 
-        {sliders.map((slide, index) => (
+        {maxSlider.map((slide, index) => (
          
 <div className="relative">
 <div className="absolute h-16 w-16 top-0 right-1 items-center justify-center bg-gray-200 bg-opacity-50 z-10">

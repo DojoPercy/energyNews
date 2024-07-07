@@ -12,17 +12,23 @@ import { useKindeBrowserClient } from '@kinde-oss/kinde-auth-nextjs';
 const inter = Inter({ subsets: ['latin'] });
 
 export default function AdminLayout({ children }) {
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(false);
  
+  const [isExpanded, setIsExpanded] = useState(false);
+  
+
+  const toggleSidebar = () => {
+    setIsExpanded(!isExpanded);
+  };
 return  (
     <Provider store={store}>
-      <AdminHeader />
-      <div className="flex mt-20">
-        <Sidebar isExpanded={isSidebarExpanded} setIsExpanded={setIsSidebarExpanded} />
-        <section className={`flex-grow p-4 transition-margin duration-300 w-full max-w-6xl mx-auto ${isSidebarExpanded ? 'ml-80' : 'ml-20'} sm:ml-20`}>
-          {children}
-        </section>
-      </div>
+     
+      <div className="flex">
+      <AdminHeader toggleSidebar={toggleSidebar} />
+   <Sidebar isExpanded={isExpanded} setIsExpanded={setIsExpanded} isAuthenticated={true} />
+      <main className={`flex-1 transition-margin duration-300 ${isExpanded ? 'ml-0' : 'ml-0'}`}>
+        {children}
+      </main>
+    </div>
     </Provider>
   ) 
 }

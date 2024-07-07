@@ -5,7 +5,7 @@ import DigitalIssuesByYear from '@/app/_components/digitalIssueView';
 
 const DigitalEditionPage = () => {
   return (
-    <div className='flex flex-col'>
+    <div className='flex flex-col mt-40'>
       <DigitalIssuesByYear/>
       <DigitalEditionForm/>
     </div>
