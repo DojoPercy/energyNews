@@ -33,20 +33,22 @@ const PersonalityofWeek = () => {
       <div className="bg-blueTheme text-white text-lg font-bold p-2 rounded-t-lg">
         Best Personality of the Week
       </div>
-      <div className='flex flex-col md:flex-row items-center justify-start space-y-4 md:space-y-0 md:space-x-6 p-4'>
-        <div className='w-full md:w-1/3'>
+      <div className='flex flex-col md:flex-row items-start justify-start space-y-4 md:space-y-0 md:space-x-6 p-4'>
+        <div className='w-full md:w-1/3 flex flex-col'>
           <img
             src={personality.imageUrl}
             alt="Personality of the Week"
             className='object-cover w-full h-full rounded-lg shadow-md'
           />
-        </div>
-        <div className='w-full md:w-2/3'>
-          <p className='text-gray-700 text-lg font-semibold mb-2'>
-            {personality.title}
+           <p className='text-gray-700 text-lg font-semibold mb-2'>
+            {personality.name}
           </p>
+        </div>
+        <div className='w-full md:w-2/3 flex flex-col'>
+         
           <p className='text-gray-600'>
-            {personality.description}
+          <div className="prose max-w-none" dangerouslySetInnerHTML={{ __html:  personality.description}} />
+           
           </p>
         </div>
       </div>

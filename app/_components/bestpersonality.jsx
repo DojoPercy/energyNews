@@ -1,13 +1,12 @@
 "use client";
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, FileInput, TextInput } from 'flowbite-react';
 import { storage } from '../../config/firebaseconfig';
 import 'react-quill/dist/quill.snow.css';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import Editor from './editor';
-import { useDispatch } from 'react-redux';
 import { fetchPersonality, savePersonality } from '../_redux/news/personality';
-import { ButtonIcon } from '@radix-ui/react-icons';
 
 const BestPersonalityForm = () => {
   const dispatch = useDispatch();
@@ -65,28 +64,28 @@ const BestPersonalityForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    if(!name && !description && !imageUrl) {
+    if (!name && !description && !imageUrl) {
       alert('Please fill in all the fields');
       return;
     }
     try {
-        const newPersonality = {
-          name,
-          description,
-          imageUrl,
-        };
-        dispatch(savePersonality(newPersonality));
-        setName('');
-        setDescription('');
-        setImageFile(null);
-        setImageUrl('');
-      } catch (error) {
-        console.error('Error creating personality:', error);
-      }
+      const newPersonality = {
+        name,
+        description,
+        imageUrl,
+      };
+      dispatch(savePersonality(newPersonality));
+      setName('');
+      setDescription('');
+      setImageFile(null);
+      setImageUrl('');
+    } catch (error) {
+      console.error('Error creating personality:', error);
+    }
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto min-h-screen bg-white shadow-lg rounded-lg lg:p-8">
+    <div className="p-6 max-w-3xl mx-auto min-h-screen bg-white shadow-lg rounded-lg">
       <h1 className="text-center text-4xl my-8 font-semibold text-gray-800">Best Personality of the Week</h1>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
         <TextInput
@@ -95,9 +94,13 @@ const BestPersonalityForm = () => {
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
-          className="border border-gray-300 rounded-md p-4 focus:outline-none focus:border-blue-500"
+          className="border border-gray-300 rounded-md p-4 m-2 focus:outline-none focus:border-blue-500"
         />
-        <Editor placeholder="Full Description of The Person" onChange={(value) => setDescription(value)} />
+        <Editor
+          placeholder="Full Description of The Person"
+          value={description}
+          onChange={(value) => setDescription(value)}
+        />
         <div className="flex flex-col sm:flex-row items-center justify-between border border-gray-300 rounded-md p-3">
           {uploading ? (
             <div className="flex items-center justify-between w-full">
@@ -107,7 +110,7 @@ const BestPersonalityForm = () => {
           ) : imageUrl ? (
             <div className="flex items-center gap-4">
               <img src={imageUrl} alt="Uploaded" className="w-48 h-48 object-cover rounded-md" />
-              <Button type="button" onClick={handleRemoveImage} gradientDuoTone="redToOrange" size="sm" className='p-3'>
+              <Button type="button" onClick={handleRemoveImage} gradientDuoTone="redToOrange" size="sm" className='bg-blueTheme p-3'>
                 Remove Image
               </Button>
             </div>
@@ -120,14 +123,12 @@ const BestPersonalityForm = () => {
             </div>
           )}
         </div>
-        <h2 className="text-2xl font-semibold text-gray-800 mt-4">Preview</h2>
-        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg" className="mt-4 p-3 bg-black">
-          Create Personality
-        </Button>
         {showImageUploadNotice && (
           <p className="text-red-500 text-sm mt-2">Please upload an image for the personality.</p>
         )}
-       
+        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg" className="mt-4 bg-blueTheme p-3">
+          Create Personality
+        </Button>
       </form>
     </div>
   );

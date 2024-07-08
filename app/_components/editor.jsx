@@ -90,6 +90,11 @@ class Editor extends Component {
     this.quillRef = this.reactQuillRef.getEditor();
   }
 
+  handleChange = (value) => {
+    this.setState({ text: value });
+    this.props.onChange(value);
+  };
+
   render() {
     return (
       <ReactQuill
@@ -98,8 +103,8 @@ class Editor extends Component {
         placeholder={this.props.placeholder || "Compose an epic..."}
         modules={this.modules}
         formats={this.formats}
-        value={this.state.text}
-        onChange={(value) => this.setState({ text: value })}
+        value={this.props.value}
+        onChange={this.handleChange}
       />
     );
   }
