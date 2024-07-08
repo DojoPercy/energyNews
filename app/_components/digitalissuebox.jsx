@@ -30,16 +30,16 @@ const RecentDigitalIssue = () => {
   const month = issueDate.toLocaleString('default', { month: 'long' });
 
   return (
-    <div className="border border-gray-200 shadow-sm">
+    <div className="border border-gray-200 shadow-sm mt-10 mb-2">
       <div className="bg-blueTheme text-white text-sm  font-bold p-4 ">
-        Digital Issue
+        Digital Edition
       </div>
       <div className="bg-white p-1 rounded-b-lg g">
         <div className="p-1 rounded-lg">
           
           {recentIssue.imageUrl && (
             <a href={recentIssue.imageUrl} target="_blank" rel="noopener noreferrer">
-              <img src={recentIssue.imageUrl} alt="Uploaded" className="w-full h-80 lg:h-48 object-cover mt-2 rounded-lg" />
+              <img src={recentIssue.imageUrl} alt="Uploaded" className="  h-80 lg:h-48 object-cover mt-2 rounded-lg" />
             </a>
           )}
           <p className="mt-2 text-gray-600">{`${month} ${year}`}</p>

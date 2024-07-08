@@ -8,6 +8,7 @@ import NewsShimmer from "../../../lib/shimmer/news_shimmer";
 import { FaChevronRight } from "react-icons/fa";
 import RecentCategoryNews from "@/app/_components/recentcategories";
 import { ClipLoader } from "react-spinners";
+import TitleSection from "@/app/_components/titleSection";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -47,65 +48,78 @@ const Categories = () => {
     const firestoreMatches = timestampString.match(firestoreRegex);
 
     if (firestoreMatches && firestoreMatches.length === 3) {
-        const seconds = parseInt(firestoreMatches[1], 10);
-        const nanoseconds = parseInt(firestoreMatches[2], 10);
-        const milliseconds = seconds * 1000 + nanoseconds / 1000000;
-        return new Date(milliseconds);
+      const seconds = parseInt(firestoreMatches[1], 10);
+      const nanoseconds = parseInt(firestoreMatches[2], 10);
+      const milliseconds = seconds * 1000 + nanoseconds / 1000000;
+      return new Date(milliseconds);
     } else {
-        const date = new Date(timestampString);
-        if (!isNaN(date.getTime())) {
-            return date;
-        } else {
-            throw new Error("Invalid timestamp format");
-        }
+      const date = new Date(timestampString);
+      if (!isNaN(date.getTime())) {
+        return date;
+      } else {
+        throw new Error("Invalid timestamp format");
+      }
     }
-}
-
+  }
 
   let content;
 
   if (loading) {
-    content =(<div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
-    <ClipLoader size={50} color={"#123abc"} loading={true} />
-  </div>)
+    content = (
+      <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+        <ClipLoader size={50} color={"#123abc"} loading={true} />
+      </div>
+    );
   } else if (newsStatus === "succeeded") {
     const filteredNews = news
-    .filter((item) => item.category === catName && item.isPublished === true)
-    .sort((a, b) => {
-      const dateA = new Date(a.publishDate);
-      const dateB = new Date(b.publishDate);
-      console.log(a.publishDate);
-      return dateB - dateA; // Sorts in ascending order (earliest date first)
-      // For descending order, use: return dateB - dateA;
-    });
+      .filter((item) => item.category === catName && item.isPublished === true)
+      .sort((a, b) => {
+        const dateA = new Date(a.publishDate);
+        const dateB = new Date(b.publishDate);
+        console.log(a.publishDate);
+        return dateB - dateA; // Sorts in ascending order (earliest date first)
+        // For descending order, use: return dateB - dateA;
+      });
 
     content = (
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-0  ">
         <div className="col-span-2">
           {filteredNews.map((article, index) => {
-            
             return (
               <article
                 key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
+                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4 border border-gray-100 shadow-sm p-1"
               >
-                <figure className="post-thumbnail">
-                  <a className=" block w-full lg:w-[400px]" href={`/news/${article.title}`}>
-                    <img src={article.imageUrl} alt={article.title} className="  object-cover" />
+                <figure className="post-thumbnail ">
+                  <a
+                    className=" block w-full lg:w-[400px]"
+                    href={`/news/${article.title}`}
+                  >
+                    <img
+                      src={article.imageUrl}
+                      alt={article.title}
+                      className="w-full  object-cover"
+                    />
                   </a>
                 </figure>
                 <div className="pr-2 lg:p-4 flex flex-col justify-start">
                   <span className=" block text-sm text-gray-500 mb-2"></span>
                   <header className="entry-header">
                     <h2 className="entry-title text-xl font-semibold mb-2">
-                      <a href={`/news/${article.title}`} className="hover:underline">
+                      <a
+                        href={`/news/${article.title}`}
+                        className="hover:underline"
+                      >
                         {article.title}
                       </a>
                     </h2>
                   </header>
                   <div className="flex space-x-2 text-sm text-gray-500 mb-4">
                     <span className="by_line block">
-                      by <strong><i>{article.author}</i></strong>
+                      by{" "}
+                      <strong>
+                        <i>{article.author}</i>
+                      </strong>
                     </span>
                     <span className="font-semibold">|</span>
                     <span className="posted-on block">
@@ -120,9 +134,12 @@ const Categories = () => {
             );
           })}
         </div>
-        <div className="hidden lg:block col-span-1  overflow-y-auto   ">
+
+        <div className=" col-span-1  overflow-y-auto  mb-3 ">
+          <TitleSection title={"More News"}/>
           {/* Right Section Content */}
-          <RecentCategoryNews news={news} category="industry_updates" /> 
+          <RecentCategoryNews news={news} category="industry_updates" />
+          <RecentCategoryNews news={news} category="decarbonization_strategies" />
         </div>
       </div>
     );

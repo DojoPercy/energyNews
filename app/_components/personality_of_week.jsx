@@ -28,7 +28,7 @@ const PersonalityofWeek = () => {
 
   return (
    <div>
-     <div className="bg-blueTheme text-white text-sm font-bold p-4">
+     <div className="bg-blueTheme text-white text-sm font-bold ">
         Best Personality of the Week 
       </div>
      <div className='border border-gray-500 bg-white shadow-sm p-4'>

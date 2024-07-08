@@ -11,6 +11,7 @@ import Slider from "./slider";
 import RecentDigitalIssue from "./digitalissuebox";
 import RecentCategoryNews from "./recentcategories";
 import PersonalityofWeek from "./personality_of_week";
+import TitleSection from "./titleSection";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -237,10 +238,8 @@ const Categories = () => {
            <RecentCategoryNews news={news} category="industry_updates" /> 
            </div>
           </div>
-          <section className="mb-8 max-w-7xl mx-auto p-6 lg:p-2 lg:col-span-3 col-span-1">
-            <h2 className="text-lg lg:text-2xl font-bold mb-4">
-              Featured Articles
-            </h2>
+          <section className="mb-8 max-w-7xl mx-auto p-1 lg:p-2 lg:col-span-3 col-span-1">
+            <TitleSection title={"Featured Articles"}/>
             {allOtherArticles.map((article, index) => (
               <article
                 key={index}
@@ -296,7 +295,8 @@ const Categories = () => {
             </div>
           </section>
         </div>
-        <div className="flex flex-col lg:hidden p-4 justify-around">
+        <div className="flex flex-col lg:hidden p-2 justify-around">
+          <TitleSection title={"More News"}/>
           <RecentCategoryNews news={news} category="global_news" />
           <div className="mt-5">
             <RecentCategoryNews news={news} category="industry_updates" />

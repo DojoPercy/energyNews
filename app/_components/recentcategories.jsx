@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchNews } from "../_redux/news/newSlice";
 import Link from "next/link";
 import { fetchAd } from "../_redux/news/ads";
+import RecentDigitalIssue from "./digitalissuebox";
 
 const RecentCategoryNews = ({ category, news }) => {
   const [recentNews, setRecentNews] = useState([]);
@@ -35,7 +36,8 @@ const RecentCategoryNews = ({ category, news }) => {
   const categoryFormat = convertToTitleCase(category);
 
   return (
-    <div
+    <div>
+        <div
       className={`border border-gray-200 shadow-sm w-full ${
         recentNews.length === 0 ? "hidden" : "block"
       } `}
@@ -90,14 +92,19 @@ const RecentCategoryNews = ({ category, news }) => {
             View More
           </Link>
         </div>
-        <div>
-          <div className="flex flex-col items-center justify-center space-y-2">
-            <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
-            <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
-            <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
-          </div>
-        </div>
+      
       </div>
+    </div>
+      <div>
+      <div className="flex flex-col items-center justify-center space-y-2 mt-10">
+        <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
+        <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
+        <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
+      </div>
+    </div>
+    <div>
+        <RecentDigitalIssue />
+    </div>
     </div>
   );
 };

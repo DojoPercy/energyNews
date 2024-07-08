@@ -1,7 +1,7 @@
 // components/Sidebar.js
 "use client";
 import React, { useState } from 'react';
-import { FaTh, FaPen, FaCog, FaList, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaTh, FaPen, FaCog, FaList, FaChevronDown, FaChevronUp, FaPlus } from 'react-icons/fa';
 import Link from 'next/link';
 
 const Sidebar = ({ isExpanded, setIsExpanded, isAuthenticated }) => {
@@ -31,6 +31,12 @@ const Sidebar = ({ isExpanded, setIsExpanded, isAuthenticated }) => {
             {isExpanded && <span className="ml-4">Ads Management</span>}
           </Link>
         </li>
+        <li className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
+          <Link href="/admin/createpost" className="flex justify-center items-center">
+            {isExpanded ? <FaPlus className="text-xl" /> : null}
+            {isExpanded && <span className="ml-4">Add news</span>}
+          </Link>
+        </li>
         <li className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer" onClick={() => toggleAccordion(1)}>
           <div className="flex justify-center items-center w-full">
             {isExpanded ? <FaList className="text-xl" /> : null}
@@ -43,6 +49,7 @@ const Sidebar = ({ isExpanded, setIsExpanded, isAuthenticated }) => {
             <li className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
               <Link href="/admin/personality">
                 Personality of the Week
+                
               </Link>
             </li>
             <li className="flex items-center px-4 py-2 hover:bg-gray-700 cursor-pointer">
