@@ -7,11 +7,11 @@ import { useState } from 'react';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function AdminLayout({ children }) {
+export default function CatLayout({ children }) {
   return (
     <Provider store={store}>
       <Header />
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         {children}
       </div>
     </Provider>

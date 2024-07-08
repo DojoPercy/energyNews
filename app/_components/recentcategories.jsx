@@ -103,7 +103,7 @@ const RecentCategoryNews = ({ category, news }) => {
       </div>
     </div>
     <div>
-        <RecentDigitalIssue />
+        
     </div>
     </div>
   );

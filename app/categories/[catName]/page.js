@@ -9,6 +9,7 @@ import { FaChevronRight } from "react-icons/fa";
 import RecentCategoryNews from "@/app/_components/recentcategories";
 import { ClipLoader } from "react-spinners";
 import TitleSection from "@/app/_components/titleSection";
+import RecentDigitalIssue from "@/app/_components/digitalissuebox";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -139,7 +140,9 @@ const Categories = () => {
           <TitleSection title={"More News"}/>
           {/* Right Section Content */}
           <RecentCategoryNews news={news} category="industry_updates" />
+          <RecentDigitalIssue />
           <RecentCategoryNews news={news} category="decarbonization_strategies" />
+
         </div>
       </div>
     );
@@ -148,20 +151,23 @@ const Categories = () => {
   }
 
   return (
-    <div className="container mx-auto ">
-      <div className="flex items-center text-gray-500 text-sm">
-        <a href="/" className="hover:underline">
-          Home
-        </a>
-        <FaChevronRight className="mx-2 text-xs" />
-        <a href="/news" className="hover:underline truncate max-w-xs" title={catName}>
-          {catName}
-        </a>
-      </div>
-
-      <h2 className="text-3xl font-bold my-4 capitalize">{catName}</h2>
-      {content}
+    <div className="p-2">
+    <div className="flex items-center text-gray-500 text-sm">
+      <a href="/" className="hover:underline">
+        Home
+      </a>
+      <FaChevronRight className="mx-2 text-xs" />
+      <a href="/news" className="hover:underline  max-w-xs " title={catName}>
+        {catName}
+      </a>
     </div>
+  
+    <h2 className="text-3xl font-bold my-4 capitalize overflow-hidden">
+    <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl ">{catName}</span>
+  </h2>
+    {content}
+  </div>
+  
   );
 };
 
