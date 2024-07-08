@@ -232,7 +232,7 @@ const SingleNews = () => {
   }
 
   return (
-    <div className="container">
+    <div className="p-2">
       <div className="flex items-center text-gray-500 text-xs lg:text-sm">
         <a href="/" className="hover:underline">
           Home
