@@ -154,7 +154,7 @@ const Categories = () => {
           Home
         </a>
         <FaChevronRight className="mx-2 text-xs" />
-        <a href="/news" className="hover:underline">
+        <a href="/news" className="hover:underline truncate max-w-xs" title={catName}>
           {catName}
         </a>
       </div>
