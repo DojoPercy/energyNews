@@ -7,6 +7,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import Editor from './editor';
 import { useDispatch } from 'react-redux';
 import { fetchPersonality, savePersonality } from '../_redux/news/personality';
+import { ButtonIcon } from '@radix-ui/react-icons';
 
 const BestPersonalityForm = () => {
   const dispatch = useDispatch();
@@ -119,12 +120,14 @@ const BestPersonalityForm = () => {
             </div>
           )}
         </div>
+        <h2 className="text-2xl font-semibold text-gray-800 mt-4">Preview</h2>
+        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg" className="mt-4 p-3 bg-black">
+          Create Personality
+        </Button>
         {showImageUploadNotice && (
           <p className="text-red-500 text-sm mt-2">Please upload an image for the personality.</p>
         )}
-        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg" className="mt-4 p-3">
-          Create Personality
-        </Button>
+       
       </form>
     </div>
   );
