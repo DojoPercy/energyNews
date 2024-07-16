@@ -20,7 +20,7 @@ module.exports = {
       colors: {
         blueTheme: '#262262',
         secondaryBlue: '#322D80',
-        orangeTheme:'#FDB13F',
+        orangeTheme:'#DD7B2D',
       },
       keyframes: {
         marquee: {
