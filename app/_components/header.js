@@ -49,53 +49,68 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center pb-2 transition-all duration-2000 ease-in-out  ">
+      <div className="flex justify-between items-center  transition-all duration-2000 ease-out  ">
         <LoginSignupButtons isAuthenticated={isAuthenticated} />
       </div>
       <header
-        className={`text-gray-900 bg-white  ${
-          isSticky ? "" : ""
+        className={`text-gray-900 bg-blueTheme transition-all ease-in-out duration-200   ${
+          isSticky ? "fixed top-0 z-50 w-full" : "relative"
         }`}
       >
         <div className="w-full flex flex-col ">
-          <div className="container mx-auto flex flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-7xl ">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1400px] hidden lg:flex">
             <Link href="/">
-              <img src="/logo.png" alt="Logo" className="h-20 flex" />
+              <img
+                src="/logo_white.png"
+                alt="Logo"
+                className={` flex ${
+                  isSticky ? " h-16" : " h-24"
+                } transition-all ease-out duration-100`}
+              />
             </Link>
 
-            <Link href="/" className=" ">
+            <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
               <img
                 src="/ads_by_logo.png"
                 alt="Logo"
-                className=" lg:h-36 flex"
+                className={` flex ${
+                  isSticky ? "h-0" : "lg:h-32"
+                } transition-all ease-in duration-100`}
               />
             </Link>
           </div>
           {/* Mobile Screen Nav */}
-          <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out border border-gray-200 "> 
+          <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out border border-gray-200 ">
+           
+            <Link href="/">
+              <img
+                src="/logo_white.png"
+                alt="Logo"
+                className={` flex ${
+                  isSticky ? " h-12" : " h-16"
+                } transition-all ease-out duration-100`}
+              />
+            </Link>
             <div className="flex justify-between items-center">
               <button
                 onClick={toggleMenu}
-                className="text-gray-800 focus:outline-none"
+                className="text-white focus:outline-none"
               >
                 <div className="flex items-center space-x-3">
-                <FaBars className=" w-5 h-5" />
-                <h3>
-                  Home
-                </h3>
+                  <FaBars className=" w-5 h-5" />
+                  <div className="flex-shrink-0">
+                    <button className="text-white focus:outline-none">
+                      <FaSearch />
+                    </button>
+                  </div>
                 </div>
-              </button>
-            </div>
-            <div className="flex-shrink-0">
-              <button className="text-gray-800 focus:outline-none">
-                <FaSearch />
               </button>
             </div>
           </div>
 
           <div className=" ni">
-            <div className="hidden lg:flex items-center w-full space-x-4  my-0 border border-white   bg-blueTheme text-white justify-between ">
-              <div className="flex justify-start items-start  space-x-0 font-normal text-md lg:mx-auto lg:max-w-7xl w-full pl-10">
+            <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
+              <div className="flex justify-start items-center space-x-2 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
                 {navItems.map((item, index) => (
                   <NavLink
                     key={index}
@@ -103,11 +118,9 @@ const Header = () => {
                     dropdownItems={item.dropdownItems}
                   >
                     {item.title}
-                    <FaChevronDown className="h-2" />
                   </NavLink>
                 ))}
               </div>
-
             </div>
           </div>
         </div>
@@ -115,12 +128,16 @@ const Header = () => {
         <nav
           className={`absolute w-[80%] lg:w-[50%] h-screen inset-x-0 shadow-md top-0 bg-white z-50 transform ${
             menuOpen ? "-translate-x-0" : "-translate-x-full"
-          } transition duration-300 ease-in-out`}
+          } transition duration-300 ease-in-out `}
         >
           <div className="flex flex-col items-start p-4">
             <div className="flex items-center justify-between mb-4 w-full">
               <Link href="/">
-                <img src="/logo.png" alt="Logo" className="h-16 flex" />
+                <img
+                  src="/logo.png"
+                  alt="Logo"
+                  className="h-16 flex transition-all ease-in-out duration-100"
+                />
               </Link>
               <button
                 onClick={toggleMenu}
@@ -159,17 +176,17 @@ const Header = () => {
               </LoginLink>
             )}
             <RegisterLink>
-                <Button variant="outline" href="/login">
-                  Sign UP
-                </Button>
-              </RegisterLink>
+              <Button variant="outline" href="/login">
+                Sign UP
+              </Button>
+            </RegisterLink>
           </div>
         </nav>
       </header>
       {/* mobile header */}
       <header
         className={`hidden lg:flex fixed top-0 left-0 right-0 bg-white shadow-md z-50 ${
-          isSticky ? "visible" : "invisible"
+          isSticky ? "invisible" : "invisible"
         }`}
       >
         <div className="container mx-auto  flex items-center justify-between p-4">
@@ -200,20 +217,22 @@ const Header = () => {
   );
 };
 
-const NavLink = ({ href, children, dropdownItems , isSticky}) => {
+const NavLink = ({ href, children, dropdownItems, isSticky }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex items-center  space-x-2 border border-white px-3 py-2">
+    <div className="flex space-x-10 items-center  px-3 py-2">
       <div
         className="relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
-      <a
-  href={`/categories/${href}`}
-  className={`text-black ${isSticky ? 'text-black' : 'text-white'} hover:text-gray-600 flex justify-start flex-col items-center`}
->
+        <a
+          href={`/categories/${href}`}
+          className={`text-black ${
+            isSticky ? "text-black" : "text-white"
+          } hover:text-gray-600 flex justify-start flex-col items-center`}
+        >
           {children}
         </a>
         {dropdownItems && isDropdownOpen && (
@@ -271,13 +290,13 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
 
 const LoginSignupButtons = ({ isAuthenticated }) => (
   <>
-    <div className="bg-blueTheme w-full py-5 relative">
+    <div className="bg-orangeTheme w-full py-5 relative">
       <div className="absolute right-10 top-2  lg:max-w-7xl lg:mx-auto">
         {!isAuthenticated ? (
           <LoginLink>
             <span
               variant="outline"
-              className="text-white text-md p-1 bg-gray-800"
+              className="text-black text-md p-1 font-semibold"
             >
               Login
             </span>
@@ -286,23 +305,22 @@ const LoginSignupButtons = ({ isAuthenticated }) => (
           <LogoutLink>
             <span
               variant="outline"
-              className="text-white text-md px-5 py-1 bg-gray-800"
+              className="text-black text-md p-1 font-semibold"
             >
               Log Out
             </span>
           </LogoutLink>
         )}
-        
       </div>
       <div className="absolute right-28 top-2  lg:max-w-7xl lg:mx-auto">
-      <RegisterLink>
-            <span
-              variant="outline"
-              className="text-white text-md p-1 bg-gray-800"
-            >
-              Sign Up
-            </span>
-          </RegisterLink>
+        <RegisterLink>
+          <span
+            variant="outline"
+            className="text-black text-md p-1 font-semibold "
+          >
+            Sign Up
+          </span>
+        </RegisterLink>
       </div>
     </div>
   </>

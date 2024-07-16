@@ -19,6 +19,8 @@ module.exports = {
     extend: {
       colors: {
         blueTheme: '#262262',
+        secondaryBlue: '#322D80',
+        orangeTheme:'#FDB13F',
       },
       keyframes: {
         marquee: {

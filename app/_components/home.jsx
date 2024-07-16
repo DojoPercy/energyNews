@@ -12,6 +12,7 @@ import RecentDigitalIssue from "./digitalissuebox";
 import RecentCategoryNews from "./recentcategories";
 import PersonalityofWeek from "./personality_of_week";
 import TitleSection from "./titleSection";
+import { Img } from "@chakra-ui/react";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -90,6 +91,15 @@ const Categories = () => {
     const bottomRightContent = filteredNews[2];
 
     const allOtherArticles = filteredNews.slice(3, 8);
+    function convertToTitleCase(input) {
+      const words = input.split("_");
+  
+      const titleCase = words
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+  
+      return titleCase;
+    }
 
     content = (
       <>
@@ -122,99 +132,46 @@ const Categories = () => {
                 </div>
               </div>
             </div>
-            <div className="p-4 w-[100%] lg:w-[60%]   mx-auto">
+            <div className="p-4 w-[100%] lg:h-[92px]">
               <img
                 src={ads.bannerAds}
                 alt="banner.png"
-                className=" w-[95%] mx-auto"
+                className="lg:h-[100px] "
               />
             </div>
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6  lg:p-2  ">
               {/* Main Content - 2/3 width */}
-              <div className="lg:col-span-1 lg:flex flex-col hidden mt-4 ">
-                {topRightContent && (
-                  <div className="flex-1 ">
-                    <section className="mt-8">
-                      <article className="bg-white overflow-hidden flex flex-col  justify-start space-x-0 w-full mb-0">
-                        <figure className="post-thumbnail">
-                          <a
-                            className="block w-full"
-                            href={`/news/${topRightContent.title}`}
-                          >
-                            <img
-                              src={topRightContent.imageUrl}
-                              alt={topRightContent.title}
-                              className="object-cover"
-                            />
-                          </a>
-                        </figure>
-                        <div className="pr-0 lg:pt-2 flex flex-col justify-start">
-                          <header className="entry-header">
-                            <h2 className="entry-title text-sm font-normal mb-1">
-                              <a
-                                href={`/news/${topRightContent.title}`}
-                                className="hover:underline"
-                              >
-                                {topRightContent.title}
-                              </a>
-                            </h2>
-                          </header>
-                          <div className="flex space-x-2 text-xs text-gray-500 mb-4">
-                            <span className="posted-on block">
-                              {topRightContent.publishDate}
-                            </span>
-                          </div>
-                        </div>
-                      </article>
-                    </section>
-                  </div>
-                )}
-                <div className="flex-1">
-                  {bottomRightContent && (
-                    <div className="flex-1 mb-0">
-                      <section className="mt-0">
-                        <article className="bg-white overflow-hidden flex flex-col  justify-start space-x-0 w-full mb-2">
-                          <figure className="post-thumbnail">
-                            <a
-                              className="block w-full "
-                              href={`/news/${bottomRightContent.title}`}
-                            >
-                              <img
-                                src={bottomRightContent.imageUrl}
-                                alt={bottomRightContent.title}
-                                className="object-cover"
-                              />
-                            </a>
-                          </figure>
-                          <div className="pr-0 lg:pt-2 flex flex-col justify-start">
-                            <header className="entry-header">
-                              <h2 className="entry-title text-sm font-normal mb-1">
-                                <a
-                                  href={`/news/${bottomRightContent.title}`}
-                                  className="hover:underline"
-                                >
-                                  {bottomRightContent.title}
-                                </a>
-                              </h2>
-                            </header>
-                            <div className="flex space-x-2 text-xs text-gray-500 mb-4">
-                              <span className="posted-on block">
-                                {bottomRightContent.publishDate}
-                              </span>
-                            </div>
-                          </div>
-                        </article>
-                      </section>
-                      <div class="bg-transparent border-0 border-t border-gray-300 h-px my-8 mx-auto max-w-[5rem] opacity-100"></div>
-                    </div>
-                  )}
-                </div>
-              </div>
-              <div className="lg:col-span-3 lg:mt-10">
+             
+              <div className="lg:col-span-4 lg:mt-4">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  Latest News
+                  Top News
                 </h2>
-                {news && <Slider sliders={news} />}
+                <div className=''>
+                  <div className="flex flex-col lg:flex-row w-full py-0 m-2 ">
+                  <figure className="lg:w-[55%] w-[100%] ">
+                    <div>
+                      <Img src={latestArticle.imageUrl} alt="figure" className="w-full object-cover object-center" />
+                    </div>
+                  </figure>
+                  <div className="p-5 lg:w-[45%] w-[100%] bg-gray-200 flex flex-col justify-start ">
+                   
+                    <h1 className="text-xl font-bold text-gray-900 hover:text-secondaryBlue hover:cursor-pointer">
+                    <a href={`/news/${latestArticle.title}`}>
+                      {latestArticle.title}
+                      </a>
+                    </h1>
+                    
+                    <span className=" w-auto text-xs p-2  text-secondaryBlue rounded-md">
+                      {convertToTitleCase(latestArticle.category)}
+                    </span>
+                    <p className="text-gray-500 py-2 text-sm">
+                      {latestArticle.summary}
+                    </p>
+                  </div>
+                  </div>
+
+                </div>
+
               </div>
               {/* Right Column - 1/3 width */}
 
@@ -223,7 +180,6 @@ const Categories = () => {
                   <div className="flex flex-col items-center justify-center space-y-2">
                     <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
                     <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
-                    <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
                   </div>
                 </div>
               </div>
