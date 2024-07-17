@@ -21,6 +21,8 @@ module.exports = {
         blueTheme: '#262262',
         secondaryBlue: '#322D80',
         orangeTheme:'#DD7B2D',
+        'custom-yellow': 'hsla(48, 98%, 61%, 1)',
+        'custom-orange': 'hsla(27, 91%, 55%, 1)',
       },
       keyframes: {
         marquee: {

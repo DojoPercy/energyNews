@@ -151,7 +151,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="p-2">
+    <div className="p-2 max-w-7xl mx-auto">
     <div className="flex items-center text-gray-500 text-sm">
       <a href="/" className="hover:underline">
         Home

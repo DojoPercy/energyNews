@@ -143,7 +143,7 @@ const Categories = () => {
               {/* Main Content - 2/3 width */}
              
               <div className="lg:col-span-4 lg:mt-4">
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2 className="text-2xl lg:text-3xl font-bold text-secondaryBlue ">
                   Top News
                 </h2>
                 <div className=''>
@@ -187,19 +187,14 @@ const Categories = () => {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6  lg:p-2">
-          <div className="lg:col-span-1 hidden lg:block">
-            <RecentDigitalIssue />
-           <div className="ml-1">
-           <RecentCategoryNews news={news} category="industry_updates" /> 
-           </div>
-          </div>
-          <section className="mb-8 max-w-7xl mx-auto p-1 lg:p-2 lg:col-span-3 col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-7 gap-10 p-6  lg:p-2">
+          
+          <section className="mb-8 max-w-7xl mx-auto p-1 lg:p-2 lg:col-span-6 col-span-1">
             <TitleSection title={"Featured Articles"}/>
-            {allOtherArticles.map((article, index) => (
+            {allOtherArticles.slice(0, 4).map((article, index) => (
               <article
                 key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
+                className="bg-white overflow-hidden flex flex-col  lg:flex-row justify-start space-x-0 w-full mb-4"
               >
                 <figure className="post-thumbnail">
                   <a
@@ -246,7 +241,7 @@ const Categories = () => {
           </section>
 
           <section className="">
-            <div className="lg:col-span-1 hidden lg:block">
+            <div className="lg:col-span-1 hidden lg:block w-full">
               <RecentCategoryNews news={news} category="global_news" />
             </div>
           </section>

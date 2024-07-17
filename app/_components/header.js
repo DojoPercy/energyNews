@@ -290,7 +290,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
 
 const LoginSignupButtons = ({ isAuthenticated }) => (
   <>
-    <div className="bg-orangeTheme w-full py-5 relative">
+    <div className="bg-gradient-to-r from-custom-yellow to-custom-orange w-full py-5 relative">
       <div className="absolute right-10 top-2  lg:max-w-7xl lg:mx-auto">
         {!isAuthenticated ? (
           <LoginLink>
