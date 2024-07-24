@@ -80,7 +80,7 @@ const Header = () => {
             </Link>
           </div>
           {/* Mobile Screen Nav */}
-          <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out border border-gray-200 ">
+          <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out  ">
            
             <Link href="/">
               <img
