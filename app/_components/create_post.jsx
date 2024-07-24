@@ -37,8 +37,8 @@ const CreatePost = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    setImageFile(file);
-    // Optionally, you can display a preview of the image before uploading
+    setImageFile(prev => file);
+   
   };
 
   const handleRemoveImage = () => {
@@ -62,7 +62,7 @@ const CreatePost = () => {
           title,
           content: editorHtml,
           summary,
-          author: user.user.given_name + ' ' + user.user.family_name,
+          author: 'energyGoverance Desk',
           category,
           tags,
           publishDate: new Date().toUTCString(),
@@ -91,8 +91,10 @@ const CreatePost = () => {
   };
 
   const handleImageUpload = async () => {
+   
     if (!imageFile) {
       setShowImageUploadNotice(true);
+      console.log('No image file selected');
       return;
     }
 

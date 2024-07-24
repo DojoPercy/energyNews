@@ -24,6 +24,11 @@ module.exports = {
         'custom-yellow': 'hsla(48, 98%, 61%, 1)',
         'custom-orange': 'hsla(27, 91%, 55%, 1)',
       },
+      fontFamily: {
+        mont: ["var(--font-mont)"],
+        proxima: ["var(--font-proxima)"],
+        poppins: ["var(--font-poppins)"],
+      },
       keyframes: {
         marquee: {
           '0%': { transform: 'translateX(100%)' },

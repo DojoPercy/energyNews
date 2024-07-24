@@ -6,31 +6,36 @@ import { Button, FileInput, Select, TextInput } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { updateNews, fetchNews } from "../_redux/news/newSlice";
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { storage } from "../../config/firebaseconfig";
+
 
 const EditPost = () => {
-  const newsId = useParams();
-  
+  const { newsID } = useParams();
   const dispatch = useDispatch();
-
-  const news = useSelector(state => state.news.news);
-  const newsStatus = useSelector(state => state.news.status);
-  const loading = useSelector(state => state.news.loading);
-  const error = useSelector(state => state.news.error);
+  const news = useSelector((state) => state.news.news);
+  const newsStatus = useSelector((state) => state.news.status);
+  const loading = useSelector((state) => state.news.loading);
+  const error = useSelector((state) => state.news.error);
 
   useEffect(() => {
-    if (newsStatus === 'idle') {
+    if (newsStatus === "idle") {
       dispatch(fetchNews());
     }
   }, [newsStatus, dispatch]);
 
-  const newsItem = news.find(item => item.id === newsId.newsID) || {};
+  const newsItem = news.find((item) => item.id === newsID) || {};
 
   const [title, setTitle] = useState(newsItem.title || "");
   const [category, setCategory] = useState(newsItem.category || "uncategorized");
   const [imageFile, setImageFile] = useState(null);
   const [editorHtml, setEditorHtml] = useState(newsItem.content || "");
+  const [imageUrl, setImageUrl] = useState("");
   const [tags, setTags] = useState(newsItem.tags || []);
   const [newTag, setNewTag] = useState("");
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
 
   useEffect(() => {
     if (newsItem) {
@@ -38,12 +43,56 @@ const EditPost = () => {
       setCategory(newsItem.category || "uncategorized");
       setEditorHtml(newsItem.content || "");
       setTags(newsItem.tags || []);
+      setImageUrl(newsItem.imageUrl || "");
     }
   }, [newsItem]);
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setImageFile(file);
+    console.log("Selected file:", file);
+    console.log("State after setImageFile:", imageFile);
+  };
+
+  const handleRemoveImage = () => {
+    setImageFile(null);
+    setImageUrl("");
+  };
+ 
+  const handleImageUpload = async () => {
+    if (!imageFile) {
+      setShowImageUploadNotice(true);
+      console.log("No image file selected");
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const storageRef = ref(storage, `images/${imageFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);
+        },
+        (error) => {
+          console.error("Error uploading image:", error);
+          setUploading(false);
+          setShowImageUploadNotice(true);
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setImageUrl(downloadURL);
+          setUploading(false);
+        }
+      );
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setUploading(false);
+      setShowImageUploadNotice(true);
+    }
   };
 
   const handleAddTag = () => {
@@ -62,31 +111,29 @@ const EditPost = () => {
       category,
       tags,
       updateDate: new Date(),
-      
       imageUrl: imageFile ? URL.createObjectURL(imageFile) : newsItem.imageUrl,
     };
-    dispatch(updateNews({ updatedFields: updatedNewsItem }))
-   
-    setTitle('');
-    setCategory('uncategorized');
+    dispatch(updateNews({ updatedFields: updatedNewsItem }));
+
+    setTitle("");
+    setCategory("uncategorized");
     setImageFile(null);
-    setEditorHtml('');
+    setEditorHtml("");
     setTags([]);
   };
 
   if (loading) {
-   
     return <p>Loading...</p>;
   }
 
   if (error) {
-    console.log(newsId);
+    console.log(newsID);
     return <p>Error loading news: {error}</p>;
   }
 
   return (
-    <div className="p-3 max-w-3xl mx-auto min-h-screen">
-      <h1 className="text-center text-3xl my-7 font-semibold"></h1>
+    <div className="p-3 max-w-3xl mx-auto mt-20">
+      <h1 className="text-center text-3xl my-7 font-semibold">Edit Post</h1>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <TextInput
@@ -138,57 +185,56 @@ const EditPost = () => {
           </Select>
         </div>
         <div className="flex items-center justify-between border border-gray-300 rounded-md p-3">
-          <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 ">
-            <FileInput
-              type="file"
-              accept="image/*"
-              onChange={handleFileChange}
-            />
-            <Button
-              type="button"
-              gradientDuoTone="purpleToBlue"
-              size="sm"
-              outline
-            >
-              Upload Image
-            </Button>
-          </div>
+          {uploading ? (
+            <div className="flex items-center justify-between w-full">
+              <progress value={uploadProgress} max="100" className="w-full h-2 rounded-lg"></progress>
+              <span>{uploadProgress.toFixed(2)}%</span>
+            </div>
+          ) : imageUrl ? (
+            <div className="flex items-center gap-4">
+              <img src={imageUrl} alt="Uploaded" className="w-72 h-72 object-cover rounded-md" />
+              <Button type="button" onClick={handleRemoveImage} gradientDuoTone="redToOrange" size="sm">
+                Remove Image
+              </Button>
+            </div>
+          ) : (
+            <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3'>
+              <FileInput type='file' accept='image/*' onChange={handleFileChange} />
+              <Button type='button' onClick={handleImageUpload} gradientDuoTone='purpleToBlue' size='sm' outline>Upload Image</Button>
+            </div>
+          )}
         </div>
-        <div className="flex flex-col gap-2">
+        {showImageUploadNotice && (
+          <p className="text-red-500">Please select an image file before uploading.</p>
+        )}
+        <ReactQuill
+          value={editorHtml}
+          onChange={setEditorHtml}
+          className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
+        />
+        <div className="flex gap-2 items-center w-full">
           <TextInput
             type="text"
-            placeholder="Enter tag and press Add"
+            placeholder="Add tag"
             value={newTag}
             onChange={(e) => setNewTag(e.target.value)}
             className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
           />
-          <Button
-            type="button"
-            onClick={handleAddTag}
-            gradientDuoTone="purpleToBlue"
-            size="sm"
-          >
+          <Button type="button" onClick={handleAddTag} gradientDuoTone="greenToBlue" className="bg-black">
             Add Tag
           </Button>
-          <div className="flex flex-wrap gap-2 mt-2">
-            {tags.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-teal-500 text-white rounded-full px-3 py-1 text-sm"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
         </div>
-        <ReactQuill
-          theme="snow"
-          value={editorHtml}
-          onChange={setEditorHtml}
-          className="mb-12 h-72"
-          placeholder="Write your post content here..."
-        />
-        <Button type="submit" gradientDuoTone="purpleToBlue" size="lg">
+        <div className="flex gap-2 flex-wrap">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-teal-500 text-white py-1 px-3 rounded-md"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <Button type="submit" gradientDuoTone="purpleToBlue" className="bg-black">
           Update Post
         </Button>
       </form>
