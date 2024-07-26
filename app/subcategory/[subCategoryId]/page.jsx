@@ -164,7 +164,7 @@ const SubCategory = () => {
             </div>
           )}
           <div className="col-span-3">
-            <div className="flex flex-col space-y-2 justify-start items-start">
+            <div className="flex flex-col space-y-2 justify-start items-start mb-32">
               <article
                 key={article.id}
                 className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
@@ -242,7 +242,7 @@ const SubCategory = () => {
             {
               dropDowns[0].dropdownItems.length > 1 && dropDowns[0].dropdownItems.map(
                 (item, index) => (
-                  <div key={index}>
+                  <div key={index} >
                     <SingleCategory news={news} currentCategory={item} />
                   </div>
                 )
