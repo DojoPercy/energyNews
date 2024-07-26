@@ -133,7 +133,7 @@ const Categories = () => {
                 className="lg:h-[100px]"
               />
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-6 lg:p-2">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 p-3 lg:p-2">
               <div className="lg:col-span-4 lg:mt-4">
                 <h2 className="text-2xl lg:text-3xl font-bold text-secondaryBlue font-mont">
                   Top News
@@ -219,6 +219,9 @@ const Categories = () => {
           <section className="lg:col-span-2 hidden  lg:block w-full">
             <RecentCategoryNews news={news} category="global_news" />
             <RecentDigitalIssue/>
+          </section>
+          <section className="lg:hidden">
+          <RecentDigitalIssue/>
           </section>
 
         </div>

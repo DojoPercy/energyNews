@@ -36,6 +36,7 @@ const SingleNews = () => {
   }, [newsStatus, dispatch]);
 
   useEffect(() => {
+    
     const filteredNews = news.filter((item) => item.title === decodeURIComponent(newsId));
     if (filteredNews.length > 0) {
       const article = filteredNews[0];

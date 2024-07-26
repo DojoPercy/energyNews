@@ -228,7 +228,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
         <a
-          href={`/categories/${href}`}
+          href={`/subcategory${href}`}
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
           } hover:text-gray-600 flex justify-start flex-col items-center`}
@@ -262,7 +262,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
         className="flex justify-between items-center py-2 w-full"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <a href={`/categories/${href}`} className="text-gray-800">
+        <a href={`/subcategory${href}`} className="text-gray-800">
           {children}
         </a>
         {dropdownItems && (

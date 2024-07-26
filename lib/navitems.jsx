@@ -52,7 +52,7 @@ export const navItems = [
     },
     {
       title: "Energy Transition",
-      href: "/energy-transition",
+      href: "/energy_transition",
       dropdownItems: [
         "Decarbonization Strategies",
         "Renewable Integration",
