@@ -11,7 +11,7 @@ const Home = () => {
     <Provider store={store}>
        <div className='w-full font-poppins'>
        <Header />
-       <div className="flex flex-col mx-auto lg:max-w-[1400px]  lg:mx-auto ">  <Categories/></div>
+       <div className="flex flex-col mx-auto lg:max-w-[1450px]  lg:mx-auto ">  <Categories/></div>
        </div>
       </Provider>
   )

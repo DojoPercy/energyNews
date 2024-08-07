@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPersonality } from '../_redux/news/personality';
 import { ClipLoader } from "react-spinners";
+import TitleSection from './titleSection';
 
 const PersonalityofWeek = () => {
   const dispatch = useDispatch();
@@ -29,10 +30,9 @@ const PersonalityofWeek = () => {
   }
 
   return (
-    <div className="p-4 rounded-lg shadow-lg bg-white">
-      <div className="bg-blueTheme text-white text-lg font-bold p-2 rounded-t-lg">
-        Best Personality of the Week
-      </div>
+    <div className="p-4 rounded-lg  bg-white">
+      <TitleSection title="Energy Leadership Icon of the Week" />
+      
       <div className='flex flex-col md:flex-row items-start justify-start space-y-4 md:space-y-0 md:space-x-6 p-4'>
         <div className='w-full md:w-1/3 flex flex-col'>
           <img

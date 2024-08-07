@@ -58,7 +58,7 @@ const Header = () => {
         }`}
       >
         <div className="w-full flex flex-col ">
-          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1400px] hidden lg:flex">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1450px] hidden lg:flex">
             <Link href="/">
               <img
                 src="/logo_white.png"
@@ -111,18 +111,31 @@ const Header = () => {
           <div className=" ni">
             <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
               <div className="flex justify-start items-center space-x-2 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
-                {navItems.map((item, index) => (
-                  <NavLink
-                    key={index}
-                    href={item.href}
-                    dropdownItems={item.dropdownItems}
-                  >
-                    {item.title}
-                  </NavLink>
-                ))}
+                {navItems.map((item, index) =>
+                !item.special ?
+                  (
+                    <NavLink
+                      key={index}
+                      href={item.href}
+                      dropdownItems={item.dropdownItems}
+                    >
+                      {item.title}
+                    </NavLink>
+                  ) :
+                  (
+                    <SpecialNavLink
+                      key={index}
+                      href={item.href}
+                      >
+                      {item.title}
+                      </SpecialNavLink>
+                  )
+                
+                )}
               </div>
             </div>
           </div>
+          
         </div>
         {/* sidemnue */}
         <nav
@@ -214,6 +227,29 @@ const Header = () => {
         </div>
       </header>
     </>
+  );
+};
+
+const SpecialNavLink = ({ href, children, isSticky }) => {
+ 
+
+  return (
+    <div className="flex space-x-10 items-center  px-3 py-2">
+      <div
+        className="relative"
+     
+      >
+        <a
+          href={`${href}`}
+          className={`text-black ${
+            isSticky ? "text-black" : "text-white"
+          } hover:text-gray-600 flex justify-start flex-col items-center`}
+        >
+          {children}
+        </a>
+       
+      </div>
+    </div>
   );
 };
 

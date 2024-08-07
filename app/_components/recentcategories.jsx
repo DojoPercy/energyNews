@@ -97,9 +97,7 @@ const RecentCategoryNews = ({ category, news }) => {
     </div>
       <div>
       <div className="flex flex-col items-center justify-center space-y-2 mt-10">
-        <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
-        <img src={ads.squareAds.SquareAd_2} alt="Lexar" />
-        <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
+       
       </div>
     </div>
     <div>
