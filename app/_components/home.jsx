@@ -156,7 +156,7 @@ const Categories = () => {
               </figure>
               <div className="p-5 lg:w-[45%] w-[100%] bg-gray-200 flex flex-col justify-start">
               <div className="bg-secondaryBlue flex justify-center rounded-lg w-[100px] mb-3">
-              <h2 className="text-lg lg:text-sm py-2 px-0  font-semibold text-white font-mont">
+              <h2 className="text-xs lg:text-sm py-2 px-0  font-semibold text-white font-mont">
               Top News
             </h2>
               </div>
