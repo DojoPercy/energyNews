@@ -111,17 +111,17 @@ const Categories = () => {
         )}
         {latestArticle && (
           <>
-            <div className="absolute top-[232px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-secondaryBlue w-full">
+            <div className="absolute lg:top-[232px] top-[132px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-secondaryBlue w-full">
               <div className="relative h-full flex items-center z-10">
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex">
                   {news.map((headline, index) => (
                     <span className="px-4 relative " key={index}>
-                      <span className="h-[65px] absolute -top-[10px] left-0 w-[1px] -ml-1 bg-secondaryBlue inline-block"></span>
+                      <span className="lg:h-[40px]  absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-secondaryBlue inline-block"></span>
                       <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
-                      <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
+                     
                       <a
                         href={`/news/${headline.title}`}
-                        className="hover:underline ml-1 text-black text-[14px]"
+                        className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
                       >
                         {headline.title}
                       </a>
@@ -131,8 +131,8 @@ const Categories = () => {
               </div>
             </div>
 
-            <div className=" container mx-auto px-0 lg:px-4 py-2 lg:py-10">
-              <div className=" w-[100%] lg:h-[92px]">
+            <div className="  lg:px-6 pt-10 lg:pt-14 lg:pb-0">
+              <div className=" w-[100%] lg:h-[82px]">
                 <img
                   src={ads.bannerAds}
                   alt="banner.png"
@@ -143,10 +143,10 @@ const Categories = () => {
             </div>
           </>
         )}
-        <div className="grid grid-cols-1 lg:grid-cols-8 gap-10 p-6 lg:p-2">
-          <section className="mb-8 max-w-7xl mx-auto p-1 lg:p-2 lg:col-span-6 col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2">
+          <section className="mb-8 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
             
-            <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 m-2">
+            <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
               <figure className="lg:w-[55%] w-[100%]">
                 <Img
                   src={latestArticle.imageUrl}
@@ -184,7 +184,7 @@ const Categories = () => {
             {allOtherArticles.slice(0, 4).map((article, index) => (
               <article
                 key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
+                className="bg-white p-2 overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
               >
                 <figure className="post-thumbnail">
                   <a
@@ -241,7 +241,9 @@ const Categories = () => {
             </div>
           </section>
           <section className="lg:hidden">
+            <div className="p-2">
             <RecentDigitalIssue />
+            </div>
           </section>
         </div>
       </>

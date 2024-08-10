@@ -68,7 +68,7 @@ const CategoryFocus = ({ news }) => {
                 <div className="grid grid-cols-1 lg:grid-cols-2 ">
                   <div className="col-span-1">
                     {firstArticle && (
-                      <div className="mb-6 p-4 rounded-lg  bg-white">
+                      <div className="mb-6 p-2 rounded-lg  bg-white">
                         <img
                           src={firstArticle.imageUrl}
                           alt={firstArticle.title}
