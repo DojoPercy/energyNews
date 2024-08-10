@@ -81,7 +81,6 @@ const Header = () => {
           </div>
           {/* Mobile Screen Nav */}
           <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out  ">
-           
             <Link href="/">
               <img
                 src="/logo_white.png"
@@ -99,9 +98,9 @@ const Header = () => {
                 <div className="flex items-center space-x-3">
                   <FaBars className=" w-5 h-5" />
                   <div className="flex-shrink-0">
-                    <button className="text-white focus:outline-none">
+                    <div className="text-white focus:outline-none">
                       <FaSearch />
-                    </button>
+                    </div>
                   </div>
                 </div>
               </button>
@@ -112,8 +111,7 @@ const Header = () => {
             <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
               <div className="flex justify-start items-center space-x-2 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
                 {navItems.map((item, index) =>
-                !item.special ?
-                  (
+                  !item.special ? (
                     <NavLink
                       key={index}
                       href={item.href}
@@ -121,21 +119,15 @@ const Header = () => {
                     >
                       {item.title}
                     </NavLink>
-                  ) :
-                  (
-                    <SpecialNavLink
-                      key={index}
-                      href={item.href}
-                      >
+                  ) : (
+                    <SpecialNavLink key={index} href={item.href}>
                       {item.title}
-                      </SpecialNavLink>
+                    </SpecialNavLink>
                   )
-                
                 )}
               </div>
             </div>
           </div>
-          
         </div>
         {/* sidemnue */}
         <nav
@@ -161,13 +153,31 @@ const Header = () => {
             </div>
             <div className="mt-4 w-full   ">
               {navItems.map((item, index) => (
-                <MobileNavLink
+                
+                 !item.special ? (
+                  <MobileNavLink
                   key={index}
                   href={item.href}
                   dropdownItems={item.dropdownItems}
                 >
                   {item.title}
                 </MobileNavLink>
+                ) : (
+                  
+                    <div className="flex space-x-10 items-center  px-1 py-2">
+                      <div className="relative">
+                        <a
+                          href={`${item.href}`}
+                          className={`text-black 
+                            
+                           hover:text-gray-600 flex justify-start flex-col items-center`}
+                        >
+                          {item.title}
+                        </a>
+                      </div>
+                    </div>
+                  
+                )
               ))}
             </div>
             {isAdmin && (
@@ -177,21 +187,21 @@ const Header = () => {
             )}
             {isAuthenticated ? (
               <LogOut>
-                <Button variant="outline" href="/logout">
+                
                   Log Out
-                </Button>
+                
               </LogOut>
             ) : (
               <LoginLink>
-                <Button variant="outline" href="/login">
+             
                   Login
-                </Button>
+                
               </LoginLink>
             )}
             <RegisterLink>
-              <Button variant="outline" href="/login">
+             
                 Sign UP
-              </Button>
+              
             </RegisterLink>
           </div>
         </nav>
@@ -207,22 +217,28 @@ const Header = () => {
             <img src="/logo.png" alt="Logo" className="h-16 flex" />
           </Link>
           <div className="flex flex-row items-center space-x-4">
-            {navItems.map((item, index) => (
-              <NavLink
-                key={index}
-                href={item.href}
-                dropdownItems={item.dropdownItems}
-                isSticky={isSticky}
-              >
-                {item.title}
-                <FaChevronDown height={2} />
-              </NavLink>
-            ))}
+            {navItems.map((item, index) =>
+              !item.special ? (
+                <NavLink
+                  key={index}
+                  href={item.href}
+                  dropdownItems={item.dropdownItems}
+                  isSticky={isSticky}
+                >
+                  {item.title}
+                  <FaChevronDown height={2} />
+                </NavLink>
+              ) : (
+                <SpecialNavLink key={index} href={item.href}>
+                  {item.title}
+                </SpecialNavLink>
+              )
+            )}
           </div>
           <div className="flex-shrink-0">
-            <button className="text-gray-800 focus:outline-none">
+            <div className="text-gray-800 focus:outline-none">
               <FaSearch />
-            </button>
+            </div>
           </div>
         </div>
       </header>
@@ -230,15 +246,10 @@ const Header = () => {
   );
 };
 
-const SpecialNavLink = ({ href, children, isSticky }) => {
- 
-
+const SpecialNavLink = ({ href, children, isSticky ,}) => {
   return (
     <div className="flex space-x-10 items-center  px-3 py-2">
-      <div
-        className="relative"
-     
-      >
+      <div className="relative">
         <a
           href={`${href}`}
           className={`text-black ${
@@ -247,7 +258,6 @@ const SpecialNavLink = ({ href, children, isSticky }) => {
         >
           {children}
         </a>
-       
       </div>
     </div>
   );
@@ -302,9 +312,9 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
           {children}
         </a>
         {dropdownItems && (
-          <button className="text-gray-800 focus:outline-none">
+          <div className="text-gray-800 focus:outline-none">
             {isDropdownOpen ? <FaTimes /> : <FaChevronDown />}
-          </button>
+          </div>
         )}
       </div>
       {dropdownItems && isDropdownOpen && (

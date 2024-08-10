@@ -64,7 +64,7 @@ const RecentCategoryNews = ({ category, news }) => {
                     <img
                       src={newsItem.imageUrl}
                       alt="Uploaded"
-                      className=" lg:w-48 w-[300px] object-cover mt-2 "
+                      className=" lg:w-ful w-[300px] object-cover mt-2 "
                     />
                   </Link>
                   <Link
