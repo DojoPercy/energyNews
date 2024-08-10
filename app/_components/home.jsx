@@ -131,8 +131,8 @@ const Categories = () => {
               </div>
             </div>
 
-            <div className="  lg:px-6 pt-10 lg:pt-14 lg:pb-0">
-              <div className=" w-[100%] lg:h-[82px]">
+            <div className="  lg:px-6 pt-10 lg:pt-14 lg:pb-2 ">
+              <div className="w-[95%] mx-auto lg:w-[100%] lg:h-[82px]">
                 <img
                   src={ads.bannerAds}
                   alt="banner.png"
