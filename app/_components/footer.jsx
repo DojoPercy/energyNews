@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaFacebookF, FaYoutube, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -18,18 +19,18 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Social Media</h3>
             <ul className="flex space-x-4">
               <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300">
-                  Facebook
+                <a href="#" className="text-white hover:text-gray-400 transition duration-300" aria-label="Facebook">
+                  <FaFacebookF size={20} />
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300">
-                  YouTube
+                <a href="#" className="text-white hover:text-gray-400 transition duration-300" aria-label="YouTube">
+                  <FaYoutube size={20} />
                 </a>
               </li>
               <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300">
-                  LinkedIn
+                <a href="#" className="text-white hover:text-gray-400 transition duration-300" aria-label="LinkedIn">
+                  <FaLinkedinIn size={20} />
                 </a>
               </li>
             </ul>
@@ -78,27 +79,7 @@ const Footer = () => {
           </div>
 
           {/* Sister Sites */}
-          <div>
-            <h3 className="text-xl font-bold mb-4">Sister Sites</h3>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300 block">
-                  PMV Middle East
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300 block">
-                  Construction Week Online
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-white hover:text-gray-400 transition duration-300 block">
-                  Facilities Management ME
-                </a>
-              </li>
-              {/* Add more sister sites as needed */}
-            </ul>
-          </div>
+          
         </div>
 
         {/* Copyright */}
