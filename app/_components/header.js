@@ -49,9 +49,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-between items-center  transition-all duration-2000 ease-out  ">
-        <LoginSignupButtons isAuthenticated={isAuthenticated} />
-      </div>
+     
       <header
         className={`text-gray-900 bg-blueTheme transition-all ease-in-out duration-200   ${
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
@@ -336,7 +334,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
 
 const LoginSignupButtons = ({ isAuthenticated }) => (
   <>
-    <div className="bg-gradient-to-r from-custom-yellow to-custom-orange w-full py-5 relative">
+    <div className="bg-blueTheme from-custom-yellow to-custom-orange w-full py-5 relative">
       <div className="absolute right-10 top-2  lg:max-w-7xl lg:mx-auto">
         {!isAuthenticated ? (
           <LoginLink>
