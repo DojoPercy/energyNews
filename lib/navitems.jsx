@@ -8,7 +8,9 @@ export const navItems = [
         "Industry Updates",
         "Press Releases",
       ],
-      special:false
+       special:false,
+      
+      feature: false
     },
     {
       title: "Analysis",
@@ -19,7 +21,8 @@ export const navItems = [
         "Technology Trends",
         "Expert Opinions",
       ],
-      special:false
+      special:false,
+      feature: false
     },
     {
       title: "Features",
@@ -30,7 +33,8 @@ export const navItems = [
         "Interviews",
         "Special Editions",
       ],
-      special:false
+      special:false,
+      feature: true
     },
     {
       title: "Sectors",
@@ -42,7 +46,8 @@ export const navItems = [
         "Nuclear Energy",
         "Energy Efficiency",
       ],
-      special:false
+       special:false,
+      feature: false
     },
     {
       title: "Regions",
@@ -53,7 +58,8 @@ export const navItems = [
         "Sub-Saharan Africa",
         "GCC Countries",
       ],
-      special:false
+       special:false,
+      feature: false
     },
     {
       title: "Energy Transition",
@@ -65,7 +71,8 @@ export const navItems = [
         "Sustainable Energy Innovations",
         "Green Financing",
       ],
-      special:false
+       special:false,
+      feature: false
     },
     {
       title: "Events",
@@ -76,7 +83,8 @@ export const navItems = [
         "Conferences",
         "Industry Awards",
       ],
-      special:false
+       special:false,
+      feature: false
     },
     {
       title:"Energy Governance MEA Quarterly Review",
@@ -84,6 +92,7 @@ export const navItems = [
       dropdownItems: [
         
       ],
-      special:true
+      special:true,
+      feature: false
     }
   ];

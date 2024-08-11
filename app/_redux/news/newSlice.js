@@ -1,10 +1,10 @@
 // src/features/news/newsSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { db, storage } from '../../../config/firebaseconfig'; // Import storage from Firebase config
+import { db, storage } from '../../../config/firebaseconfig';
 import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, getDoc } from 'firebase/firestore';
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; // Import necessary storage functions
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; 
 
-// Thunk to fetch news from Firebase
+
 export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   const newsCollection = collection(db, 'news');
   const snapshot = await getDocs(newsCollection);
@@ -13,7 +13,7 @@ export const fetchNews = createAsyncThunk('news/fetchNews', async () => {
   return newsArray;
 });
 
-// Thunk to add news to Firebase, including file upload
+
 export const addNews = createAsyncThunk('news/addNews', async (newsItem) => {
   
   const newsCollection = collection(db, 'news');
@@ -22,23 +22,22 @@ export const addNews = createAsyncThunk('news/addNews', async (newsItem) => {
   return { id: docRef.id, ...newsItem };
 });
 
-// Thunk to update news in Firebase, including image update
 export const updateNews = createAsyncThunk(
   'news/updateNews',
   async ({ updatedFields, imageFile }, thunkAPI) => {
     try {
       const { id } = updatedFields;
-      let imageUrl = updatedFields.imageUrl; // Existing image URL or new URL if updated
+      let imageUrl = updatedFields.imageUrl; 
 
       if (imageFile) {
-        // Upload new image to storage if imageFile is provided
+        
         const storageRef = ref(storage, `images/${imageFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, imageFile);
         const snapshot = await uploadTask;
-        imageUrl = await getDownloadURL(snapshot.ref); // Update imageUrl with new download URL
+        imageUrl = await getDownloadURL(snapshot.ref); 
       }
 
-      // Update the document in Firestore with updatedFields and possibly new imageUrl
+     
       const docRef = doc(db, 'news', id);
       await updateDoc(docRef, { ...updatedFields, imageUrl });
 

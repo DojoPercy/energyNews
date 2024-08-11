@@ -33,14 +33,14 @@ const CategoryFocus = ({ news }) => {
   return (
     <div className="w-full">
       <div>
-        <div className="flex flex-wrap justify-start items-start space-x-3 space-y-3 lg:space-y-1">
+        <div className="flex flex-wrap justify-start items-start gap-2">
           {categories.map((category) => (
             <button
               key={category.value}
               onClick={() => handleCategoryChange(category.value)}
               className={`px-3 py-2 rounded-lg text-white ${
                 currentCategory === category.value
-                  ? "bg-secondaryBlue"
+                  ? "bg-secondaryBlue px-4 transition duration-100 ease-in-out"
                   : "bg-blueTheme"
               }`}
             >

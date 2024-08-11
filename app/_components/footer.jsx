@@ -129,58 +129,58 @@ const Footer = () => {
   <h3 className="text-xl font-bold mb-4">Sister Websites</h3>
   <div className="flex flex-col space-y-2">
     <span>
-      RADComm Group -{' '}
+     
       <a
         href="https://www.radcommgroup.com"
         className="text-white hover:text-gray-400 transition duration-300"
         target="_blank"
         rel="noopener noreferrer"
       >
-        www.radcommgroup.com
+        RADComm Group 
       </a>
     </span>
     <span>
-      World Business Leaders Congress -{' '}
+      
       <a
         href="https://www.worldbusinessleaderscongress.com"
         className="text-white hover:text-gray-400 transition duration-300"
         target="_blank"
         rel="noopener noreferrer"
       >
-        www.worldbusinessleaderscongress.com
+        World Business Leaders Congress
       </a>
     </span>
     <span>
-      National Communications Awards -{' '}
+      
       <a
         href="https://www.nationalcommunicationsawards.com"
         className="text-white hover:text-gray-400 transition duration-300"
         target="_blank"
         rel="noopener noreferrer"
       >
-        www.nationalcommunicationsawards.com
+       National Communications Awards 
       </a>
     </span>
     <span>
-      Premier Business MEA -{' '}
+      
       <a
         href="https://www.premierbusinessmag.com"
         className="text-white hover:text-gray-400 transition duration-300"
         target="_blank"
         rel="noopener noreferrer"
       >
-        www.premierbusinessmag.com
+        Premier Business MEA 
       </a>
     </span>
     <span>
-      Premier Energy Leadership MEA -{' '}
+      
       <a
         href="https://www.premierenergymea.com"
         className="text-white hover:text-gray-400 transition duration-300"
         target="_blank"
         rel="noopener noreferrer"
       >
-        www.premierenergymea.com
+       Premier Energy Leadership MEA
       </a>
     </span>
   </div>
