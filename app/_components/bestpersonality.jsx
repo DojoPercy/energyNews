@@ -7,16 +7,69 @@ import 'react-quill/dist/quill.snow.css';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import Editor from './editor';
 import { fetchPersonality, savePersonality } from '../_redux/news/personality';
+import { addNews } from '../_redux/news/newSlice';
+import { categories } from '../../lib/categories';
 
 const BestPersonalityForm = () => {
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [category, setCategory] = useState('personality_of_the_week_feature');
+  const [summary, setSummary] = useState(''); 
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [tags, setTags] = useState([]);
+  const [newTag, setNewTag] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
+  const [publishImmediately, setPublishImmediately] = useState(true);
+
+  const handleCheckboxChange = () => {
+    setPublishImmediately(!publishImmediately);
+  };
+
+  const handleFormSubmitToNews = async (event) => {
+    console.log('submitting');
+    event.preventDefault();
+    if (!name && !description && !imageUrl) {
+      alert('Please fill in all the fields');
+      return;
+    }
+    
+    
+      try {
+        const newNewsItem = {
+          name,
+          content: description,
+          summary,
+          author: 'energyGoverance Desk',
+          category,
+          tags,
+          publishDate: new Date().toUTCString(),
+          updateDate: new Date().toDateString(),
+          imageUrl: imageUrl || '',
+          videoUrl: '',
+          isPublished: publishImmediately,
+          views: 0,
+          likes: 0,
+          comments: [],
+        };
+  
+        dispatch(addNews(newNewsItem));
+        // Reset form fields if needed
+        setName('');
+        
+        
+        setImageFile(null);
+        setImageUrl('');
+        setDescription('');
+        
+      } catch (error) {
+        console.error('Error creating post:', error);
+      }
+    
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -87,7 +140,7 @@ const BestPersonalityForm = () => {
   return (
     <div className="p-6 max-w-3xl mx-auto min-h-screen bg-white shadow-lg rounded-lg">
       <h1 className="text-center text-4xl my-8 font-semibold text-gray-800">Best Personality of the Week</h1>
-      <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
+      <form onSubmit={handleFormSubmitToNews} className="flex flex-col gap-6">
         <TextInput
           type="text"
           placeholder="Name of the Person"
@@ -96,6 +149,7 @@ const BestPersonalityForm = () => {
           onChange={(e) => setName(e.target.value)}
           className="border border-gray-300 rounded-md p-4 m-2 focus:outline-none focus:border-blue-500"
         />
+        
         <Editor
           placeholder="Full Description of The Person"
           value={description}

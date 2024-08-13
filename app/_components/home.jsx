@@ -84,7 +84,7 @@ const Categories = () => {
     );
   } else if (newsStatus === "succeeded") {
     const filteredNews = news
-      .filter((item) => item.isPublished)
+      .filter((item) => item.isPublished && item.category !== 'personality_of_the_week')
       .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
     const shuffleArray = (array) => {
       let shuffledArray = [...array];
@@ -223,7 +223,7 @@ const Categories = () => {
           
           </section>
           <section className="lg:col-span-2 hidden  lg:block w-full">
-            <RecentIcon />
+            <RecentIcon news={news} />
             <RecentCategoryNews news={news} category="global_news" />
             <RecentDigitalIssue />
             <div className="flex flex-col justify-center items-center space-y-3 mt-10">

@@ -49,7 +49,6 @@ const Header = () => {
 
   return (
     <>
-     
       <header
         className={`text-gray-900 bg-blueTheme transition-all ease-in-out duration-200   ${
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
@@ -150,33 +149,30 @@ const Header = () => {
               </button>
             </div>
             <div className="mt-4 w-full   ">
-              {navItems.map((item, index) => (
-                
-                 !item.special ? (
+              {navItems.map((item, index) =>
+                !item.special ? (
                   <MobileNavLink
-                  key={index}
-                  href={item.href}
-                  dropdownItems={item.dropdownItems}
-                >
-                  {item.title}
-                </MobileNavLink>
+                    key={index}
+                    href={item.href}
+                    dropdownItems={item.dropdownItems}
+                  >
+                    {item.title}
+                  </MobileNavLink>
                 ) : (
-                  
-                    <div className="flex space-x-10 items-center  px-1 py-2">
-                      <div className="relative">
-                        <a
-                          href={`${item.href}`}
-                          className={`text-black 
+                  <div className="flex space-x-10 items-center  px-1 py-2">
+                    <div className="relative">
+                      <a
+                        href={`${item.href}`}
+                        className={`text-black 
                             
                            hover:text-gray-600 flex justify-start flex-col items-center`}
-                        >
-                          {item.title}
-                        </a>
-                      </div>
+                      >
+                        {item.title}
+                      </a>
                     </div>
-                  
+                  </div>
                 )
-              ))}
+              )}
             </div>
             {isAdmin && (
               <a href="/admin" className="text-black-300 hover:text-black mb-4">
@@ -184,23 +180,11 @@ const Header = () => {
               </a>
             )}
             {isAuthenticated ? (
-              <LogOut>
-                
-                  Log Out
-                
-              </LogOut>
+              <LogOut>Log Out</LogOut>
             ) : (
-              <LoginLink>
-             
-                  Login
-                
-              </LoginLink>
+              <LoginLink>Login</LoginLink>
             )}
-            <RegisterLink>
-             
-                Sign UP
-              
-            </RegisterLink>
+            <RegisterLink>Sign UP</RegisterLink>
           </div>
         </nav>
       </header>
@@ -244,7 +228,7 @@ const Header = () => {
   );
 };
 
-const SpecialNavLink = ({ href, children, isSticky ,}) => {
+const SpecialNavLink = ({ href, children, isSticky }) => {
   return (
     <div className="flex space-x-10 items-center  px-3 py-2">
       <div className="relative">
@@ -284,7 +268,11 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
             {dropdownItems.map((item, index) => (
               <a
                 key={index}
-                href={`/categories/${item.toLowerCase().replace(/ /g, "_")}`}
+                href={`/categories/${item
+                  .toLowerCase()
+                  .replace(/&/g, "_")
+                  .replace(/ +/g, "_")
+                  .replace(/_{2,}/g, "_")}`}
                 className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
               >
                 {item}

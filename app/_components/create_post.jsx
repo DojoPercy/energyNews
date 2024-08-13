@@ -3,28 +3,27 @@ import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, FileInput, Select, TextInput } from 'flowbite-react';
-import { storage } from '../../config/firebaseconfig'; // Import storage from Firebase config
+import { storage } from '../../config/firebaseconfig';
 import 'react-quill/dist/quill.snow.css';
 import { addNews } from '../_redux/news/newSlice';
 import { categories } from '../../lib/categories';
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
-import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; // Import necessary storage functions
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'; 
 
-// Dynamically import ReactQuill
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 const CreatePost = () => {
   const dispatch = useDispatch();
   const news = useSelector(state => state.news.news);
   const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState(''); // State for summary
+  const [summary, setSummary] = useState(''); 
   const [category, setCategory] = useState('uncategorized');
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const [editorHtml, setEditorHtml] = useState('');
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState('');
-  const [uploading, setUploading] = useState(false); // State to track upload status
+  const [uploading, setUploading] = useState(false); 
   const [uploadProgress, setUploadProgress] = useState(0); // State to track upload progress
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
   const [publishImmediately, setPublishImmediately] = useState(false);
@@ -55,7 +54,7 @@ const CreatePost = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // Start upload process
+    
     if (imageFile != '') {
       try {
         const newNewsItem = {

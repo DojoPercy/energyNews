@@ -5,7 +5,7 @@ import { fetchPersonality } from '../_redux/news/personality';
 import { ClipLoader } from "react-spinners";
 import TitleSection from './titleSection';
 
-const PersonalityofWeek = () => {
+const PersonalityofWeek = ({news}) => {
   const dispatch = useDispatch();
   const personality = useSelector((state) => state.personality.personality);
   const personalityStatus = useSelector((state) => state.personality.status);
