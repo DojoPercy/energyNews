@@ -308,7 +308,11 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
           {dropdownItems.map((item, index) => (
             <a
               key={index}
-              href={`/categories/${item.toLowerCase().replace(/ /g, "_")}`}
+              href={`/categories/${item
+                .toLowerCase()
+                .replace(/&/g, "_")
+                .replace(/ +/g, "_")
+                .replace(/_{2,}/g, "_")}`}
               className="block py-2 text-gray-800 hover:bg-gray-200"
             >
               {item}
