@@ -100,17 +100,20 @@ const Page = () => {
         <section className="py-10">
           <div className="flex flex-col items-start justify-center  lg:flex-row px-10  ">
             <div className="flex justify-center items-center w-full lg:w-[50%]">
-              <img src={'/get_involved.jpg'} alt="Get Involved" className="w-full lg:w-[90%] object-cover rounded-lg" />
+              <img
+                src={"/get_involved.jpg"}
+                alt="Get Involved"
+                className="w-full lg:w-[90%] object-cover rounded-lg"
+              />
             </div>
             <div className="flex justify-start flex-col w-[100%] lg:w-[50%]">
               <h3 className="text-2xl lg:text-3xl  font-bold text-black my-3 relative inline-block font-mont text-start">
                 Get involved in the next edition
               </h3>
               <span className="text-slate-500 text-xs lg:text-sm ">
-                Join us in shaping the future of energy. Contribute to our
-                upcoming edition and share your insights to drive impactful
-                change. Contact us to find out how you can be part of this
-                important dialogue.
+                Join us in shaping the future of energy. Contribute to our next
+                issue and share your insights to drive meaningful change.
+                Contact us to find out how you can get involved.
               </span>
               <div>
                 <div className="grid grid-cols-2 gap-3 mt-8 ">
@@ -125,7 +128,7 @@ const Page = () => {
                       data-val-required="Please provide a value for First Name"
                     />
                   </div>
-                  <div> 
+                  <div>
                     <input
                       type="text"
                       name="last_name"
@@ -160,14 +163,17 @@ const Page = () => {
                   </div>
                 </div>
                 <span className="text-slate-500 text-xs lg:text-sm">
-                By submitting, you agree to the processing of your personal data by dmg events as described in the <span className="text-secondaryBlue font-semibold">
-                Privacy Statement</span>.
+                  By submitting, you agree to the processing of your personal
+                  data by RADComm Group as described in the
+                  <span className="text-secondaryBlue font-semibold">
+                    Privacy Statement
+                  </span>
+                  .
                 </span>
 
                 <span className="bg-secondaryBlue w-[80%] lg:w-[40%] py-3 flex justify-center items-center text-white text-sm lg:text-lg rounded-sm mt-5">
                   SUBMIT
                 </span>
-
               </div>
             </div>
           </div>

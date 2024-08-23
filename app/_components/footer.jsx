@@ -10,20 +10,7 @@ const Footer = () => {
           <div className="mb-6 sm:mb-0 col-span-1 flex justify-center flex-col items-center">
             <h3 className="text-xl font-bold mb-4">About Us</h3>
             <p className="text-sm">
-              The Energy Governance Middle East & Africa Magazine is the premier
-              news platform dedicated to serving the entire energy sector across
-              the region. Our publication is a hub for original, insightful
-              content that not only drives critical discussions but also shapes
-              industry perspectives through continuous thought leadership. Our
-              mission is to empower, inspire, and inform energy leaders,
-              executives, and board members with cutting-edge insights, trends,
-              and stories from the energy world. With a focus on innovation,
-              diversity, and strategic growth, Energy Governance is a trusted
-              resource for professionals striving for excellence in energy
-              leadership and governance. We connect with a highly engaged
-              audience that spans the full spectrum of the energy value chain,
-              including oil and gas, wind, solar, utilities, hydrogen, and
-              nuclear sectors.
+            The Energy Governance Middle East & Africa Magazine is the premier news platform dedicated to serving the entire energy sector across the region. Our publication is a hub for original, insightful content that not only drives critical discussions but also shapes industry perspectives through continuous thought leadership.
             </p>
           </div>
 
@@ -191,7 +178,8 @@ const Footer = () => {
         {/* Copyright */}
       </div>
       <div className="mt-8 text-center text-xs sm:text-sm bg-secondaryBlue w-full py-3">
-        <p>&copy; 2024. Published by RADComm Group. All Rights Reserved.</p>
+        <p>Copyright &copy; 2024. Published by RADComm Group. All Rights Reserved.</p>
+      
       </div>
     </footer>
   );
