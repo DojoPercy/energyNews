@@ -55,7 +55,7 @@ const CreatePost = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     
-    if (imageFile != '') {
+    if (imageFile != '' && imageUrl != '') {
       try {
         const newNewsItem = {
           title,
