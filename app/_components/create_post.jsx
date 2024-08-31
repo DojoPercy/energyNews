@@ -87,6 +87,11 @@ const CreatePost = () => {
         console.error('Error creating post:', error);
       }
     }
+    else if(imageUrl === ''){
+      setShowImageUploadNotice(true);
+      console.log('No image file uploaded');
+      return;
+    }
   };
 
   const handleImageUpload = async () => {
