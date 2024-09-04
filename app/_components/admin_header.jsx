@@ -22,9 +22,10 @@ const AdminHeader = ({ toggleSidebar }) => {
           <img src="/logo.png" alt="Logo" className="h-14 mr-2" />
         </Link>
         <div className="flex justify-center items-center">
-          <div className="border border-blue-500 text-black rounded-lg p-3 mt-2 flex justify-center items-center mr-2">
+          <div className="border border-blueTheme text-black rounded-lg p-2 mt-2 flex justify-center items-center mr-2">
             <Link href="/admin/createpost">
               <span className="flex items-center">
+                <span className="hidden lg:block p-1 text-sm text-black uppercase font-semibold">Create Post</span>
                 <FaPlus />
               </span>
             </Link>
@@ -37,7 +38,7 @@ const AdminHeader = ({ toggleSidebar }) => {
             <span></span>
           )}
           <Button onClick={toggleSidebar} className="ml-4">
-            <FaBars />
+            <FaBars className="text-xl"/>
           </Button>
         </div>
       </div>

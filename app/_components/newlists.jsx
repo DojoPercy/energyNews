@@ -1,5 +1,3 @@
-// src/components/NewsList.js
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FaCaretSquareUp } from "react-icons/fa";
@@ -7,15 +5,12 @@ import { Tooltip } from "@nextui-org/react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import {
   fetchNews,
-  addNews,
   updateNews,
   deleteNews,
 } from "../_redux/news/newSlice";
 import DOMPurify from "dompurify";
 import Link from "next/link";
-import { FaPen } from "react-icons/fa";
 import Analytics from "./anaylstics";
-import NewsShimmer from "../../lib/shimmer/news_shimmer";
 import { ClipLoader } from "react-spinners";
 
 const NewsList = () => {
@@ -25,6 +20,10 @@ const NewsList = () => {
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
   const [showButton, setShowButton] = useState(false);
+  
+  // Pagination state
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 15;
 
   useEffect(() => {
     if (newsStatus === "idle") {
@@ -47,15 +46,11 @@ const NewsList = () => {
     dispatch(deleteNews(newsId));
   };
 
-  const handleUpdateNews = (currentNewsItem, newsItem) => {
-    dispatch(updateNews(newsItem));
-  };
-
   const handleTogglePublish = (newsId, currentStatus, currentNews) => {
     const updatedNewsItem = {
       ...currentNews,
       id: newsId,
-      isPublished: !currentStatus, // Toggle the current publish status
+      isPublished: !currentStatus,
     };
 
     dispatch(updateNews({ updatedFields: updatedNewsItem }));
@@ -90,9 +85,39 @@ const NewsList = () => {
     return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
   };
 
+  // Sort news by publishDate in descending order
   const sortedNews = news
     .slice()
     .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+
+  // Pagination calculation
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = sortedNews.slice(indexOfFirstItem, indexOfLastItem);
+
+  const totalPages = Math.ceil(sortedNews.length / itemsPerPage);
+
+  const renderPagination = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(i);
+    }
+    return (
+      <div className="flex space-x-2 mt-4">
+        {pageNumbers.map((number) => (
+          <button
+            key={number}
+            onClick={() => setCurrentPage(number)}
+            className={`px-3 py-1 rounded ${
+              number === currentPage ? "bg-blueTheme text-white" : "bg-gray-300"
+            }`}
+          >
+            {number}
+          </button>
+        ))}
+      </div>
+    );
+  };
 
   let content;
 
@@ -122,7 +147,7 @@ const NewsList = () => {
               </tr>
             </thead>
             <tbody>
-              {sortedNews.map((newsItem) => (
+              {currentItems.map((newsItem) => (
                 <tr key={newsItem.id}>
                   <td className="py-2 px-4 border-b">
                     {truncateString(newsItem.title, 14)}
@@ -155,7 +180,7 @@ const NewsList = () => {
                       className="bg-gray-200 rounded-sm border border-gray-100"
                     >
                       <Link href={`/admin/editpost/${newsItem.id}`}>
-                        <span className="text-blue-500 hover:underline">
+                        <span className="text-blueTheme hover:underline">
                           <MdEdit />
                         </span>
                       </Link>
@@ -193,6 +218,7 @@ const NewsList = () => {
             </tbody>
           </table>
         </div>
+        {renderPagination()}
       </>
     );
   } else if (newsStatus === "failed") {
