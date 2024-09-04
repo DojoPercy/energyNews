@@ -9,6 +9,7 @@ module.exports = {
     './components/**/*.{js,jsx}',
     './app/**/*.{js,jsx}',
     './src/**/*.{js,jsx}',
+    './node_modules/@nextui-org/theme/dist/components/popover.js'
   ],
   prefix: "",
   theme: {

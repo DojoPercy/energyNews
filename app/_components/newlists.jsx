@@ -2,6 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FaCaretSquareUp } from "react-icons/fa";
+import { Tooltip } from "@nextui-org/react";
+import { MdEdit, MdDelete } from "react-icons/md";
 import {
   fetchNews,
   addNews,
@@ -36,8 +39,8 @@ const NewsList = () => {
       setShowButton(shouldShowButton);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleDeleteNews = (newsId) => {
@@ -59,7 +62,7 @@ const NewsList = () => {
   };
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const truncateString = (str, num) => {
@@ -87,7 +90,9 @@ const NewsList = () => {
     return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
   };
 
-  const sortedNews = news.slice().sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+  const sortedNews = news
+    .slice()
+    .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
   let content;
 
@@ -143,18 +148,33 @@ const NewsList = () => {
                     {newsItem.isPublished ? "Yes" : "No"}
                   </td>
                   <td className="py-2 px-4 border-b">{newsItem.likes}</td>
-                  <td className="py-2 px-4 border-b flex flex-col space-y-2">
-                    <Link href={`/admin/editpost/${newsItem.id}`}>
-                      <span className="text-blue-500 hover:underline">
-                        Edit
-                      </span>
-                    </Link>
+                  <td className="py-4 px-4 border-b flex  items-center space-x-2">
+                    <Tooltip
+                      content="edit"
+                      placement="top"
+                      className="bg-gray-200 rounded-sm border border-gray-100"
+                    >
+                      <Link href={`/admin/editpost/${newsItem.id}`}>
+                        <span className="text-blue-500 hover:underline">
+                          <MdEdit />
+                        </span>
+                      </Link>
+                    </Tooltip>
+                    <Tooltip
+                        content="delete"
+                        placement="bottom"
+                        className="bg-gray-200 rounded-sm border border-gray-100"
+                        color="default"
+                      >
                     <button
                       className="text-red-500 hover:underline"
                       onClick={() => handleDeleteNews(newsItem.id)}
                     >
-                      Delete
+                    
+                        <MdDelete />
+                      
                     </button>
+                    </Tooltip>
                     <button
                       className="text-yellow-500 hover:underline"
                       onClick={() =>
@@ -186,9 +206,9 @@ const NewsList = () => {
       {showButton && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-4 right-4 flex justify-center items-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="fixed bottom-4 right-4 flex justify-center items-center text-blueTheme font-bold bg-white py-2 px-2 rounded"
         >
-          <span>Scroll to Top</span>
+          <span><FaCaretSquareUp className="text-2xl" /></span>
         </button>
       )}
     </div>

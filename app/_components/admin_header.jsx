@@ -18,7 +18,7 @@ const AdminHeader = ({ toggleSidebar }) => {
     <header className="text-gray-900 bg-white shadow-md fixed w-full z-10 top-0">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Left Side: Logo and Name */}
-        <Link href={'/'}>
+        <Link href={'/admin'}>
           <img src="/logo.png" alt="Logo" className="h-14 mr-2" />
         </Link>
         <div className="flex justify-center items-center">
