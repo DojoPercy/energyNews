@@ -2,7 +2,8 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, FileInput, Select, TextInput, Label } from "flowbite-react";
+import { IoAlertCircle } from "react-icons/io5";
+import { Button, FileInput, Select, TextInput, Label, Alert } from "flowbite-react";
 import { storage } from "../../config/firebaseconfig";
 import "react-quill/dist/quill.snow.css";
 import { addNews } from "../_redux/news/newSlice";
@@ -104,26 +105,25 @@ const CreatePost = () => {
       const storageRef = ref(storage, `images/${imageFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-      // Listen for state changes, errors, and completion of the upload.
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          // Handle progress
+         
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setUploadProgress(progress);
         },
         (error) => {
-          // Handle unsuccessful uploads
+         
           console.error("Error uploading image:", error);
-          setUploading(false); // Reset upload state on error
-          setShowImageUploadNotice(true); // Show notice if upload fails
+          setUploading(false);
+          setShowImageUploadNotice(true);
         },
         async () => {
-          // Handle successful uploads on complete
+         
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setImageUrl(downloadURL); // Set image URL after successful upload
-          setUploading(false); // Reset upload state
+          setImageUrl(downloadURL);
+          setUploading(false);
         }
       );
     } catch (error) {
@@ -137,7 +137,7 @@ const CreatePost = () => {
     <div className="p-3 max-w-3xl mx-auto min-h-screen pt-20">
       <h1 className="text-center text-3xl my-7 font-semibold">Create a Post</h1>
       <form onSubmit={handleFormSubmit} className="flex flex-col gap-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid w-full grid-cols-1 sm:grid-cols-2 gap-4">
           <TextInput
             type="text"
             placeholder="Title"
@@ -166,7 +166,10 @@ const CreatePost = () => {
           onChange={(e) => setSummary(e.target.value)}
           className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
         />
-        <div className="flex items-center justify-between border border-gray-300 rounded-md p-3">
+        <p className="text-gray-500 text-sm mt-2 flex items-center pl-3 ">
+           <IoAlertCircle/> click on the Upload Image Button after Image Files is Selected
+          </p>
+        <div className="flex w-full items-center justify-between border border-gray-300 rounded-md p-3">
           {uploading ? (
             <div className="flex items-center justify-between w-full">
               <progress
@@ -193,12 +196,10 @@ const CreatePost = () => {
               </Button>
             </div>
           ) : (
-            <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 ">
+            <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 w-full ">
              
-              <div>
-                <div className="mb-2 block">
-                  <Label htmlFor="file-upload" value="Upload file" />
-                </div>
+              <div className="w-full">
+                
                 <FileInput
                   id="file-upload"
                   type="file"
@@ -212,6 +213,7 @@ const CreatePost = () => {
                 gradientDuoTone="purpleToBlue"
                 size="sm"
                 outline
+                className="w-[200px]"
               >
                 Upload Image
               </Button>
@@ -220,7 +222,7 @@ const CreatePost = () => {
         </div>
         {showImageUploadNotice && (
           <p className="text-red-500 text-sm mt-2">
-            Please upload an image for your news.
+            Please upload the image for your news.
           </p>
         )}
         <div className="flex flex-col gap-2">
@@ -251,6 +253,7 @@ const CreatePost = () => {
             ))}
           </div>
         </div>
+        <p className="text-lg text-black ">Main Content</p>
         <ReactQuill
           theme="snow"
           value={editorHtml}
