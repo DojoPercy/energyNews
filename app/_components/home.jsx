@@ -111,12 +111,12 @@ const Categories = () => {
         )}
         {latestArticle && (
           <>
-            <div className="absolute lg:top-[192px] top-[92px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-secondaryBlue w-full">
+            <div className="absolute lg:top-[270px] top-[92px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-complementaryTheme w-full">
               <div className="relative h-full flex items-center z-10">
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex">
                   {news.map((headline, index) => (
                     <span className="px-4 relative " key={index}>
-                      <span className="lg:h-[40px]  absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-secondaryBlue inline-block"></span>
+                      <span className="lg:h-[40px]  absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
                       <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
                      
                       <a
@@ -179,7 +179,7 @@ const Categories = () => {
               >
                 <figure className="post-thumbnail">
                   <a
-                    className="block w-full lg:w-[400px]"
+                    className="block w-full lg:w-[400px] lg:h-[250px]"
                     href={`/news/${article.title}`}
                   >
                     <img
@@ -224,6 +224,7 @@ const Categories = () => {
           </section>
           <section className="lg:col-span-2 hidden  lg:block w-full">
             <RecentIcon news={news} />
+            
             <RecentCategoryNews news={news} category="global_news" />
             <RecentDigitalIssue />
             <div className="flex flex-col justify-center items-center space-y-3 mt-10">

@@ -38,12 +38,12 @@ const RecentCategoryNews = ({ category, news }) => {
   return (
     <div>
         <div
-      className={`border border-gray-200 shadow-sm w-full ${
+      className={`border border-complementaryTheme shadow-sm w-full ${
         recentNews.length === 0 ? "hidden" : "block"
       } `}
     >
-      <div className="bg-blueTheme text-white text-sm font-bold p-4">
-        {categoryFormat}
+      <div className="bg-white text-black font-poppins text-xl font-normal p-4">
+        {`Recent ${categoryFormat}...`}
       </div>
       <div className="bg-white p-1 rounded-b-lg">
         {recentNews.map((newsItem, index) => {
@@ -87,7 +87,7 @@ const RecentCategoryNews = ({ category, news }) => {
         <div className="mt-4">
           <Link
             href={`/news/category/${category}`}
-            className="text-blue-500 text-center"
+            className="text-secondaryBlue text-sm text-center"
           >
             View More
           </Link>

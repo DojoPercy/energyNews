@@ -12,9 +12,9 @@ const RecentIcon = ({ news }) => {
           (item) => item.category === 'personality_of_the_week' && item.isPublished === true
         )
         .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
-        .slice(0, 1); // Get the first item
+        .slice(0, 1); 
       setRecentNews(filteredNews);
-      console.log(filteredNews[0]?.imageUrl); // Optional: Use optional chaining
+      console.log(filteredNews[0]?.imageUrl); 
     }
   }, [news]);
 
@@ -26,16 +26,16 @@ const RecentIcon = ({ news }) => {
     );
   }
 
-  // Ensure recentNews has data before rendering
+  
   if (recentNews.length === 0) {
     return <div>No news available</div>;
   }
 
-  const { imageUrl, name, content } = recentNews[0] || {}; // Destructure with default value
+  const { imageUrl, name, content } = recentNews[0] || {}; 
 
   return (
-    <div className="border border-blueTheme shadow-sm my-2 p-3 rounded-sm overflow-hidden">
-      <div className="text-white bg-blueTheme w-full text-sm font-bold p-4">
+    <div className="border mb-10 border-complementaryTheme shadow-sm my-2 p-3 rounded-sm overflow-hidden">
+      <div className="text-black bg-white w-full text-xl font-normal p-4 ">
         Energy Leadership Icon of the Week
       </div>
       <div className="bg-white">

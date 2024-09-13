@@ -10,7 +10,7 @@ import Link from "next/link";
 import Divider from "../_components/divider";
 import { LogOut } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import { FaBars, FaChevronDown, FaSearch, FaTimes } from "react-icons/fa";
+import { FaBars, FaChevronDown, FaFacebook, FaInstagram, FaLinkedin, FaSearch, FaTimes } from "react-icons/fa";
 import { navItems } from "../../lib/navitems";
 
 const Header = () => {
@@ -55,17 +55,36 @@ const Header = () => {
         }`}
       >
         <div className="w-full flex flex-col ">
-          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1450px] hidden lg:flex">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1450px] hidden lg:flex py-5">
             <Link href="/">
               <img
                 src="/logo_white.png"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? " h-16" : " h-24"
+                  isSticky ? " h-16" : " h-28"
                 } transition-all ease-out duration-100`}
               />
             </Link>
 
+            <div>
+              <div className="w-full  justify-end gap-5 items-center hidden lg:flex">
+                  <div className="bg-complementaryTheme text-secondaryBlue py-1 px-2 ">
+                    Advertise With Us
+                  </div>
+                  <div className="flex justify-center gap-3">
+                    <Link href="/">
+                    <FaFacebook className="text-white text-2xl" />
+                    </Link>
+                    <Link href="/">
+                    <FaInstagram className="text-white text-2xl" />
+                    </Link>
+                    <Link href="/">
+                    <FaLinkedin className="text-white text-2xl" />
+                    </Link>
+                  </div>
+                 
+
+              </div>
             <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
               <img
                 src="/ads_by_logo.png"
@@ -75,6 +94,7 @@ const Header = () => {
                 } transition-all ease-in duration-100`}
               />
             </Link>
+            </div>
           </div>
           {/* Mobile Screen Nav */}
           <div className="flex lg:hidden justify-between items-center p-4 transition-all duration-2000 ease-in-out  ">
