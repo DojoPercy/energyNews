@@ -168,12 +168,14 @@ const Categories = () => {
                 </p>
               </div>
             </div>
-            <TitleSection title={"Category Focus"} />
-
-            <CategoryFocus news={news} />
+            
 
             <TitleSection title={"News Updates"} />
             <NewsUpdates news={updates} />
+
+            <TitleSection title={"Category Focus"} />
+
+            <CategoryFocus news={news} />
 
             <TitleSection title={"Featured Articles"} />
             {allOtherArticles.slice(0, 4).map((article, index) => (
