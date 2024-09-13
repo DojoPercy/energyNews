@@ -116,7 +116,7 @@ const Categories = () => {
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex">
                   {news.map((headline, index) => (
                     <span className="px-4 relative " key={index}>
-                      <span className="lg:h-[40px]  absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
+                      <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
                       <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
                      
                       <a
@@ -239,6 +239,7 @@ const Categories = () => {
           <section className="lg:hidden">
             <div className="p-2">
             <RecentDigitalIssue />
+            <RecentIcon news={news} />
             </div>
           </section>
         </div>
