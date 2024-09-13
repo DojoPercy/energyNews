@@ -111,7 +111,7 @@ const Categories = () => {
         )}
         {latestArticle && (
           <>
-            <div className="absolute lg:top-[270px] top-[92px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-complementaryTheme w-full">
+            <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-complementaryTheme w-full">
               <div className="relative h-full flex items-center z-10">
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex">
                   {news.map((headline, index) => (
@@ -131,10 +131,14 @@ const Categories = () => {
               </div>
             </div>
 
+          <div className="pt-14 px-3 lg:hidden">
+          <img src={ads.bannerAds} alt="Lexar" />
+          </div>
+
           
           </>
         )}
-        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-14">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14">
           <section className="mb-8 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
             
             <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
