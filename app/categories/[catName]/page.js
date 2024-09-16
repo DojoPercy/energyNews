@@ -52,81 +52,105 @@ const Categories = () => {
       .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
     content = (
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-0">
-        <div className="col-span-2">
-          {filteredNews.length === 0 ? (
-            <p>No news available</p>
-          ) : (
-            filteredNews.map((article, index) => (
-              <article
-                key={index}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4 border border-gray-100 shadow-sm p-1"
-              >
-                <figure className="post-thumbnail">
+      <div className="flex flex-col ">
+        <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 mb-10 border-t border-b border-complementaryTheme w-full">
+          <div className="relative h-full flex items-center z-10">
+            <div className="ml-32  animation-marquee text-sm lg:text-base flex">
+              {news.map((headline, index) => (
+                <span className="px-4 relative " key={index}>
+                  <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
+                  <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
+
                   <a
-                    className="block w-full lg:w-[400px]"
-                    href={`/news/${article.title}`}
+                    href={`/news/${headline.title}`}
+                    className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
                   >
-                    <img
-                      src={article.imageUrl || "/path/to/default-image.jpg"}
-                      alt={article.title || "Default Title"}
-                      className="w-full object-cover"
-                    />
+                    {headline.title}
                   </a>
-                </figure>
-                <div className="pr-2 lg:p-4 flex flex-col justify-start">
-                  <header className="entry-header">
-                    <h2 className="entry-title text-xl font-semibold mb-2">
-                      <a
-                        href={`/news/${article.title}`}
-                        className="hover:underline"
-                      >
-                        {article.title || article.name}
-                      </a>
-                    </h2>
-                  </header>
-                  <div className="flex space-x-2 text-sm text-gray-500 mb-4">
-                    <span className="by_line block">
-                      by{" "}
-                      <strong>
-                        <i>{article.author || "Unknown Author"}</i>
-                      </strong>
-                    </span>
-                    <span className="font-semibold">|</span>
-                    <span className="posted-on block">
-                      {new Date(article.publishDate).toLocaleDateString() ||
-                        "Unknown Date"}
-                    </span>
-                  </div>
-                  <div className="entry-content">
-                    <p className=" ">
-                      {getShortSummary(article.summary) || (
-                          <div className="text-gray-600 mt-2 line-clamp-3">
-                            <div
-                              className="prose max-w-none"
-                              dangerouslySetInnerHTML={{
-                                __html: article.content || "No content available",
-                              }}
-                            />
-                          </div>
-                        ) ||
-                        "No summary available"}
-                    </p>
-                  </div>
-                </div>
-              </article>
-            ))
-          )}
+                </span>
+              ))}
+            </div>
+          </div>
         </div>
 
-        <div className="col-span-1 overflow-y-auto mb-3">
-          <TitleSection title={"More News"} />
-          <RecentCategoryNews news={news} category="industry_updates" />
-          <RecentDigitalIssue />
-          <RecentCategoryNews
-            news={news}
-            category="decarbonization_strategies"
-          />
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-0">
+          <div className="col-span-2">
+            {filteredNews.length === 0 ? (
+              <p>No news available</p>
+            ) : (
+              filteredNews.map((article, index) => (
+                <article
+                  key={index}
+                  className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4 border border-gray-100 shadow-sm p-1"
+                >
+                  <figure className="post-thumbnail">
+                    <a
+                      className="block w-full lg:w-[400px]"
+                      href={`/news/${article.title}`}
+                    >
+                      <img
+                        src={article.imageUrl || "/path/to/default-image.jpg"}
+                        alt={article.title || "Default Title"}
+                        className="w-full object-cover"
+                      />
+                    </a>
+                  </figure>
+                  <div className="pr-2 lg:p-4 flex flex-col justify-start">
+                    <header className="entry-header">
+                      <h2 className="entry-title text-xl font-semibold mb-2">
+                        <a
+                          href={`/news/${article.title}`}
+                          className="hover:underline"
+                        >
+                          {article.title || article.name}
+                        </a>
+                      </h2>
+                    </header>
+                    <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                      <span className="by_line block">
+                        by{" "}
+                        <strong>
+                          <i>{article.author || "Unknown Author"}</i>
+                        </strong>
+                      </span>
+                      <span className="font-semibold">|</span>
+                      <span className="posted-on block">
+                        {new Date(article.publishDate).toLocaleDateString() ||
+                          "Unknown Date"}
+                      </span>
+                    </div>
+                    <div className="entry-content">
+                      <p className=" ">
+                        {getShortSummary(article.summary) || (
+                            <div className="text-gray-600 mt-2 line-clamp-3">
+                              <div
+                                className="prose max-w-none"
+                                dangerouslySetInnerHTML={{
+                                  __html:
+                                    article.content || "No content available",
+                                }}
+                              />
+                            </div>
+                          ) ||
+                          "No summary available"}
+                      </p>
+                    </div>
+                  </div>
+                </article>
+              ))
+            )}
+          </div>
+
+          <div className="col-span-1 overflow-y-auto mb-3">
+            <TitleSection title={"More News"} />
+            <RecentCategoryNews news={news} category="industry_updates" />
+            <RecentDigitalIssue />
+            <RecentCategoryNews
+              news={news}
+              category="decarbonization_strategies"
+            />
+          </div>
         </div>
       </div>
     );
@@ -135,7 +159,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="p-2 max-w-7xl mx-auto">
+    <div className="p-2 max-w-7xl mx-auto mt-14">
       <div className="flex items-center text-gray-500 text-sm">
         <a href="/" className="hover:underline">
           Home
@@ -147,7 +171,7 @@ const Categories = () => {
       </div>
 
       <h2 className="text-3xl font-bold my-4 capitalize overflow-hidden">
-        <span className="text-sm sm:text-lg md:text-2xl lg:text-3xl">
+        <span className="text-2xl sm:text-lg md:text-2xl lg:text-3xl">
           {convertToCapitalCase(catName)}
         </span>
       </h2>

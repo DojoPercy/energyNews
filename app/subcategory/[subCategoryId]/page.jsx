@@ -157,6 +157,26 @@ const SubCategory = () => {
       const otherArticles = filteredNews.slice(1,5);
       console.log(dropDowns[0].dropdownItems[1]);
       content = (
+        <div className="flex flex-col">
+          <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 mb-10 border-t border-b border-complementaryTheme w-full">
+        <div className="relative h-full flex items-center z-10">
+          <div className="ml-32  animation-marquee text-sm lg:text-base flex">
+            {news.map((headline, index) => (
+              <span className="px-4 relative " key={index}>
+                <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
+                <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
+
+                <a
+                  href={`/news/${headline.title}`}
+                  className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
+                >
+                  {headline.title}
+                </a>
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 p-2 lg:gap-6 lg:p-4 relative">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
@@ -263,6 +283,7 @@ const SubCategory = () => {
             />
           </div>
         </div>
+        </div>
       );
     } else {
       content = <div>No article found.</div>;
@@ -272,7 +293,7 @@ const SubCategory = () => {
   }
 
   return (
-    <div className=" lg:px-10 py-2 lg:py-10  p-2">
+    <div className=" lg:px-10 py-2 lg:py-10 mt-10  p-2">
       <div className="flex items-center text-gray-500 text-xs lg:text-sm">
         <a href="/" className="hover:underline">
           Home
