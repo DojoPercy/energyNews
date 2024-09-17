@@ -105,12 +105,14 @@ const Header = () => {
               </div>
             <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
               <img
-                src="/ads_by_logo.png"
+                src={ads.adsLogo}
+                loading="lazy"
                 alt="Logo"
                 className={` flex ${
                   isSticky ? "h-0" : "lg:h-32"
                 } transition-all ease-in duration-100`}
               />
+               
             </Link>
             </div>
           </div>
