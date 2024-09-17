@@ -88,7 +88,7 @@ export const navItems = [
     },
     {
       title:"Energy Governance MEA Quarterly Review",
-      href: "/quartely_review",
+      href: "/quarterlyreview",
       dropdownItems: [
         
       ],

@@ -9,7 +9,7 @@ import TitleSection from "../_components/titleSection";
 const Page = () => {
   return (
     <div>
-      <Header />
+     
       <div className="">
         <div className="flex items-center py-5 text-gray-500 text-xs lg:text-sm  mx-auto lg:max-w-[1450px] pl-10  lg:mx-auto ">
           <a href="/" className="hover:underline">
@@ -17,7 +17,7 @@ const Page = () => {
           </a>
 
           <FaChevronRight className="mx-1 text-xs" />
-          <a href="/quartely_review" className="text-xs lg:text-sm">
+          <a href="/quarterlyreview" className="text-xs lg:text-sm">
             Quarterly Review
           </a>
         </div>
