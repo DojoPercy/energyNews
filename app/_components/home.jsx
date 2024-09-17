@@ -84,7 +84,10 @@ const Categories = () => {
     );
   } else if (newsStatus === "succeeded") {
     const filteredNews = news
-      .filter((item) => item.isPublished && item.category !== 'personality_of_the_week')
+      .filter(
+        (item) =>
+          item.isPublished && item.category !== "personality_of_the_week"
+      )
       .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
     const shuffleArray = (array) => {
       let shuffledArray = [...array];
@@ -99,6 +102,7 @@ const Categories = () => {
     };
 
     const latestArticle = filteredNews[0];
+    const secondArticle = filteredNews[1];
     const allOtherArticles = filteredNews.slice(3, 8);
     const updates = shuffleArray(filteredNews).slice(0, 4);
 
@@ -111,64 +115,52 @@ const Categories = () => {
         )}
         {latestArticle && (
           <>
-            <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 border-t border-b border-complementaryTheme w-full">
-              <div className="relative h-full flex items-center z-10">
-                <div className="ml-32  animation-marquee text-sm lg:text-base flex">
-                  {news.map((headline, index) => (
-                    <span className="px-4 relative " key={index}>
-                      <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
-                      <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
-                     
-                      <a
-                        href={`/news/${headline.title}`}
-                        className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
-                      >
-                        {headline.title}
-                      </a>
-                    </span>
-                  ))}
-                </div>
-              </div>
+            
+            <div className="pt-14 px-3 lg:hidden">
+              <img src={ads.bannerAds} alt="Lexar" />
             </div>
-
-          <div className="pt-14 px-3 lg:hidden">
-          <img src={ads.bannerAds} alt="Lexar" />
-          </div>
-
-          
           </>
         )}
         <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14">
           <section className="mb-8 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
-            
-            <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
-              <figure className="lg:w-[55%] w-[100%]">
-                <Img
-                  src={latestArticle.imageUrl}
-                  alt="figure"
-                  className="object-cover h-[50vh] object-center"
-                />
-              </figure>
-              <div className="p-5 lg:w-[45%] w-[100%] bg-gray-200 flex flex-col justify-start">
-              <div className="bg-secondaryBlue flex justify-center rounded-lg w-[100px] mb-3">
-              <h2 className="text-xs lg:text-sm py-2 px-0  font-semibold text-white font-mont">
-              Top News
-            </h2>
+            <div className="flex flex-col">
+              
+              <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
+                <figure className="lg:w-[55%] w-[100%]">
+                  <Img
+                    src={latestArticle.imageUrl}
+                    alt="figure"
+                    className="object-cover h-[50vh] w-full object-center"
+                  />
+                </figure>
+                <div className="p-5 lg:w-[45%] w-[100%] bg-gray-200  flex flex-col justify-start">
+                  <div className="bg-secondaryBlue flex justify-center rounded w-[100px] mb-3">
+                    <h2 className="text-xs lg:text-sm py-2 px-0  font-semibold text-white font-mont">
+                      Top News
+                    </h2>
+                  </div>
+                  <h1 className="text-xl lg:text-2xl font-bold text-secondaryBlue hover:text-blueTheme hover:cursor-pointer font-mont">
+                    <a href={`/news/${latestArticle.title}`}>
+                      {latestArticle.title}
+                    </a>
+                  </h1>
+                  <span className="w-auto text-xs p-2 text-secondaryBlue rounded-md">
+                    {convertToTitleCase(latestArticle.category)}
+                  </span>
+                  <p className="text-gray-500 py-2 text-sm">
+                    {latestArticle.summary}
+                  </p>
+                  <p className="text-gray-500 py-2 text-sm line-clamp-4" 
+                  ><div className="text-gray-600 mt-2 line-clamp-4">
+                  <div
+                    className="prose max-w-none"
+                    dangerouslySetInnerHTML={{ __html: latestArticle.content || "No content available" }}
+                  />
+                </div></p>
+                </div>
               </div>
-                <h1 className="text-xl lg:text-2xl font-bold text-secondaryBlue hover:text-blueTheme hover:cursor-pointer font-mont">
-                  <a href={`/news/${latestArticle.title}`}>
-                    {latestArticle.title}
-                  </a>
-                </h1>
-                <span className="w-auto text-xs p-2 text-secondaryBlue rounded-md">
-                  {convertToTitleCase(latestArticle.category)}
-                </span>
-                <p className="text-gray-500 py-2 text-sm">
-                  {latestArticle.summary}
-                </p>
-              </div>
+              
             </div>
-            
 
             <TitleSection title={"News Updates"} />
             <NewsUpdates news={updates} />
@@ -225,23 +217,21 @@ const Categories = () => {
               </article>
             ))}
             <PersonalityofWeek />
-
-          
           </section>
           <section className="lg:col-span-2 hidden  lg:block w-full">
             <RecentIcon news={news} />
-            
+
             <RecentCategoryNews news={news} category="global_news" />
             <RecentDigitalIssue />
             <div className="flex flex-col justify-center items-center space-y-3 mt-10">
-            <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
-            <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
+              <img src={ads.squareAds.SquareAd_1} alt="Lexar" />
+              <img src={ads.squareAds.SquareAd_3} alt="Lexar" />
             </div>
           </section>
           <section className="lg:hidden">
             <div className="p-2">
-            <RecentDigitalIssue />
-            <RecentIcon news={news} />
+              <RecentDigitalIssue />
+              <RecentIcon news={news} />
             </div>
           </section>
         </div>

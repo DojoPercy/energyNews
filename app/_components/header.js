@@ -6,6 +6,10 @@ import {
   LogoutLink,
   useKindeBrowserClient,
 } from "@kinde-oss/kinde-auth-nextjs";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchNews } from "../_redux/news/newSlice";
+import { fetchAd } from "../_redux/news/ads";
+import { FaChevronRight } from "react-icons/fa";
 import Link from "next/link";
 import Divider from "../_components/divider";
 import { LogOut } from "lucide-react";
@@ -18,6 +22,20 @@ const Header = () => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
+  const dispatch = useDispatch();
+  const news = useSelector((state) => state.news.news);
+  const ads = useSelector((state) => state.ads.ads);
+  const adsStatus = useSelector((state) => state.ads.adsStatus);
+  const newsStatus = useSelector((state) => state.news.status);
+  const loading = useSelector((state) => state.news.loading);
+  const error = useSelector((state) => state.news.error);
+
+  useEffect(() => {
+    if (newsStatus === "idle") {
+      dispatch(fetchNews());
+      dispatch(fetchAd());
+    }
+  }, [newsStatus, dispatch]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -142,6 +160,25 @@ const Header = () => {
                     </SpecialNavLink>
                   )
                 )}
+              </div>
+            </div>
+            <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2 border-t border-b border-complementaryTheme w-full shadow-md ${isSticky ? "hidden" : "block"}`}>
+              <div className="relative h-full flex items-center z-10">
+                <div className="ml-32  animation-marquee text-sm lg:text-base flex">
+                  {news.map((headline, index) => (
+                    <span className="px-4 relative " key={index}>
+                      <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
+                      <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
+
+                      <a
+                        href={`/news/${headline.title}`}
+                        className="hover:underline ml-1 text-gray-600 text-[10px] font-semibold lg:text-[12px]"
+                      >
+                        {headline.title}
+                      </a>
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
