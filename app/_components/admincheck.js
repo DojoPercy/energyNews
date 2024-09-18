@@ -32,6 +32,7 @@ const AdminCheck = () => {
       console.log('Response data:', data); // Log response data for debugging
   
       if (data.isAdmin) {
+        console.log('Response data true:', data); 
         dispatch(setAdminStatus(true));
         router.push('/admin');
       } else {

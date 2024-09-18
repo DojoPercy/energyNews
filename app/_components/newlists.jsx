@@ -29,6 +29,7 @@ const NewsList = () => {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(isAdmin)
     if (!isAdmin) {
       router.push('/admin-check');  
     }
