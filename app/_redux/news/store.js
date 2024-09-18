@@ -4,6 +4,7 @@ import newsReducer from './newSlice';
 import adsReducer from './ads';
 import personality from './personality';
 import digitalIssues from './digitalEdition';
+import admin from './admin';
 
 export const store = configureStore({
   reducer: {
