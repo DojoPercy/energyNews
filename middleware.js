@@ -9,7 +9,7 @@ export async function middleware(request) {
   if (!(await isAuthenticated())) {
     return NextResponse.redirect(new URL('/api/auth/login', request.url));
   }
-
+  console.log('dan');
   return NextResponse.next();
 }
 
