@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 
 export async function middleware(request) {
   try {
-    const { isAuthenticated, getUser } = await getKindeServerSession();
+    const { isAuthenticated, getUser } =  getKindeServerSession();
 
     // Check if the user is authenticated
     if (!(await isAuthenticated())) {
