@@ -12,6 +12,7 @@ import DOMPurify from "dompurify";
 import Link from "next/link";
 import Analytics from "./anaylstics";
 import { ClipLoader } from "react-spinners";
+import { useRouter } from "next/router";
 
 const NewsList = () => {
   const dispatch = useDispatch();
@@ -24,12 +25,23 @@ const NewsList = () => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
+  const isAdmin = useSelector((state) => state.admin.isAdmin);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!isAdmin) {
+      router.push('/admin-check');  // Redirect to admin check page
+    }
+  }, [isAdmin, router]);
+
+  if (!isAdmin) return null; 
 
   useEffect(() => {
     if (newsStatus === "idle") {
       dispatch(fetchNews());
     }
   }, [newsStatus, dispatch]);
+
 
   useEffect(() => {
     const handleScroll = () => {
