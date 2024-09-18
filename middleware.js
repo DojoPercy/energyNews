@@ -4,6 +4,7 @@ import { NextResponse } from 'next/server';
 
 export async function middleware(request) {
   const { isAuthenticated } =  getKindeServerSession();
+  console.log('isAuthenticated:', await isAuthenticated()); 
 
   // Check if the user is authenticated
   if (!(await isAuthenticated())) {
