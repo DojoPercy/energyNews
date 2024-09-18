@@ -11,5 +11,6 @@ export const store = configureStore({
     ads: adsReducer,
     personality: personality,
     digitalIssues: digitalIssues,
+    admin: admin,
   },
 });
