@@ -25,12 +25,12 @@ const NewsList = () => {
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 15;
-  const isAdmin = useSelector((state) => state.admin.isAdmin);
+  const isAdmin = useSelector((state) => state.admin?.isAdmin);
   const router = useRouter();
 
   useEffect(() => {
     if (!isAdmin) {
-      router.push('/admin-check');  // Redirect to admin check page
+      router.push('/admin-check');  
     }
   }, [isAdmin, router]);
 
@@ -97,12 +97,12 @@ const NewsList = () => {
     return <div dangerouslySetInnerHTML={{ __html: sanitizedHtml }} />;
   };
 
-  // Sort news by publishDate in descending order
+  
   const sortedNews = news
     .slice()
     .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
 
-  // Pagination calculation
+ 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = sortedNews.slice(indexOfFirstItem, indexOfLastItem);
