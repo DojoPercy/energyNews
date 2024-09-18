@@ -1,9 +1,9 @@
-// pages/admin-check.js
+
 "use client";
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAdminStatus } from '../_redux/news/admin';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 const AdminCheck = () => {
   const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const AdminCheck = () => {
 
   const handleCheckEmail = async () => {
     try {
-      // Call API to check if the email is admin
+   
       const response = await fetch('/api/check-admin', {
         method: 'POST',
         headers: {
@@ -24,7 +24,7 @@ const AdminCheck = () => {
 
       const data = await response.json();
       if (data.isAdmin) {
-        // Set Redux state to true and redirect to admin page
+        
         dispatch(setAdminStatus(true));
         router.push('/admin');
       } else {

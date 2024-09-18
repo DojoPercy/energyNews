@@ -12,7 +12,7 @@ import DOMPurify from "dompurify";
 import Link from "next/link";
 import Analytics from "./anaylstics";
 import { ClipLoader } from "react-spinners";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const NewsList = () => {
   const dispatch = useDispatch();
