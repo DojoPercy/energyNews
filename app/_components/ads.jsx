@@ -5,6 +5,7 @@ import { fetchAd, saveAd } from "../_redux/news/ads";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { FileInput, Button } from "flowbite-react";
 import { storage } from "../../config/firebaseconfig";
+import { useRouter } from "next/navigation";
 
 const AdsSection = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,19 @@ const AdsSection = () => {
   const adsStatus = useSelector((state) => state.ads.status);
   const loading = useSelector((state) => state.ads.loading);
   const error = useSelector((state) => state.ads.error);
+  const isAdmin = useSelector((state) => state.admin?.isAdmin);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(isAdmin)
+    if (!isAdmin) {
+      router.push('/admin-check');  
+    }
+  }, [isAdmin, router]);
+
+  if (!isAdmin) {
+    router.push('/');
+    return null}; 
 
   const [adsLogo, setAdsLogo] = useState("");
   const [bannerAds, setBannerAds] = useState("");

@@ -28,6 +28,19 @@ const CreatePost = () => {
   const [uploadProgress, setUploadProgress] = useState(0); // State to track upload progress
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
   const [publishImmediately, setPublishImmediately] = useState(false);
+  const isAdmin = useSelector((state) => state.admin?.isAdmin);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(isAdmin)
+    if (!isAdmin) {
+      router.push('/admin-check');  
+    }
+  }, [isAdmin, router]);
+
+  if (!isAdmin) {
+    router.push('/');
+    return null}; 
 
   const handleCheckboxChange = () => {
     setPublishImmediately(!publishImmediately);

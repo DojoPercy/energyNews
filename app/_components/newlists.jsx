@@ -35,7 +35,9 @@ const NewsList = () => {
     }
   }, [isAdmin, router]);
 
-  if (!isAdmin) return null; 
+  if (!isAdmin) {
+    router.push('/');
+    return null}; 
 
   useEffect(() => {
     if (newsStatus === "idle") {

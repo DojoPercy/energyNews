@@ -19,6 +19,7 @@ export default function AdminLayout({ children }) {
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
   };
+  
 
   if (!store) {
     return <div>Loading...</div>; // Handle case where store isn't ready

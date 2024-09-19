@@ -18,6 +18,20 @@ const EditPost = () => {
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
 
+  const isAdmin = useSelector((state) => state.admin?.isAdmin);
+  const router = useRouter();
+
+  useEffect(() => {
+    console.log(isAdmin)
+    if (!isAdmin) {
+      router.push('/admin-check');  
+    }
+  }, [isAdmin, router]);
+
+  if (!isAdmin) {
+    router.push('/');
+    return null}; 
+
   useEffect(() => {
     if (newsStatus === "idle") {
       dispatch(fetchNews());
