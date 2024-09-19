@@ -1,57 +1,50 @@
-
 "use client";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setAdminStatus } from '../_redux/news/admin';
 import { useRouter } from 'next/navigation';
 
 const AdminCheck = () => {
-  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const handleCheckEmail = async () => {
-    try {
-      const response = await fetch('/api/check-admin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
+  useEffect(() => {
+    // Function to check authentication and admin status
+    const checkAuth = async () => {
+      try {
+        // Call the API route we created
+        const response = await fetch('/api/check-session');
+        const data = await response.json();
 
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
+        if (data.authenticated && data.isAdmin) {
+          // Set admin status in Redux
+          dispatch(setAdminStatus(true));
+          localStorage.setItem('isAdmin', 'true'); // Store in localStorage
+          router.push('/admin'); // Redirect to admin page
+        } else if (data.authenticated && !data.isAdmin) {
+          setError('You do not have admin access.');
+        } else {
+          router.push('/api/auth/login'); // Redirect to login if not authenticated
+        }
+      } catch (err) {
+        setError('Error checking admin access.');
+      } finally {
+        setLoading(false); // Stop loading
       }
+    };
 
-      const data = await response.json();
+    checkAuth();
+  }, [dispatch, router]);
 
-      if (data.isAdmin) {
-        // Save admin status in Redux and localStorage
-        dispatch(setAdminStatus(true));
-        localStorage.setItem('isAdmin', 'true'); // Store in localStorage
-
-        // Redirect to the admin page
-        router.push('/admin');
-      } else {
-        setError('You do not have admin access.');
-      }
-    } catch (err) {
-      setError('Error checking admin access.');
-    }
-  };
+  if (loading) {
+    return <div>Validating...</div>; // Show validation message
+  }
 
   return (
     <div>
       <h1>Admin Access</h1>
-      <input
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter admin email"
-      />
-      <button onClick={handleCheckEmail}>Check Admin</button>
       {error && <p>{error}</p>}
     </div>
   );
