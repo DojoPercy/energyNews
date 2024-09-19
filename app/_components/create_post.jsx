@@ -10,6 +10,7 @@ import { addNews } from "../_redux/news/newSlice";
 import { categories } from "../../lib/categories";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { useRouter } from "next/navigation";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 

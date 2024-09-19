@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Button, FileInput, Select, TextInput } from "flowbite-react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
