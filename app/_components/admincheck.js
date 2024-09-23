@@ -15,7 +15,7 @@ const AdminCheck = () => {
     const checkAuth = async () => {
       try {
         // Call the API route we created
-        const response = await fetch('/api/check-session');
+        const response = await fetch('/api/check-admin');
         const data = await response.json();
 
         if (data.authenticated && data.isAdmin) {
@@ -30,6 +30,7 @@ const AdminCheck = () => {
         }
       } catch (err) {
         setError('Error checking admin access.');
+        console.log(err);
       } finally {
         setLoading(false); // Stop loading
       }
