@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { FaClock } from "react-icons/fa";
 
 const Homepage = ({ news }) => {
   const [recentNews, setRecentNews] = useState([]);
@@ -15,16 +16,15 @@ const Homepage = ({ news }) => {
   }, [news]);
 
   const convertToTitleCase = (input) => {
-    if (typeof input !== 'string') return ''; 
+    if (typeof input !== "string") return "";
     const words = input.split("_");
     return words
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
 
-
   if (recentNews.length < 4) {
-    return <div></div>; 
+    return <div></div>;
   }
 
   const newsItem1 = recentNews[0];
@@ -44,10 +44,16 @@ const Homepage = ({ news }) => {
             />
             <div className="absolute hidden inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-0 flex flex-col left-0 p-2">
-            <div className="absolute -top-5 left-0 w-full p-2">
+            <div className="absolute -top-16 left-0 w-full  flex-col p-2">
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem1.category)}
                 </span>
+                <div className="flex space-x-1 px-0 py-4">
+                  <FaClock className="text-secondaryBlue" />
+                  <span className="text-xs opacity-80 text-white w-full ">
+                    {newsItem1.publishDate}
+                  </span>
+                </div>
               </div>
               <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white drop-shadow-lg">
                 {newsItem1?.title}
@@ -63,11 +69,17 @@ const Homepage = ({ news }) => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 left-0 p-2 flex flex-col">
-            <div className="absolute -top-5 left-0 w-full p-2">
+            <div className="absolute bottom-0 left-0 p-2 flex  flex-col">
+              <div className="absolute -top-16 left-0 w-full  flex-col p-2">
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem2.category)}
                 </span>
+                <div className="flex space-x-1 px-0 py-4">
+                  <FaClock className="text-secondaryBlue" />
+                  <span className="text-xs opacity-80 text-white w-full ">
+                    {newsItem2.publishDate}
+                  </span>
+                </div>
               </div>
               <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
                 {newsItem2?.title}
@@ -84,13 +96,18 @@ const Homepage = ({ news }) => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-0 left-0 flex flex-col p-2">
-              
-            <div className="absolute -top-5 left-0 w-full p-2">
+              <div className="absolute -top-16 left-0 w-full  flex-col p-2">
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem3.category)}
                 </span>
+                <div className="flex space-x-1 px-2 py-4">
+                  <FaClock className="text-secondaryBlue" />
+                  <span className="text-xs opacity-80 text-white w-full ">
+                    {newsItem3.publishDate}
+                  </span>
+                </div>
               </div>
-              <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="md:text-sm drop-shadow-lg text-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
                 {newsItem3?.title}
               </span>
             </div>
@@ -105,11 +122,16 @@ const Homepage = ({ news }) => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-0 left-0 p-2">
-                    
-            <div className="absolute -top-5 left-0 w-full p-2">
+            <div className="absolute -top-16 left-0 w-full  flex-col p-2">
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem4.category)}
                 </span>
+                <div className="flex space-x-1 px-2 py-4">
+                  <FaClock className="text-secondaryBlue" />
+                  <span className="text-xs opacity-80 text-white w-full ">
+                    {newsItem4.publishDate}
+                  </span>
+                </div>
               </div>
               <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 line-clamp-2 font-semibold mt-2 text-white">
                 {newsItem4?.title}
