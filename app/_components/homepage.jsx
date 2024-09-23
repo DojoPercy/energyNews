@@ -33,7 +33,7 @@ const Homepage = ({ news }) => {
   const newsItem4 = recentNews[3];
 
   return (
-    <div className="w-full lg:px-20 px-3 py-5 md:h-[70vh] h-[210vh]">
+    <div className="w-full lg:px-20 px-3 py-5 md:h-[70vh] h-[170vh]">
       <div className="grid lg:grid-cols-9 lg:grid-rows-5 gap-1 md:grid-cols-8 md:grid-rows-8 w-full h-full grid-cols-1 grid-rows-12">
         <div className="lg:col-span-5 md:col-span-4 lg:row-span-5 md:row-span-4 relative overflow-hidden row-span-3">
           <a href={`/news/${newsItem1?.title}`}>
@@ -49,7 +49,7 @@ const Homepage = ({ news }) => {
                   {convertToTitleCase(newsItem1.category)}
                 </span>
               </div>
-              <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white drop-shadow-lg">
                 {newsItem1?.title}
               </span>
             </div>
@@ -69,7 +69,7 @@ const Homepage = ({ news }) => {
                   {convertToTitleCase(newsItem2.category)}
                 </span>
               </div>
-              <span className="text-md hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
                 {newsItem2?.title}
               </span>
             </div>
@@ -90,7 +90,7 @@ const Homepage = ({ news }) => {
                   {convertToTitleCase(newsItem3.category)}
                 </span>
               </div>
-              <span className="md:text-sm text-md hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
                 {newsItem3?.title}
               </span>
             </div>
@@ -111,7 +111,7 @@ const Homepage = ({ news }) => {
                   {convertToTitleCase(newsItem4.category)}
                 </span>
               </div>
-              <span className="md:text-sm text-md hover:cursor-pointer transition ease-in-out duration-100 line-clamp-2 font-semibold mt-2 text-white">
+              <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 line-clamp-2 font-semibold mt-2 text-white">
                 {newsItem4?.title}
               </span>
             </div>
