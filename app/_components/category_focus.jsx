@@ -40,8 +40,8 @@ const CategoryFocus = ({ news }) => {
               onClick={() => handleCategoryChange(category.value)}
               className={`px-3 py-2 rounded-lg text-white ${
                 currentCategory === category.value
-                  ? "bg-secondaryBlue px-4 transition duration-100 ease-in-out"
-                  : "bg-blueTheme"
+                  ? "bg-blueTheme px-4 transition duration-100 ease-in-out"
+                  : "bg-secondaryBlue"
               }`}
             >
               {category.label}

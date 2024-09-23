@@ -16,6 +16,7 @@ import { Img } from "@chakra-ui/react";
 import CategoryFocus from "./category_focus";
 import NewsUpdates from "./news_updates";
 import RecentIcon from "./RecentIcon";
+import Homepage from "./homepage";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -113,17 +114,19 @@ const Categories = () => {
             <ClipLoader size={50} color={"#123abc"} loading={true} />
           </div>
         )}
-        {latestArticle && (
+           {latestArticle && (
           <>
             
-            <div className="pt-14 px-3 lg:hidden">
+            <div className="pt-2 px-6 lg:hidden">
               <img src={ads.bannerAds} alt="Lexar" />
             </div>
           </>
         )}
+        <Homepage news={news}/>
+     
         <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14">
-          <section className="mb-8 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
-            <div className="flex flex-col">
+          <section className="my-0 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
+            {/* <div className="flex flex-col">
               
               <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
                 <figure className="lg:w-[55%] w-[100%]">
@@ -160,7 +163,7 @@ const Categories = () => {
                 </div>
               </div>
               
-            </div>
+            </div> */}
 
             <TitleSection title={"News Updates"} />
             <NewsUpdates news={updates} />
@@ -218,7 +221,7 @@ const Categories = () => {
             ))}
             <PersonalityofWeek />
           </section>
-          <section className="lg:col-span-2 hidden  lg:block w-full">
+          <section className="lg:col-span-2 hidden my-6  lg:block w-full">
             <RecentIcon news={news} />
 
             <RecentCategoryNews news={news} category="global_news" />

@@ -67,8 +67,9 @@ const Header = () => {
 
   return (
     <>
+    
       <header
-        className={`text-gray-900 bg-blueTheme transition-all ease-in-out duration-200   ${
+        className={`text-gray-900 md:bg-white bg-blueTheme  transition-all ease-in-out duration-200   ${
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
         }`}
       >
@@ -76,10 +77,10 @@ const Header = () => {
           <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1450px] hidden lg:flex py-5">
             <Link href="/">
               <img
-                src="/logo_white.png"
+                src="/logo.png"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? " h-16" : " h-28"
+                  isSticky ? " h-12" : " h-20"
                 } transition-all ease-out duration-100`}
               />
             </Link>
@@ -91,13 +92,13 @@ const Header = () => {
                   </div>
                   <div className="flex justify-center gap-3">
                     <Link href="/">
-                    <FaFacebook className="text-white text-2xl" />
+                    <FaFacebook className="text-black text-2xl" />
                     </Link>
                     <Link href="/">
-                    <FaInstagram className="text-white text-2xl" />
+                    <FaInstagram className="text-black text-2xl" />
                     </Link>
                     <Link href="/">
-                    <FaLinkedin className="text-white text-2xl" />
+                    <FaLinkedin className="text-black text-2xl" />
                     </Link>
                   </div>
                  
@@ -105,11 +106,11 @@ const Header = () => {
               </div>
             <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
               <img
-                src={ads.adsLogo}
+                src={ads.bannerAds}
                 loading="lazy"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? "h-0" : "lg:h-32"
+                  isSticky ? "h-0" : "lg:h-20"
                 } transition-all ease-in duration-100`}
               />
                
@@ -146,7 +147,7 @@ const Header = () => {
 
           <div className=" ni">
             <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
-              <div className="flex justify-start items-center space-x-2 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
+              <div className="flex justify-start items-center space-x-0 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
                 {navItems.map((item, index) =>
                   !item.special ? (
                     <NavLink
@@ -164,7 +165,7 @@ const Header = () => {
                 )}
               </div>
             </div>
-            <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2 border-t border-b border-complementaryTheme w-full shadow-md ${isSticky ? "hidden" : "block"}`}>
+            <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2  shadow-gray-200 shadow-lg  border-t border-b border-complementaryTheme w-full ${isSticky ? "hidden" : "block"}`}>
               <div className="relative h-full flex items-center z-10">
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex">
                   {news.map((headline, index) => (
@@ -308,7 +309,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex space-x-10 items-center  px-3 py-2">
+    <div className="flex space-x-10 items-center  px-0 py-2">
       <div
         className="relative"
         onMouseEnter={() => setIsDropdownOpen(true)}

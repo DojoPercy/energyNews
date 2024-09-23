@@ -2,40 +2,20 @@ export const navItems = [
     {
       title: "News",
       href: "/news",
-      dropdownItems: [
-        "Regional News",
-        "Global News",
-        "Industry Updates",
-        "Press Releases",
-      ],
-       special:false,
-      
+     
+       special:true,
+
       feature: false
     },
     {
-      title: "Analysis",
-      href: "/analysis",
-      dropdownItems: [
-        "Market Analysis",
-        "Policy & Regulation",
-        "Technology Trends",
-        "Expert Opinions",
-      ],
-      special:false,
+      title: "Specials",
+      href: "/specials",
+     
+       special:true,
+
       feature: false
     },
-    {
-      title: "Features",
-      href: "/features",
-      dropdownItems: [
-        "Personality of the Week",
-        "Case Studies",
-        "Interviews",
-        "Special Editions",
-      ],
-      special:false,
-      feature: true
-    },
+   
     {
       title: "Sectors",
       href: "/sectors",
@@ -49,18 +29,7 @@ export const navItems = [
        special:false,
       feature: false
     },
-    {
-      title: "Regions",
-      href: "/regions",
-      dropdownItems: [
-        "Middle East",
-        "North Africa",
-        "Sub-Saharan Africa",
-        "GCC Countries",
-      ],
-       special:false,
-      feature: false
-    },
+  
     {
       title: "Energy Transition",
       href: "/energy_transition",
@@ -71,7 +40,56 @@ export const navItems = [
         "Sustainable Energy Innovations",
         "Green Financing",
       ],
+       special:true,
+      feature: false
+    },
+  
+    {
+      title:"Interviews",
+      href: "/interviews",
+      special:true,
+      feature: false
+    },
+    
+    
+    {
+      title:"Thought Leadership",
+      href: "/thoughtleadership",
+      special:true,
+      feature: false
+    },
+    {
+      title: "Multimedia",
+      href: "/multimedia",
+      dropdownItems: [
+        "Gallery",
+        "Videos",
+        "Podcasts",
+        
+      ],
        special:false,
+      feature: false
+    },
+    {
+      title:"Publications",
+      href: "/publications",
+      special:true,
+      feature: false
+    },
+    // {
+    //   title:"Energy Governance MEA Quarterly Review",
+    //   href: "/quarterlyreview",
+    //   dropdownItems: [
+        
+    //   ],
+    //   special:true,
+    //   feature: false
+    // },
+    {
+      title: "Rankings",
+      href: "/rankings",
+      
+       special:true,
       feature: false
     },
     {
@@ -83,16 +101,7 @@ export const navItems = [
         "Conferences",
         "Industry Awards",
       ],
-       special:false,
+       special:true,
       feature: false
     },
-    {
-      title:"Energy Governance MEA Quarterly Review",
-      href: "/quarterlyreview",
-      dropdownItems: [
-        
-      ],
-      special:true,
-      feature: false
-    }
   ];
