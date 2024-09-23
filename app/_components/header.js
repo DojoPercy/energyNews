@@ -69,7 +69,7 @@ const Header = () => {
     <>
     
       <header
-        className={`text-gray-900 md:bg-white bg-blueTheme  transition-all ease-in-out duration-200   ${
+        className={`text-gray-900 lg:bg-white bg-blueTheme  transition-all ease-in-out duration-200   ${
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
         }`}
       >
