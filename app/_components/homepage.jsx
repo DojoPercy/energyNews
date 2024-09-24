@@ -33,7 +33,7 @@ const Homepage = ({ news }) => {
   const newsItem4 = recentNews[3];
 
   return (
-    <div className="w-full lg:px-20 px-3 py-5 md:h-[70vh] h-[170vh]">
+    <div className="w-full lg:px-20 px-3 py-5 md:h-[70vh] h-[185vh]">
       <div className="grid lg:grid-cols-9 lg:grid-rows-5 gap-1 md:grid-cols-8 md:grid-rows-8 w-full h-full grid-cols-1 grid-rows-12">
         <div className="lg:col-span-5 md:col-span-4 lg:row-span-5 md:row-span-4 relative overflow-hidden row-span-3">
           <a href={`/news/${newsItem1?.title}`}>

@@ -124,7 +124,7 @@ const DigitalIssuesByYear = () => {
                           {issue.description}
                         </h3>
                         {issue.imageUrl && (
-                          <a href={issue.pdfUrl} >
+                          <a href={`magazine/${issue.date}`} >
                             <img
                             src={issue.imageUrl}
                             alt="Issue"

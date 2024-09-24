@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Button, FileInput } from 'flowbite-react';
+import { Alert, Button, FileInput } from 'flowbite-react';
 import { storage } from '../../config/firebaseconfig';
 import { useDispatch } from "react-redux";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; // Ensure Firebase storage is properly imported and initialized
@@ -16,8 +16,11 @@ const DigitalEditionForm = () => {
   const [pdfUrl, setPdfUrl] = useState('');
   const [date, setDate] = useState('');
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
-  const [uploading, setUploading] = useState(false); // State to track upload status
+  const [showMagazineUploadNotice, setShowMagazineUploadNotice] = useState(false);
+  const [uploading, setUploading] = useState(false); 
   const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadMagazineProgress, setUploadMagazineProgress] = useState(0);
+
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -27,11 +30,11 @@ const DigitalEditionForm = () => {
   const handleMagazineFileChange = (event) => {
     const file = event.target.files[0];
     setMagazineFile(prev => prev = file);
-    setShowImageUploadNotice(false); 
+    setShowImageMagazineNotice(false); 
   }
   const handleMagazineUpload = async () => {
     if (!magazineFile) {
-      setShowImageUploadNotice(true);
+      setShowMagazineUploadNotice(true);
       
       return;
     }
@@ -45,26 +48,26 @@ const DigitalEditionForm = () => {
         (snapshot) => {
          
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
+          setUploadMagazineProgress(progress);
         },
         (error) => {
          
           console.error('Error uploading image:', error);
           setUploading(false);
-          setShowImageUploadNotice(true);
+          setShowMagazineUploadNotice(true);
         },
         async () => {
           
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           setPdfUrl(downloadURL);
           setUploading(false); 
-          setShowImageUploadNotice(false); 
+          setShowMagazineUploadNotice(false); 
         }
       );
     } catch (error) {
       console.error('Error uploading image:', error);
       setUploading(false);
-      setShowImageUploadNotice(true); 
+      setShowMagazineUploadNotice(true); 
     }
   }
   const handleImageUpload = async () => {
@@ -115,8 +118,9 @@ const DigitalEditionForm = () => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    if (!imageUrl) {
+    if (!imageUrl && !pdfUrl && !date) {
       setShowImageUploadNotice(true);
+      Alert.error('Fill out all the Fields.');
       return;
     }
     const digitalEdition = {
@@ -200,8 +204,8 @@ const DigitalEditionForm = () => {
             <div className="flex items-center justify-between border border-gray-300 rounded-md p-3">
               {uploading ? (
                 <div className="flex items-center justify-between w-full">
-                  <progress value={uploadProgress} max="100" className="w-full h-2 rounded-lg"></progress>
-                  <span>{uploadProgress.toFixed(2)}%</span>
+                  <progress value={uploadMagazineProgress} max="100" className="w-full h-2 rounded-lg"></progress>
+                  <span>{uploadMagazineProgress.toFixed(2)}%</span>
                 </div>
               ) : pdfUrl ? (
                 <div className="flex items-center gap-4">
@@ -214,8 +218,8 @@ const DigitalEditionForm = () => {
                 </div>
               )}
             </div>
-            {showImageUploadNotice && (
-              <p className="text-red-500 text-sm mt-2">Please upload an image for your news.</p>
+            {showMagazineUploadNotice && (
+              <p className="text-red-500 text-sm mt-2">Please upload The Magazine Publication.</p>
             )}
           </div>
           <div className="flex flex-col gap-2">
