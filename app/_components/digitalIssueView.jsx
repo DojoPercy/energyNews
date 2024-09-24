@@ -61,7 +61,7 @@ const DigitalIssuesByYear = () => {
           <figure className="post-thumbnail ">
             <a href={latestIssue.pdfUrl} aria-hidden="true" tabIndex="-1">
               <img
-                src={`/magazines/${latestIssue.date}`}
+                src={latestIssue.imageUrl}
                 alt="Latest Issue"
                 className="w-[17rem] object-cover mb-4"
               />
