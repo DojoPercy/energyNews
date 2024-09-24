@@ -10,8 +10,9 @@ const DigitalEditionPage = () => {
 
   return (
     <div className='flex flex-col mt-40'>
-      <DigitalIssuesByYear/>
       <DigitalEditionForm/>
+      <DigitalIssuesByYear/>
+      
     </div>
   )
 }

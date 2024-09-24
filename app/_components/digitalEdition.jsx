@@ -12,6 +12,7 @@ const DigitalEditionForm = () => {
   const [description, setDescription] = useState('');
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
+  const [magazineFile, setMagazineFile] = useState('');
   const [pdfUrl, setPdfUrl] = useState('');
   const [date, setDate] = useState('');
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
@@ -23,7 +24,49 @@ const DigitalEditionForm = () => {
     setImageFile(prev => prev = file);
     setShowImageUploadNotice(false); 
   };
+  const handleMagazineFileChange = (event) => {
+    const file = event.target.files[0];
+    setMagazineFile(prev => prev = file);
+    setShowImageUploadNotice(false); 
+  }
+  const handleMagazineUpload = async () => {
+    if (!magazineFile) {
+      setShowImageUploadNotice(true);
+      
+      return;
+    }
 
+    setUploading(true);
+    try {
+      const storageRef = ref(storage, `DigitalEdition/${magazineFile.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, magazineFile);
+
+      uploadTask.on('state_changed',
+        (snapshot) => {
+         
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadProgress(progress);
+        },
+        (error) => {
+         
+          console.error('Error uploading image:', error);
+          setUploading(false);
+          setShowImageUploadNotice(true);
+        },
+        async () => {
+          
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          setPdfUrl(downloadURL);
+          setUploading(false); 
+          setShowImageUploadNotice(false); 
+        }
+      );
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setUploading(false);
+      setShowImageUploadNotice(true); 
+    }
+  }
   const handleImageUpload = async () => {
     if (!imageFile) {
       setShowImageUploadNotice(true);
@@ -31,36 +74,35 @@ const DigitalEditionForm = () => {
       return;
     }
 
-    setUploading(true); // Start upload process
+    setUploading(true);
     try {
       const storageRef = ref(storage, `DigitalEdition/${imageFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
-      // Listen for state changes, errors, and completion of the upload.
       uploadTask.on('state_changed',
         (snapshot) => {
-          // Handle progress
+         
           const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setUploadProgress(progress);
         },
         (error) => {
-          // Handle unsuccessful uploads
+         
           console.error('Error uploading image:', error);
-          setUploading(false); // Reset upload state on error
-          setShowImageUploadNotice(true); // Show notice if upload fails
+          setUploading(false);
+          setShowImageUploadNotice(true);
         },
         async () => {
-          // Handle successful uploads on complete
+          
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          setImageUrl(downloadURL); // Set image URL after successful upload
-          setUploading(false); // Reset upload state
-          setShowImageUploadNotice(false); // Reset the notice state after successful upload
+          setImageUrl(downloadURL);
+          setUploading(false); 
+          setShowImageUploadNotice(false); 
         }
       );
     } catch (error) {
       console.error('Error uploading image:', error);
-      setUploading(false); // Reset upload state on error
-      setShowImageUploadNotice(true); // Show notice if upload fails
+      setUploading(false);
+      setShowImageUploadNotice(true); 
     }
   };
 
@@ -141,6 +183,34 @@ const DigitalEditionForm = () => {
                 <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 '>
                   <FileInput type='file' accept='image/*' onChange={handleFileChange} />
                   <Button type='button' onClick={handleImageUpload} gradientDuoTone='purpleToBlue' size='sm' outline >Upload Image</Button>
+                </div>
+              )}
+            </div>
+            {showImageUploadNotice && (
+              <p className="text-red-500 text-sm mt-2">Please upload an image for your news.</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-2">
+            <label
+              className="text-lg font-semibold text-gray-800"
+              htmlFor="imageUrl"
+            >
+             Magizine File Upload
+            </label>
+            <div className="flex items-center justify-between border border-gray-300 rounded-md p-3">
+              {uploading ? (
+                <div className="flex items-center justify-between w-full">
+                  <progress value={uploadProgress} max="100" className="w-full h-2 rounded-lg"></progress>
+                  <span>{uploadProgress.toFixed(2)}%</span>
+                </div>
+              ) : pdfUrl ? (
+                <div className="flex items-center gap-4">
+                  <span className="text-green-400 text-sm">Sent Successfully</span>
+                </div>
+              ) : (
+                <div className='flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 '>
+                  <FileInput type='file' accept='pdf/*' onChange={handleMagazineFileChange} />
+                  <Button type='button' onClick={handleMagazineUpload} gradientDuoTone='purpleToBlue' size='sm' outline >Upload Image</Button>
                 </div>
               )}
             </div>
