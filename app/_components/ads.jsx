@@ -17,12 +17,7 @@ const AdsSection = () => {
   const isAdmin = useSelector((state) => state.admin?.isAdmin);
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(isAdmin)
-    if (!isAdmin) {
-      router.push('/admin-check');  
-    }
-  }, [isAdmin, router]);
+
 
   if (!isAdmin) {
     router.push('/');

@@ -48,9 +48,9 @@ const Homepage = ({ news }) => {
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem1.category)}
                 </span>
-                <div className="flex space-x-1 px-0 py-4">
-                  <FaClock className="text-secondaryBlue" />
-                  <span className="text-xs opacity-70 text-white w-full ">
+                <div className="flex space-x-1 px-0 py-4 opacity-70">
+                  <FaClock className="text-white" />
+                  <span className="text-xs  text-white w-full ">
                     {newsItem1.publishDate}
                   </span>
                 </div>
@@ -74,9 +74,9 @@ const Homepage = ({ news }) => {
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem2.category)}
                 </span>
-                <div className="flex space-x-1 px-0 py-4">
-                  <FaClock className="text-secondaryBlue" />
-                  <span className="text-xs opacity-70 text-white w-full ">
+                <div className="flex space-x-1 px-0 py-4  opacity-70">
+                  <FaClock className="text-white" />
+                  <span className="text-xs text-white w-full ">
                     {newsItem2.publishDate}
                   </span>
                 </div>
@@ -100,9 +100,9 @@ const Homepage = ({ news }) => {
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem3.category)}
                 </span>
-                <div className="flex space-x-1 px-2 py-4">
-                  <FaClock className="text-secondaryBlue" />
-                  <span className="text-xs opacity-70 text-white w-full ">
+                <div className="flex space-x-1 px-2 py-4 opacity-70">
+                  <FaClock className="text-white" />
+                  <span className="text-xs  text-white w-full ">
                     {newsItem3.publishDate}
                   </span>
                 </div>
@@ -126,9 +126,9 @@ const Homepage = ({ news }) => {
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">
                   {convertToTitleCase(newsItem4.category)}
                 </span>
-                <div className="flex space-x-1 px-2 py-4">
-                  <FaClock className="text-secondaryBlue" />
-                  <span className="text-xs opacity-70 text-white w-full ">
+                <div className=" flex space-x-1 px-2 py-4  opacity-70">
+                  <FaClock className="text-white" />
+                  <span className="text-xs text-white w-full ">
                     {newsItem4.publishDate}
                   </span>
                 </div>

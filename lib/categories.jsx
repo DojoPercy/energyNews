@@ -1,18 +1,11 @@
 export const categories = [
     { value: 'uncategorized', label: 'Select a Category' },
     { value: 'news', label: 'News' },
-    { value: 'regional_news', label: 'Regional News' },
-    { value: 'global_news', label: 'Global News' },
-    { value: 'industry_updates', label: 'Industry Updates' },
-    { value: 'press_releases', label: 'Press Releases' },
-    { value: 'analysis', label: 'Analysis' },
-    { value: 'market_analysis', label: 'Market Analysis' },
-    { value: 'policy_regulation', label: 'Policy & Regulation' },
-    { value: 'technology_trends', label: 'Technology Trends' },
-    { value: 'expert_opinions', label: 'Expert Opinions' },
-    { value: 'features', label: 'Features' },
-    { value: 'personality_of_the_week', label: 'Personality of the Week' },
-    { value: 'case_studies', label: 'Case Studies' },
+    
+  
+  
+   
+    { value: 'specials', label: 'Specials' },
     { value: 'interviews', label: 'Interviews' },
     { value: 'special_editions', label: 'Special Editions' },
     { value: 'sectors', label: 'Sectors' },
