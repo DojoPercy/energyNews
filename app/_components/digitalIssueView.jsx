@@ -61,7 +61,7 @@ const DigitalIssuesByYear = () => {
           <figure className="post-thumbnail ">
             <a href={latestIssue.pdfUrl} aria-hidden="true" tabIndex="-1">
               <img
-                src={latestIssue.imageUrl}
+                src={`/magazines/${latestIssue.date}`}
                 alt="Latest Issue"
                 className="w-[17rem] object-cover mb-4"
               />
@@ -83,7 +83,7 @@ const DigitalIssuesByYear = () => {
               </p>
               <p className="text-gray-200 mt-2 px-4 py-2 bg-red-700 ">
                 <a
-                  href={latestIssue.pdfUrl}
+                  href={`/magazines/${latestIssue.date}`}
                   className="text-white text-center"
                   target="_blank"
                   rel="noopener noreferrer"
