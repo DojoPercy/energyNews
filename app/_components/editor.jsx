@@ -48,12 +48,42 @@ class Editor extends Component {
     }
   };
 
+  // New method to handle music upload
+  handleMusicUpload = async (file) => {
+    this.setState({ uploading: true });
+    try {
+      const storageRef = ref(storage, `music/${file.name}`);
+      const uploadTask = uploadBytesResumable(storageRef, file);
+
+      uploadTask.on('state_changed',
+        (snapshot) => {
+          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          this.setState({ uploadProgress: progress });
+        },
+        (error) => {
+          console.error('Error uploading music:', error);
+          this.setState({ uploading: false });
+        },
+        async () => {
+          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+          this.setState({ uploading: false });
+          const range = this.quillRef.getSelection();
+          this.quillRef.insertEmbed(range.index, 'audio', downloadURL);
+        }
+      );
+    } catch (error) {
+      console.error('Error uploading music:', error);
+      this.setState({ uploading: false });
+    }
+  };
+
   modules = {
     toolbar: {
       container: [
         ["bold", "italic", "underline"],
         ["list", "bullet", "indent"],
-        ["image", "link"]
+        ["image", "link"],
+        [{ 'music': '🎵' }] // Custom button for music
       ],
       handlers: {
         image: () => {
@@ -65,6 +95,18 @@ class Editor extends Component {
             const file = input.files[0];
             if (file) {
               await this.handleImageUpload(file);
+            }
+          };
+        },
+        music: () => { // Custom handler for music
+          const input = document.createElement('input');
+          input.setAttribute('type', 'file');
+          input.setAttribute('accept', 'audio/*');
+          input.click();
+          input.onchange = async () => {
+            const file = input.files[0];
+            if (file) {
+              await this.handleMusicUpload(file);
             }
           };
         }
@@ -84,6 +126,7 @@ class Editor extends Component {
     "indent",
     "link",
     "image",
+    "audio", // Added audio to formats
   ];
 
   componentDidMount() {
@@ -97,15 +140,27 @@ class Editor extends Component {
 
   render() {
     return (
-      <ReactQuill
-        ref={(el) => { this.reactQuillRef = el }}
-        theme="snow"
-        placeholder={this.props.placeholder || "Compose an epic..."}
-        modules={this.modules}
-        formats={this.formats}
-        value={this.props.value}
-        onChange={this.handleChange}
-      />
+      <div>
+        {this.state.uploading && (
+          <div className="flex items-center justify-between w-full mb-2">
+            <progress
+              value={this.state.uploadProgress}
+              max="100"
+              className="w-full h-2 rounded-lg"
+            ></progress>
+            <span>{this.state.uploadProgress.toFixed(2)}%</span>
+          </div>
+        )}
+        <ReactQuill
+          ref={(el) => { this.reactQuillRef = el }}
+          theme="snow"
+          placeholder={this.props.placeholder || "Compose an epic..."}
+          modules={this.modules}
+          formats={this.formats}
+          value={this.props.value}
+          onChange={this.handleChange}
+        />
+      </div>
     );
   }
 }

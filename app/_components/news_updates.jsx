@@ -10,7 +10,7 @@ const NewsUpdates = ({ news }) => {
       };
   return (
     <div>
-      <div className="p-2 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 space-x-0 lg:space-y-0 space-y-0">
+      <div className="p-1 grid grid-cols-2 lg:grid-cols-4 md:grid-cols-3 space-x-0 lg:space-y-0 space-y-0">
         {news.map((article) => (
           <div key={article.id} className="group bg-white  rounded-lg p-2 ">
             <div className="overflow-hidden relative w-full">

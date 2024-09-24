@@ -67,20 +67,20 @@ const Header = () => {
 
   return (
     <>
-    <div className="w-full py-5 bg-blueTheme"></div>
+    
       <header
-        className={`text-gray-900 lg:bg-white bg-blueTheme  transition-all ease-in-out duration-200   ${
+        className={`text-gray-900  lg:bg-white bg-blueTheme  transition-all ease-in-out duration-200   ${
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
         }`}
       >
         <div className="w-full flex flex-col ">
-          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1450px] hidden lg:flex py-5">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-5 lg:px-20 ">
             <Link href="/">
               <img
                 src="/logo.png"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? " h-12" : " h-20"
+                  isSticky ? " h-12" : " h-28"
                 } transition-all ease-out duration-100`}
               />
             </Link>
@@ -106,7 +106,7 @@ const Header = () => {
               </div>
             <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
               <img
-                src={ads.bannerAds}
+                src={ads.adsLogo}
                 loading="lazy"
                 alt="Logo"
                 className={` flex ${

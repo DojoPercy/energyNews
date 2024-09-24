@@ -110,7 +110,8 @@ const Categories = () => {
     content = (
       <>
         {loading && (
-          <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+          <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-100 z-10">
+            <img src='/logo.png' alt="logo" className="w-20 h-20" />
             <ClipLoader size={50} color={"#123abc"} loading={true} />
           </div>
         )}
@@ -118,14 +119,14 @@ const Categories = () => {
           <>
             
             <div className="pt-2 px-6 lg:hidden">
-              <img src={ads.bannerAds} alt="Lexar" />
+              <img src={ads.adsLogo} alt="Lexar" />
             </div>
           </>
         )}
         <Homepage news={news}/>
      
-        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14">
-          <section className="my-0 max-w-7xl mx-auto p-2 lg:p-2 lg:col-span-6 col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14 lg:px-20">
+          <section className="my-0 max-w-7xl mx-auto p-2 px-2 lg:p-2 lg:col-span-6 col-span-1">
             {/* <div className="flex flex-col">
               
               <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">

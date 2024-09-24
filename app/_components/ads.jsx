@@ -18,7 +18,16 @@ const AdsSection = () => {
   const router = useRouter();
 
 
+  useEffect(() => {
+    console.log(isAdmin)
+    if (!isAdmin) {
+      router.push('/admin-check');  
+    }
+  }, [isAdmin, router]);
 
+  if (!isAdmin) {
+    router.push('/');
+    return null}; 
 
   const [adsLogo, setAdsLogo] = useState("");
   const [bannerAds, setBannerAds] = useState("");

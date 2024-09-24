@@ -55,7 +55,7 @@ const Homepage = ({ news }) => {
                   </span>
                 </div>
               </div>
-              <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white drop-shadow-lg">
+              <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white drop-shadow-lg">
                 {newsItem1?.title}
               </span>
             </div>
@@ -81,7 +81,7 @@ const Homepage = ({ news }) => {
                   </span>
                 </div>
               </div>
-              <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white">
                 {newsItem2?.title}
               </span>
             </div>
@@ -107,7 +107,7 @@ const Homepage = ({ news }) => {
                   </span>
                 </div>
               </div>
-              <span className="md:text-sm drop-shadow-lg text-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white">
+              <span className="md:text-sm drop-shadow-lg text-lg hover:cursor-pointer transition ease-in-out duration-100 font-semibold mt-2 text-white capitalize">
                 {newsItem3?.title}
               </span>
             </div>
@@ -133,7 +133,7 @@ const Homepage = ({ news }) => {
                   </span>
                 </div>
               </div>
-              <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 line-clamp-2 font-semibold mt-2 text-white">
+              <span className="md:text-sm drop-shadow-lg text-md hover:cursor-pointer transition ease-in-out duration-100 line-clamp-2 font-semibold mt-2 text-white capitalize">
                 {newsItem4?.title}
               </span>
             </div>
