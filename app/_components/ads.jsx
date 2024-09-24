@@ -19,9 +19,6 @@ const AdsSection = () => {
 
 
 
-  if (!isAdmin) {
-    router.push('/');
-    return null}; 
 
   const [adsLogo, setAdsLogo] = useState("");
   const [bannerAds, setBannerAds] = useState("");
