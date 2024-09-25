@@ -83,7 +83,7 @@ const Flipbook = ({ pdfUrl }) => {
           error && <p className='text-red-500'>Failed to load PDF file.</p>
         )}
       </Document>
-      <div className='flex flex-row justify-evenly items-center gap-5 mx-3 mt-5'>
+      <div className='flex mb-32 flex-row justify-evenly items-center gap-5 mx-3 mt-5'>
         <button 
           onClick={goToPreviousPage} 
           disabled={error} 
