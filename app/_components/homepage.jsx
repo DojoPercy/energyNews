@@ -42,7 +42,7 @@ const Homepage = ({ news }) => {
               alt="newsItem1"
               className="w-full h-full object-cover hover:scale-105 hover:rotate-1 transition ease-in-out duration-300"
             />
-            <div className="absolute hidden inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
+            <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
             <div className="absolute bottom-0 flex flex-col left-0 p-2">
             <div className="absolute -top-16 left-0 w-full  flex-col p-2">
                 <span className="bg-secondaryBlue text-white  text-xs p-2 ">

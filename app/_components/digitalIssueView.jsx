@@ -6,6 +6,7 @@ import groupIssuesByYear from "../../lib/digitalIssueUtils";
 import CustomTab from "./customTab";
 import TabPanel from "./tabPanels";
 import { FaChevronRight } from "react-icons/fa";
+import { ClipLoader } from "react-spinners";
 
 const DigitalIssuesByYear = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,9 @@ const DigitalIssuesByYear = () => {
     }
   }, [digitalIssues]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div className="w-full h-full flex jutify-center items-center">
+    <ClipLoader size={30} color={"#123abc"} loading={true} />
+  </div>;
   if (error) return <p>Error loading issues: {error}</p>;
 
   const sortedIssues = [...digitalIssues].sort(

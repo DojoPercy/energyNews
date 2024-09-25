@@ -1,5 +1,5 @@
 'use client';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import HTMLFlipBook from 'react-pageflip';
 import { Document, Page as ReactPdfPage, pdfjs } from 'react-pdf';
 import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
@@ -25,6 +25,14 @@ const Flipbook = ({ pdfUrl }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [error, setError] = useState(false);
   const bookRef = useRef();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize(); // Set on initial load
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -39,11 +47,11 @@ const Flipbook = ({ pdfUrl }) => {
   const goToPreviousPage = () => bookRef.current.pageFlip().flipPrev();
   const goToNextPage = () => bookRef.current.pageFlip().flipNext();
 
-  const width = 400;
-  const height = 570;
+  const width = isMobile ? window.innerWidth * 0.9 : 400;
+  const height = isMobile ? window.innerHeight * 0.7 : 570;
 
   return (
-    <div className='py-20 h-screen w-screen flex flex-col items-center bg-white overflow-hidden'>
+    <div className='flipbook-container h-screen w-screen flex flex-col items-center bg-white overflow-hidden'>
       <h1 className='my-5 font-extrabold text-4xl'>PDF Flipbook</h1>
       <Document 
         file={pdfUrl} 
@@ -79,9 +87,9 @@ const Flipbook = ({ pdfUrl }) => {
         <button 
           onClick={goToPreviousPage} 
           disabled={error} 
-          className='bg-gray-600 p-2 rounded-full'
+          className='bg-gray-600 p-4 md:p-2 rounded-full'
         >
-          <BsChevronLeft className='text-white text-2xl'/>
+          <BsChevronLeft className='text-white text-3xl md:text-2xl'/>
         </button>
         <span className='mx-3 text-center text-sm md:text-base'>
           Page {currentPage + 1} of {numPages || 0}
@@ -89,9 +97,9 @@ const Flipbook = ({ pdfUrl }) => {
         <button 
           onClick={goToNextPage} 
           disabled={error} 
-          className='bg-gray-600 p-2 rounded-full'
+          className='bg-gray-600 p-4 md:p-2 rounded-full'
         >
-          <BsChevronRight className='text-white text-2xl'/>
+          <BsChevronRight className='text-white text-3xl md:text-2xl'/>
         </button>
       </div>
     </div>
