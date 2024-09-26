@@ -125,8 +125,8 @@ const Categories = () => {
         )}
         <Homepage news={news}/>
      
-        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-14 lg:px-20">
-          <section className="my-0 max-w-7xl mx-auto p-2 px-2 lg:p-2 lg:col-span-6 col-span-1">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-0 lg:px-20">
+          <section className="my-0 max-w-7xl mx-auto p-2 px-2 lg:p-0 lg:col-span-6 col-span-1">
             {/* <div className="flex flex-col">
               
               <div className="flex flex-col lg:h-[50vh] lg:flex-row w-full py-0 hover:cursor-pointer">
