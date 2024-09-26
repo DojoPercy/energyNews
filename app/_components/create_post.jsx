@@ -259,7 +259,7 @@ const CreatePost = () => {
             </div>
           )}
         </div>
-        {category === "Podcast" || category === "Video" ? (
+        {category.toLowerCase() === "podcast" || category.toLowerCase() === "video" ? (
           <div>
             <p className="text-gray-500 text-sm mt-2 flex items-center pl-3">
               <IoAlertCircle /> Upload an Audio or Video file if applicable
