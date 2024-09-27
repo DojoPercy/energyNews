@@ -5,10 +5,12 @@ import { store } from "../app/_redux/news/store";
 import Categories from '../app/_components/home';
 import Header from "../app/_components/header";
 import { ErrorBoundary } from 'next/dist/client/components/error-boundary';
+import Footer from './_components/footer';
 
 const Home = () => {
   return (
   
+    <>
     <ErrorBoundary>
       <Provider store={store}>
        <div className='w-full font-poppins'>
@@ -17,6 +19,8 @@ const Home = () => {
        </div>
       </Provider>
     </ErrorBoundary>
+    <Footer />
+    </>
   )
 }
 

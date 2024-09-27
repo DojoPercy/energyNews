@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className + " " + mont.variable + " " + proxima.variable + " " + poppins.variable}>
        
         {children}
-        <Footer />
+        
       </body>
       
     </html>

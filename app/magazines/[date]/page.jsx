@@ -49,7 +49,7 @@ const PdfViewer = () => {
 
   // Render the Flipbook
   return (
-    <div className="h-screen w-screen flex flex-col gap-5 justify-center items-center bg-gray-900 overflow-hidden ">
+    <div className="h-auto py-32 w-screen flex flex-col gap-5 justify-center items-center bg-gray-900 overflow-hidden ">
       <h1 className="text-3xl text-white text-center font-bold">Digital Issue - {date}</h1>
       <Flipbook pdfUrl={selectedIssue.pdfUrl} /> {/* Ensure correct property is used */}
     </div>

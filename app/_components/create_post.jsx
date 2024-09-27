@@ -77,6 +77,11 @@ const CreatePost = () => {
       setNewTag("");
     }
   };
+  const handleRemoveAudioVideo = () => {
+    setAudioVideoFile(null);
+    setAudioVideoUrl("");
+    setAudioVideoType("");
+  };
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();

@@ -47,11 +47,12 @@ const Flipbook = ({ pdfUrl }) => {
   const goToPreviousPage = () => bookRef.current.pageFlip().flipPrev();
   const goToNextPage = () => bookRef.current.pageFlip().flipNext();
 
-  const width = isMobile ? window.innerWidth * 0.9 : 400;
-  const height = isMobile ? window.innerHeight * 0.7 : 570;
+  // Responsive dimensions
+  const width = isMobile ? window.innerWidth * 0.9 : window.innerWidth * 0.3; // 90% for mobile, 50% for desktop
+  const height = isMobile ? window.innerHeight * 0.7 : 700; // 70% for mobile, 80% for desktop 
 
   return (
-    <div className='flipbook-container h-screen w-screen flex flex-col items-center bg-white overflow-hidden'>
+    <div className='flipbook-container h-200vh w-screen flex flex-col items-center bg-white overflow-hidden'>
       <h1 className='my-5 font-extrabold text-4xl'>PDF Flipbook</h1>
       <Document 
         file={pdfUrl} 
@@ -83,7 +84,7 @@ const Flipbook = ({ pdfUrl }) => {
           error && <p className='text-red-500'>Failed to load PDF file.</p>
         )}
       </Document>
-      <div className='flex mb-32 flex-row justify-evenly items-center gap-5 mx-3 mt-5'>
+      <div className='mt-10 flex mb-32 flex-row justify-evenly items-center gap-5 mx-3 '>
         <button 
           onClick={goToPreviousPage} 
           disabled={error} 
