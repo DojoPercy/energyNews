@@ -22,9 +22,13 @@ const CreatePost = () => {
   const [category, setCategory] = useState("uncategorized");
   const [imageFile, setImageFile] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
-  const [audioVideoFile, setAudioVideoFile] = useState(null); // For audio/video file
-  const [audioVideoUrl, setAudioVideoUrl] = useState(""); // Audio/Video URL
+  const [audioVideoFile, setAudioVideoFile] = useState(null);
+  const [audioVideoUrl, setAudioVideoUrl] = useState("");
+  const [uploadingAudioVideoProgress, setUploadingAudioVideoProgress] =
+    useState(0);
+  const [uploadingAudioVideo, setUploadingAudioVideo] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
+  const [audioVideoType, setAudioVideoType] = useState("");
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
   const [uploading, setUploading] = useState(false);
@@ -36,7 +40,7 @@ const CreatePost = () => {
 
   useEffect(() => {
     if (!isAdmin) {
-      router.push('/admin-check');  
+      router.push("/admin-check");
     }
   }, [isAdmin, router]);
 
@@ -48,6 +52,7 @@ const CreatePost = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    
     setImageFile(file);
   };
 
@@ -58,7 +63,12 @@ const CreatePost = () => {
 
   const handleAudioVideoFileChange = (event) => {
     const file = event.target.files[0];
-    setAudioVideoFile(file);
+    if (file) {
+      const fileType = file.type.startsWith("audio") ? "audio" : "video";
+      setAudioVideoType(fileType); 
+      setAudioVideoFile(file);  
+    }
+    
   };
 
   const handleAddTag = () => {
@@ -124,7 +134,8 @@ const CreatePost = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setUploadProgress(progress);
         },
         (error) => {
@@ -149,7 +160,7 @@ const CreatePost = () => {
       return;
     }
 
-    setUploading(true);
+    setUploadingAudioVideo(true);
     try {
       const storageRef = ref(storage, `media/${audioVideoFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, audioVideoFile);
@@ -157,22 +168,23 @@ const CreatePost = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setUploadProgress(progress);
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setUploadingAudioVideoProgress(progress);
         },
         (error) => {
           console.error("Error uploading media:", error);
-          setUploading(false);
+          setUploadingAudioVideo(false);
         },
         async () => {
           const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
           setAudioVideoUrl(downloadURL); // Set URL for audio/video file
-          setUploading(false);
+          setUploadingAudioVideo(false);
         }
       );
     } catch (error) {
       console.error("Error uploading media:", error);
-      setUploading(false);
+      setUploadingAudioVideo(false);
     }
   };
 
@@ -210,7 +222,8 @@ const CreatePost = () => {
           className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
         />
         <p className="text-gray-500 text-sm mt-2 flex items-center pl-3">
-          <IoAlertCircle /> Click on the Upload Image Button after Image File is Selected
+          <IoAlertCircle /> Click on the Upload Image Button after Image File is
+          Selected
         </p>
         <div className="flex w-full items-center justify-between border border-gray-300 rounded-md p-3">
           {uploading ? (
@@ -259,31 +272,71 @@ const CreatePost = () => {
             </div>
           )}
         </div>
-        {category.toLowerCase() === "podcast" || category.toLowerCase() === "video" ? (
-          <div>
-            <p className="text-gray-500 text-sm mt-2 flex items-center pl-3">
-              <IoAlertCircle /> Upload an Audio or Video file if applicable
-            </p>
-            <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 w-full">
-              <FileInput
-                id="audio-video-upload"
-                type="file"
-                accept="audio/*,video/*"
-                onChange={handleAudioVideoFileChange}
-              />
-              <Button
-                type="button"
-                onClick={handleAudioVideoUpload}
-                gradientDuoTone="purpleToBlue"
-                size="sm"
-                outline
-                className="w-[200px]"
-              >
-                Upload Media
-              </Button>
-            </div>
-          </div>
-        ) : null}
+        {(category.toLowerCase() === "podcast" || category.toLowerCase() === "video") ? 
+  (uploadingAudioVideo ? 
+    (
+      <div className="flex items-center justify-between w-full">
+        <progress
+          value={uploadingAudioVideoProgress}
+          max="100"
+          className="w-full h-2 rounded-lg"
+        ></progress>
+        <span>{uploadingAudioVideoProgress.toFixed(2)}%</span>
+      </div>
+    ) : audioVideoUrl ? 
+    (
+      // Display audio or video player based on file type
+      <div className="mt-4">
+        {audioVideoType === "audio" ? (
+          <audio controls className="w-full">
+            <source src={audioVideoUrl} type="audio/mpeg" />
+            Your browser does not support the audio tag.
+          </audio>
+        ) : (
+          <video controls className="w-full h-auto">
+            <source src={audioVideoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
+        <Button
+          type="button"
+          onClick={handleRemoveAudioVideo}
+          gradientDuoTone="redToOrange"
+          size="sm"
+          className="mt-4"
+        >
+          Remove Media
+        </Button>
+      </div>
+    ) : (
+      <div>
+        <p className="text-gray-500 text-sm mt-2 flex items-center pl-3">
+          <IoAlertCircle /> Upload an Audio or Video file if applicable
+        </p>
+        <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 w-full">
+          <FileInput
+            id="audio-video-upload"
+            type="file"
+            accept="audio/*,video/*"
+            onChange={handleAudioVideoFileChange}
+          />
+          <Button
+            type="button"
+            onClick={handleAudioVideoUpload}
+            gradientDuoTone="purpleToBlue"
+            size="sm"
+            outline
+            className="w-[200px]"
+          >
+            Upload Media
+          </Button>
+        </div>
+      </div>
+    )
+  ) 
+  : null
+}
+
         <div className="border border-gray-300 rounded-md p-3">
           <ReactQuill
             value={editorHtml}
@@ -330,7 +383,9 @@ const CreatePost = () => {
           <label htmlFor="publish-immediately">Publish Immediately</label>
         </div>
         {showImageUploadNotice && (
-          <p className="text-red-500 text-sm mt-2">Please upload an image before submitting.</p>
+          <p className="text-red-500 text-sm mt-2">
+            Please upload an image before submitting.
+          </p>
         )}
         <Button type="submit" gradientDuoTone="greenToBlue">
           Submit Post
