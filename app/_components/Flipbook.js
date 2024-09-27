@@ -23,7 +23,7 @@ Page.displayName = 'Page';
 const Flipbook = ({ pdfUrl }) => {
   const [numPages, setNumPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(null); // Changed to store error message
   const bookRef = useRef();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -36,23 +36,23 @@ const Flipbook = ({ pdfUrl }) => {
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
-    setError(false);
+    setError(null); // Clear error on successful load
   };
 
   const onDocumentLoadError = (error) => {
     console.error('Error loading document:', error);
-    setError(true);
+    setError('Failed to load PDF file.'); // Set error message
   };
 
   const goToPreviousPage = () => bookRef.current.pageFlip().flipPrev();
   const goToNextPage = () => bookRef.current.pageFlip().flipNext();
 
   // Responsive dimensions
-  const width = isMobile ? window.innerWidth * 0.9 : window.innerWidth * 0.3; // 90% for mobile, 50% for desktop
-  const height = isMobile ? window.innerHeight * 0.7 : 700; // 70% for mobile, 80% for desktop 
+  const width = isMobile ? window.innerWidth * 0.9 : window.innerWidth * 0.3; // 90% for mobile, 30% for desktop
+  const height = isMobile ? window.innerHeight * 0.7 : 700; // 70% for mobile, 700px for desktop 
 
   return (
-    <div className='flipbook-container h-200vh w-screen flex flex-col items-center bg-white overflow-hidden'>
+    <div className='flipbook-container h-screen w-screen flex flex-col items-center bg-white overflow-hidden'>
       <h1 className='my-5 font-extrabold text-4xl'>PDF Flipbook</h1>
       <Document 
         file={pdfUrl} 
@@ -81,7 +81,7 @@ const Flipbook = ({ pdfUrl }) => {
             ))}
           </HTMLFlipBook>
         ) : (
-          error && <p className='text-red-500'>Failed to load PDF file.</p>
+          error && <p className='text-red-500'>{error}</p> // Display error message
         )}
       </Document>
       <div className='mt-10 flex mb-32 flex-row justify-evenly items-center gap-5 mx-3 '>
