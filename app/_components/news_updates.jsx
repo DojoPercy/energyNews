@@ -23,7 +23,7 @@ const NewsUpdates = ({ news }) => {
               </a>
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
               <div className="absolute bottom-0 left-0 w-full p-2">
-                <span className="bg-secondaryBlue text-white  text-xs p-1  ">
+                <span className="bg-secondaryBlue text-gray-200  text-xs p-1   ">
                   {convertToTitleCase(article.category)}
                 </span>
               </div>

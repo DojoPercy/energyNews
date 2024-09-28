@@ -104,8 +104,8 @@ const Categories = () => {
 
     const latestArticle = filteredNews[0];
     const secondArticle = filteredNews[1];
-    const allOtherArticles = filteredNews.slice(3, 8);
-    const updates = shuffleArray(filteredNews).slice(0, 4);
+    const allOtherArticles = filteredNews.slice(12, 19);
+    const updates = shuffleArray(filteredNews).slice(4, 12);
 
     content = (
       <>

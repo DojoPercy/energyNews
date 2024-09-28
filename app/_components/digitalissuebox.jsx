@@ -30,9 +30,9 @@ const RecentDigitalIssue = () => {
   const month = issueDate.toLocaleString('default', { month: 'long' });
 
   return (
-    <div className="border border-gray-200 shadow-sm mt-10 mb-2">
-      <div className="bg-blueTheme text-white text-sm  font-bold p-4 ">
-        Magazine
+    <div className="border-complementaryTheme border shadow-sm mt-10 mb-2">
+      <div className="bg-white text-black font-poppins text-xl font-normal p-4">
+        Live Publication
       </div>
       <div className="bg-white  g">
         <div className="p-1 ">
