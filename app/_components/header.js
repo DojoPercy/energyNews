@@ -78,13 +78,13 @@ const Header = () => {
         }`}
       >
         <div className="w-full flex flex-col ">
-          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-5 lg:px-20 ">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-1 lg:px-32 ">
             <Link href="/">
               <img
                 src="/logo.png"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? " h-12" : " h-28"
+                  isSticky ? " h-12" : " h-[7rem]"
                 } transition-all ease-out duration-100`}
               />
             </Link>
@@ -151,7 +151,7 @@ const Header = () => {
 
           <div className=" ni">
             <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
-              <div className="flex justify-start items-center space-x-0 font-normal text-md lg:mx-auto lg:max-w-7xl w-full ">
+              <div className="flex justify-start items-center space-x-0 font-normal text-md lg:mx-auto lg:px-36 w-full ">
                 {navItems.map((item, index) =>
                   !item.special ? (
                     <NavLink
