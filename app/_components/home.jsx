@@ -118,7 +118,7 @@ const Categories = () => {
            {latestArticle && (
           <>
             
-            <div className="pt-2 px-0 lg:hidden">
+            <div className="pt-2 px-2 lg:hidden">
               <img src={ads.adsLogo} alt="Lexar" />
             </div>
           </>
