@@ -29,11 +29,15 @@ const Header = () => {
   const newsStatus = useSelector((state) => state.news.status);
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
+  const [marqueeStart, setMarqueeStart] = useState(0);
 
   useEffect(() => {
     if (newsStatus === "idle") {
       dispatch(fetchNews());
       dispatch(fetchAd());
+
+      const randomStart = Math.floor(Math.random() * 100);
+    setMarqueeStart(randomStart);
     }
   }, [newsStatus, dispatch]);
 
@@ -167,7 +171,11 @@ const Header = () => {
             </div>
             <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2  shadow-gray-200 shadow-lg  border-t border-b border-complementaryTheme w-full ${isSticky ? "hidden" : "block"}`}>
               <div className="relative h-full flex items-center z-10">
-                <div className="ml-32  animation-marquee text-sm lg:text-base flex">
+                <div className="ml-32  animation-marquee text-sm lg:text-base flex"
+                
+                style={{
+                  transform: `translateX(-${marqueeStart}%)`,
+                }}>
                   {news.map((headline, index) => (
                     <span className="px-4 relative " key={index}>
                       <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
