@@ -301,7 +301,7 @@ const SpecialNavLink = ({ href, children, isSticky }) => {
     <div className="flex space-x-10 items-center  px-3 py-2">
       <div className="relative">
         <a
-          href={`${href}`}
+          href={`/categories/${href}`}
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
           } hover:text-gray-600 flex justify-start flex-col items-center`}
@@ -324,7 +324,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
         onMouseLeave={() => setIsDropdownOpen(false)}
       >
         <a
-          href={`/subcategory${href}`}
+          
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
           } hover:text-gray-600 flex justify-start flex-col items-center`}
@@ -362,7 +362,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
         className="flex justify-between items-center py-2 w-full"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <a href={`/subcategory${href}`} className="text-gray-800">
+        <a href={`${href}`} className="text-gray-800">
           {children}
         </a>
         {dropdownItems && (

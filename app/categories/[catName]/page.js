@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews } from "../../_redux/news/newSlice";
@@ -17,6 +17,10 @@ const Categories = () => {
   const newsStatus = useSelector((state) => state.news.status);
   const loading = useSelector((state) => state.news.loading);
   const error = useSelector((state) => state.news.error);
+  const [currentPage, setCurrentPage ] = useState(1);
+  const itemsPerPage = 10;
+
+
 
   useEffect(() => {
     if (newsStatus === "idle") {
@@ -37,6 +41,7 @@ const Categories = () => {
       return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
   };
+  
 
   let content;
 
@@ -47,39 +52,92 @@ const Categories = () => {
       </div>
     );
   } else if (newsStatus === "succeeded") {
+   
     const filteredNews = news
       .filter((item) => item.category === catName && item.isPublished === true)
       .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+    const latestNews = filteredNews[0];
+    const otherNews = filteredNews.slice(1);
 
+    const totalPages = Math.ceil(otherNews.length / itemsPerPage);
+    const indexOfLastPage = currentPage * itemsPerPage;
+    const indexOfFirstPage = indexOfLastPage - itemsPerPage;
+
+    const currentNews = otherNews.slice(indexOfFirstPage, indexOfLastPage);
+
+    
+    const renderPagination = () => {
+      const pageNumbers = [];
+      for (let i = 1; i <= totalPages; i++) {
+        pageNumbers.push(i);
+      }
+      return (
+        <div className="flex space-x-2 mt-4">
+          {pageNumbers.map((number) => (
+            <button
+              key={number}
+              onClick={() => setCurrentPage(number)}
+              className={`px-3 py-1 rounded ${
+                number === currentPage ? "bg-blueTheme text-white" : "bg-gray-300"
+              }`}
+            >
+              {number}
+            </button>
+          ))}
+        </div>
+      );
+    };
     content = (
       <div className="flex flex-col ">
-        <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 mb-10 border-t border-b border-complementaryTheme w-full">
-          <div className="relative h-full flex items-center z-10">
-            <div className="ml-32  animation-marquee text-sm lg:text-base flex">
-              {news.map((headline, index) => (
-                <span className="px-4 relative " key={index}>
-                  <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
-                  <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
-
-                  <a
-                    href={`/news/${headline.title}`}
-                    className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
-                  >
-                    {headline.title}
-                  </a>
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-
-
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-0">
-          <div className="col-span-2">
-            {filteredNews.length === 0 ? (
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-0">
+          <div className="col-span-3">
+            {latestNews && (
+              <>
+                <div className="flex flex-col ">
+                  <img
+                    src={latestNews.imageUrl}
+                    className="w-full "
+                    alt={latestNews.id}
+                  />
+                  <div>
+                    <h2 className="entry-title text-xl font-semibold mb-2">
+                      <a
+                        href={`/news/${latestNews.id}`}
+                        className="hover:underline"
+                      >
+                        {latestNews.title}
+                      </a>
+                    </h2>
+                    <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                      <span className="by_line block">
+                        by{" "}
+                        <strong>
+                          <i>{latestNews.author}</i>
+                        </strong>
+                      </span>
+                      <span className="font-semibold">|</span>
+                      <span className="posted-on block">
+                        {latestNews.publishDate}
+                      </span>
+                    </div>
+                    <div className="entry-content">
+                      <p>{getShortSummary(latestNews.summary)}</p>
+                    </div>
+                    <div
+                      className="entry-content my-10 mr-20 text-sm lg:text-lg line-clamp-6"
+                      dangerouslySetInnerHTML={{ __html: latestNews.content }}
+                    ></div>
+                  </div>
+                </div>
+                <div className="bg-secondaryBlue px-10 py-3 w-56 rounded-md text-white mb-10 shadow-md text-center">
+                  <span>Continue Reading</span>
+                </div>
+              </>
+            )}
+            {otherNews.length === 0 ? (
               <p>No news available</p>
             ) : (
-              filteredNews.map((article, index) => (
+              currentNews.map((article, index) => (
                 <article
                   key={index}
                   className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4 border border-gray-100 shadow-sm p-1"
@@ -140,6 +198,7 @@ const Categories = () => {
                 </article>
               ))
             )}
+             {renderPagination()}
           </div>
 
           <div className="col-span-1 overflow-y-auto mb-3">
@@ -159,7 +218,7 @@ const Categories = () => {
   }
 
   return (
-    <div className="p-2 max-w-7xl mx-auto mt-14">
+    <div className="p-2  mx-36 mt-14">
       <div className="flex items-center text-gray-500 text-sm">
         <a href="/" className="hover:underline">
           Home

@@ -42,7 +42,7 @@ const SubCategory = () => {
 
   const convertToCapitalCase = (str) => {
     return str
-      .replace(/_/g, ' ') // Replace underscores with spaces
+      .replace(/_/g, " ") // Replace underscores with spaces
       .replace(/\w\S*/g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
       });
@@ -154,135 +154,112 @@ const SubCategory = () => {
       .flat();
     if (filteredNews.length > 0) {
       const article = filteredNews[0];
-      const otherArticles = filteredNews.slice(1,5);
+      const otherArticles = filteredNews.slice(1, 5);
       console.log(dropDowns[0].dropdownItems[1]);
       content = (
         <div className="flex flex-col">
-          <div className="absolute lg:top-[270px] top-[102px] right-0 overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2 mb-10 border-t border-b border-complementaryTheme w-full">
-        <div className="relative h-full flex items-center z-10">
-          <div className="ml-32  animation-marquee text-sm lg:text-base flex">
-            {news.map((headline, index) => (
-              <span className="px-4 relative " key={index}>
-                <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
-                <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
-
-                <a
-                  href={`/news/${headline.title}`}
-                  className="hover:underline ml-1 text-black text-[10px] font-semibold lg:text-[12px]"
-                >
-                  {headline.title}
-                </a>
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 p-2 lg:gap-6 lg:p-4 relative">
-          {loading && (
-            <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
-              <ClipLoader size={50} color={"#123abc"} loading={true} />
-            </div>
-          )}
-          <div className="col-span-3">
-            <div className="flex flex-col space-y-2 justify-start items-start mb-32">
-              <article
-                key={article.id}
-                className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
-              >
-                <figure className="post-thumbnail">
-                  <a
-                    className="block w-full lg:w-[510px] relative"
-                    href={`/news/${article.title}`}
-                  >
-                    <img
-                      src={article.imageUrl}
-                      alt={article.title}
-                      className="object-cover"
-                    />
-                    <div className="hover:opacity-25 opacity-0 transition-all ease-out duration-500 absolute inset-0 bg-gradient-to-t from-black to-transparent "></div>
-                    <div className="absolute bottom-0 left-0 w-full p-4">
-                <span className="bg-secondaryBlue text-white text-xs py-1 px-2 rounded-md">
-                  {convertToTitleCase(article.category)}
-                </span>
+       
+          
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 p-2 lg:gap-6 lg:p-4 relative">
+            {loading && (
+              <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
+                <ClipLoader size={50} color={"#123abc"} loading={true} />
               </div>
-                  </a>
-                </figure>
-                <div className="pr-2 lg:p-4 flex flex-col justify-start h-full relative">
-                  <header className="entry-header">
-                    <h2 className="entry-title text-xl text-gray-800 font-mont font-semibold mb-2">
-                      <a
-                        href={`/news/${article.title}`}
-                        className="hover:underline"
-                      >
-                        {article.title}
-                      </a>
-                    </h2>
-                  </header>
-                  <div className="flex space-x-2 text-sm text-gray-500 mb-4">
-                    <span className="by_line block">
-                      by{" "}
-                      <strong>
-                        <i>{article.author}</i>
-                      </strong>
-                    </span>
-                    <span className="font-semibold">|</span>
-                    <span className="posted-on block">
-                      {article.publishDate}
-                    </span>
+            )}
+            <div className="col-span-3">
+              <div className="flex flex-col space-y-2 justify-start items-start mb-32">
+                <article
+                  key={article.id}
+                  className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4"
+                >
+                  <figure className="post-thumbnail">
+                    <a
+                      className="block w-full lg:w-[510px] relative"
+                      href={`/news/${article.title}`}
+                    >
+                      <img
+                        src={article.imageUrl}
+                        alt={article.title}
+                        className="object-cover"
+                      />
+                      <div className="hover:opacity-25 opacity-0 transition-all ease-out duration-500 absolute inset-0 bg-gradient-to-t from-black to-transparent "></div>
+                      <div className="absolute bottom-0 left-0 w-full p-4">
+                        <span className="bg-secondaryBlue text-white text-xs py-1 px-2 rounded-md">
+                          {convertToTitleCase(article.category)}
+                        </span>
+                      </div>
+                    </a>
+                  </figure>
+                  <div className="pr-2 lg:p-4 flex flex-col justify-start h-full relative">
+                    <header className="entry-header">
+                      <h2 className="entry-title text-xl text-gray-800 font-mont font-semibold mb-2">
+                        <a
+                          href={`/news/${article.title}`}
+                          className="hover:underline"
+                        >
+                          {article.title}
+                        </a>
+                      </h2>
+                    </header>
+                    <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                      <span className="by_line block">
+                        by{" "}
+                        <strong>
+                          <i>{article.author}</i>
+                        </strong>
+                      </span>
+                      <span className="font-semibold">|</span>
+                      <span className="posted-on block">
+                        {article.publishDate}
+                      </span>
+                    </div>
+                    <div className="entry-content">
+                      <p>{getShortSummary(article.summary)}</p>
+                    </div>
+                    <hr className="border-t-2 border-gray-300 rounded-lg absolute bottom-0 right-0" />
                   </div>
-                  <div className="entry-content">
-                    <p>{getShortSummary(article.summary)}</p>
-                  </div>
-                  <hr className="border-t-2 border-gray-300 rounded-lg absolute bottom-0 right-0" />
-                </div>
-              </article>
-              <div className="grid lg:grid-cols-4 grid-cols-2 space-x-4 space-y-2 items-center h-full">
-                {
-                  otherArticles.map((article, index) => (
-                    <div key={index} className=" col-span-1 justify-between flex flex-col space-y-2 h-[170px]">
+                </article>
+                <div className="grid lg:grid-cols-4 grid-cols-2 space-x-4 space-y-2 items-center h-full">
+                  {otherArticles.map((article, index) => (
+                    <div
+                      key={index}
+                      className=" col-span-1 justify-between flex flex-col space-y-2 h-[170px]"
+                    >
                       <div>
-                      <h2 className="entry-title text-gray-800 font-mont mb-2 text-lg">
-                      <a
-                        href={`/news/${article.title}`}
-                        className="hover:text-secondaryBlue"
-                      >
-                        {article.title}
-                      </a>
-                    </h2>
-                      <p>
-                        {convertToTitleCase(article.category)} 
-                      </p>
+                        <h2 className="entry-title text-gray-800 font-mont mb-2 text-lg">
+                          <a
+                            href={`/news/${article.title}`}
+                            className="hover:text-secondaryBlue"
+                          >
+                            {article.title}
+                          </a>
+                        </h2>
+                        <p>{convertToTitleCase(article.category)}</p>
                       </div>
                       <hr className="border-t-2 border-gray-300 rounded-lg" />
                     </div>
-                  ))
-                }
+                  ))}
+                </div>
               </div>
-            </div>
-            {
-              dropDowns[0].dropdownItems.length > 1 && dropDowns[0].dropdownItems.map(
-                (item, index) => (
-                  <div key={index} >
+              {dropDowns[0].dropdownItems.length > 1 &&
+                dropDowns[0].dropdownItems.map((item, index) => (
+                  <div key={index}>
                     <SingleCategory news={news} currentCategory={item} />
                   </div>
-                )
-              )
-            }
-          </div>
-
-          {/* Right Section Content (Read Next) */}
-          <div className=" col-span-1 overflow-y-auto pt-10">
-            <RecentDigitalIssue/>
-            <div className="py-10">
-
+                ))}
             </div>
-            <RelatedNews
-              category={filteredNews.category}
-              currentNewsTitle={decodeURIComponent(subCategoryId)}
-              news={news}
-            />
+
+            {/* Right Section Content (Read Next) */}
+            <div className=" col-span-1 overflow-y-auto pt-10">
+              <RecentDigitalIssue />
+              <div className="py-10"></div>
+              <RelatedNews
+                category={filteredNews.category}
+                currentNewsTitle={decodeURIComponent(subCategoryId)}
+                news={news}
+              />
+            </div>
           </div>
-        </div>
         </div>
       );
     } else {

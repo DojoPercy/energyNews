@@ -1,24 +1,24 @@
 export const navItems = [
     {
       title: "News",
-      href: "/news",
+      href: "news",
      
-       special:true,
+      special:true,
 
       feature: false
     },
     {
       title: "Specials",
-      href: "/specials",
+      href: "specials",
      
-       special:true,
+      special:true,
 
       feature: false
     },
    
     {
       title: "Sectors",
-      href: "/sectors",
+      href: "sectors",
       dropdownItems: [
         "Oil & Gas",
         "Renewable Energy",
@@ -26,13 +26,13 @@ export const navItems = [
         "Nuclear Energy",
         "Energy Efficiency",
       ],
-       special:false,
+      special:false,
       feature: false
     },
   
     {
       title: "Energy Transition",
-      href: "/energy_transition",
+      href: "energy_transition",
       dropdownItems: [
         "Decarbonization Strategies",
         "Renewable Integration",
@@ -40,13 +40,13 @@ export const navItems = [
         "Sustainable Energy Innovations",
         "Green Financing",
       ],
-       special:true,
+      special:true,
       feature: false
     },
   
     {
       title:"Interviews",
-      href: "/interviews",
+      href: "interviews",
       special:true,
       feature: false
     },
@@ -54,25 +54,25 @@ export const navItems = [
     
     {
       title:"Thought Leadership",
-      href: "/thoughtleadership",
+      href: "thought_leadership",
       special:true,
       feature: false
     },
     {
       title: "Multimedia",
-      href: "/multimedia",
+      href: "multimedia",
       dropdownItems: [
         "Gallery",
         "Videos",
         "Podcasts",
         
       ],
-       special:false,
+      special:false,
       feature: false
     },
     {
       title:"Publications",
-      href: "/publications",
+      href: "publications",
       special:true,
       feature: false
     },
@@ -87,21 +87,21 @@ export const navItems = [
     // },
     {
       title: "Rankings",
-      href: "/rankings",
+      href: "rankings",
       
-       special:true,
+      special:true,
       feature: false
     },
     {
       title: "Events",
-      href: "/events",
+      href: "#",
       dropdownItems: [
         "Upcoming Events",
         "Webinars",
         "Conferences",
         "Industry Awards",
       ],
-       special:true,
+      special:false,
       feature: false
     },
   ];
