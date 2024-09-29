@@ -208,7 +208,7 @@ const Categories = () => {
              {renderPagination()}
           </div>
 
-          <div className="col-span-1 mx-auto overflow-y-auto mb-3 justify-center w-[70%] ">
+          <div className="col-span-1 mx-auto overflow-y-auto mb-3 justify-center w-[85%] ">
             <TitleSection title={"More News"} />
             <RecentCategoryNews news={news} category="industry_updates" />
             <RecentDigitalIssue />
