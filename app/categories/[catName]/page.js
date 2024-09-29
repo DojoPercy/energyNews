@@ -89,7 +89,7 @@ const Categories = () => {
     };
     content = (
       <div className="flex flex-col ">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 p-0">
+        <div className="grid grid-cols-1 lg:grid-cols-4 lg:gap-6 p-0">
           <div className="col-span-3">
             {latestNews && (
               <>
@@ -108,7 +108,7 @@ const Categories = () => {
                         {latestNews.title}
                       </a>
                     </h2>
-                    <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                    <div className="flex space-x-1 lg:space-x-2 lg:text-sm text-xs text-gray-500 mb-4">
                       <span className="by_line block">
                         by{" "}
                         <strong>
@@ -124,13 +124,20 @@ const Categories = () => {
                       <p>{getShortSummary(latestNews.summary)}</p>
                     </div>
                     <div
-                      className="entry-content my-10 mr-20 text-sm lg:text-lg line-clamp-6"
+                      className="entry-content my-10 lg:mr-20 mr-2 text-sm lg:text-lg line-clamp-6"
                       dangerouslySetInnerHTML={{ __html: latestNews.content }}
                     ></div>
                   </div>
                 </div>
                 <div className="bg-secondaryBlue px-10 py-3 w-56 rounded-md text-white mb-10 shadow-md text-center">
-                  <span>Continue Reading</span>
+                  <span>
+                  <a
+                        href={`/news/${latestNews.id}`}
+                        className=""
+                      >
+                    Continue Reading
+                    </a>
+                    </span>
                 </div>
               </>
             )}
@@ -201,7 +208,7 @@ const Categories = () => {
              {renderPagination()}
           </div>
 
-          <div className="col-span-1 overflow-y-auto mb-3">
+          <div className="col-span-1 mx-auto overflow-y-auto mb-3 justify-center w-[70%] ">
             <TitleSection title={"More News"} />
             <RecentCategoryNews news={news} category="industry_updates" />
             <RecentDigitalIssue />
