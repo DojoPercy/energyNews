@@ -230,7 +230,7 @@ const Header = () => {
                   <div className="flex space-x-10 items-center  px-1 py-2">
                     <div className="relative">
                       <a
-                        href={`${item.href}`}
+                        href={item.href === 'publications' ? `/${item.href}` : `/categories/${item.href}`}
                         className={`text-black 
                             
                            hover:text-gray-600 flex justify-start flex-col items-center`}
@@ -297,11 +297,12 @@ const Header = () => {
 };
 
 const SpecialNavLink = ({ href, children, isSticky }) => {
+  console.log(href === 'publications' ? `/${href}` : `/categories/${href}`);
   return (
     <div className="flex space-x-10 items-center  px-3 py-2">
       <div className="relative">
         <a
-          href={`/categories/${href}`}
+          href={href === 'publications' ? `/${href}` : `/categories/${href}`}
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
           } hover:text-gray-600 flex justify-start flex-col items-center`}
@@ -362,7 +363,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
         className="flex justify-between items-center py-2 w-full"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
-        <a href={`${href}`} className="text-gray-800">
+        <a href={!dropdownItems ? href === 'publications' ? `/${href}` : `/categories/${href}` : null} className="text-gray-800">
           {children}
         </a>
         {dropdownItems && (
