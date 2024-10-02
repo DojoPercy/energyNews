@@ -14,7 +14,7 @@ const NewsUpdates = ({ news }) => {
         {news.map((article) => (
           <div key={article.id} className="group bg-white  rounded-lg pl-4 py-4 ">
             <div className="overflow-hidden relative w-full">
-              <a href={`/news/${article.title}`}>
+              <a href={`/news/${encodeURIComponent(article.title)}`}>
                 <img
                   src={article.imageUrl}
                   alt={article.title}
@@ -30,7 +30,7 @@ const NewsUpdates = ({ news }) => {
               <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 hover:cursor-pointer transition-opacity"></div>
             </div>
             <h4 className="text-lg font-semibold mt-2">
-              <a href={`/news/${article.title}`} className="hover:underline line-clamp-4">
+              <a href={`/news/${encodeURIComponent(article.title)}`} className="hover:underline line-clamp-4">
                 {article.title}
               </a>
             </h4>

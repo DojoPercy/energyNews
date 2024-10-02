@@ -36,7 +36,7 @@ const Homepage = ({ news }) => {
     <div className="w-full lg:px-32 px-3 py-5 md:h-[70vh] h-[185vh]">
       <div className="grid lg:grid-cols-9 lg:grid-rows-5 gap-[0.1rem] md:grid-cols-8 md:grid-rows-8 w-full h-full grid-cols-1 grid-rows-12">
         <div className="lg:col-span-5 md:col-span-4 lg:row-span-5 md:row-span-4 relative overflow-hidden row-span-3">
-          <a href={`/news/${newsItem1?.title}`}>
+          <a href={`/news/${encodeURIComponent(newsItem1?.title)}`}>
             <img
               src={newsItem1?.imageUrl}
               alt="newsItem1"
@@ -62,7 +62,7 @@ const Homepage = ({ news }) => {
           </a>
         </div>
         <div className="md:col-span-4 row-span-3 row-start-4 lg:row-span-3 md:row-span-4 relative lg:col-start-6 md:col-start-1 md:row-start-5">
-          <a href={`/news/${newsItem2?.title}`}>
+          <a href={`/news/${encodeURIComponent(newsItem2?.title)}`}>
             <img
               src={newsItem2?.imageUrl}
               alt="newsItem2"
@@ -88,7 +88,7 @@ const Homepage = ({ news }) => {
           </a>
         </div>
         <div className="lg:col-span-2 row-span-3 row-start-7 lg:row-span-2 relative text-sm lg:col-start-6 lg:row-start-4 md:col-span-4 md:row-span-4 md:col-start-5 md:row-start-1">
-          <a href={`/news/${newsItem3?.title}`}>
+          <a href={`/news/${encodeURIComponent(newsItem3?.title)}`}>
             <img
               src={newsItem3?.imageUrl}
               alt="newsItem3"
@@ -114,7 +114,7 @@ const Homepage = ({ news }) => {
           </a>
         </div>
         <div className="lg:col-span-2 relative lg:row-span-2 lg:col-start-8 lg:row-start-4 md:col-span-4 row-span-3 row-start-10 md:row-span-4 md:col-start-5 md:row-start-5">
-          <a href={`/news/${newsItem4?.title}`}>
+          <a href={`/news/${encodeURIComponent(newsItem4?.title)}`}>
             <img
               src={newsItem4?.imageUrl}
               alt="newsItem4"

@@ -182,7 +182,7 @@ const Categories = () => {
                 <figure className="post-thumbnail">
                   <a
                     className="block w-full lg:w-[400px] lg:h-[250px]"
-                    href={`/news/${article.title}`}
+                    href={`/news/${encodeURIComponent(article.title)}`}
                   >
                     <img
                       src={article.imageUrl}
@@ -195,7 +195,7 @@ const Categories = () => {
                   <header className="entry-header">
                     <h2 className="entry-title text-xl text-gray-800 font-mont font-semibold mb-2">
                       <a
-                        href={`/news/${article.title}`}
+                        href={`/news/${encodeURIComponent(article.title)}`}
                         className="hover:underline"
                       >
                         {article.title}

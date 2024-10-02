@@ -145,6 +145,7 @@ const Categories = () => {
               <p>No news available</p>
             ) : (
               currentNews.map((article, index) => (
+                
                 <article
                   key={index}
                   className="bg-white overflow-hidden flex flex-col lg:flex-row justify-start space-x-0 w-full mb-4 border border-gray-100 shadow-sm p-1"
@@ -152,11 +153,11 @@ const Categories = () => {
                   <figure className="post-thumbnail">
                     <a
                       className="block w-full lg:w-[400px]"
-                      href={`/news/${article.title}`}
+                      href={`/news/${encodeURIComponent(article.title)}`}
                     >
                       <img
                         src={article.imageUrl || "/path/to/default-image.jpg"}
-                        alt={article.title || "Default Title"}
+                        alt={encodeURIComponent(article.title) || "Default Title"}
                         className="w-full object-cover"
                       />
                     </a>
@@ -165,10 +166,10 @@ const Categories = () => {
                     <header className="entry-header">
                       <h2 className="entry-title text-xl font-semibold mb-2">
                         <a
-                          href={`/news/${article.title}`}
+                          href={`/news/${encodeURIComponent(article.title)}`}
                           className="hover:underline"
                         >
-                          {article.title || article.name}
+                          {encodeURIComponent(article.title) || article.name}
                         </a>
                       </h2>
                     </header>

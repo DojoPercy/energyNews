@@ -96,7 +96,7 @@ mx-2 rounded-lg overflow-hidden bg-white">
                         />
                         <div className="w-full bg-gray-200  flex flex-col p-2 justify-start">
                           <h1 className="text-xl lg:text-2xl font-bold text-secondaryBlue hover:text-blueTheme hover:cursor-pointer font-mont">
-                            <a href={`/news/${firstArticle.title}`}>
+                            <a href={`/news/${encodeURIComponent(firstArticle.title)}`}>
                               {firstArticle.title}
                             </a>
                           </h1>
