@@ -102,7 +102,7 @@ const Categories = () => {
                   <div>
                     <h2 className="entry-title text-xl font-semibold mb-2">
                       <a
-                        href={`/news/${latestNews.id}`}
+                        href={`/news/${encodeURIComponent(latestNews.title)}`}
                         className="hover:underline"
                       >
                         {latestNews.title}
@@ -132,7 +132,7 @@ const Categories = () => {
                 <div className="bg-secondaryBlue px-10 py-3 w-56 rounded-md text-white mb-10 shadow-md text-center">
                   <span>
                   <a
-                        href={`/news/${latestNews.id}`}
+                        href={`/news/${encodeURIComponent(latestNews.title)}`}
                         className=""
                       >
                     Continue Reading

@@ -14,6 +14,7 @@ import {
 import NewsShimmer from "../../../lib/shimmer/news_shimmer";
 import { FaChevronRight, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import RelatedNews from "@/app/_components/relatedNews";
+import MediaPlayer from "@/components/ui/MediaPlayer";
 
 const SingleNews = () => {
   const { newsId } = useParams();
@@ -36,8 +37,9 @@ const SingleNews = () => {
   }, [newsStatus, dispatch]);
 
   useEffect(() => {
-    
-    const filteredNews = news.filter((item) => item.title === decodeURIComponent(newsId));
+    const filteredNews = news.filter(
+      (item) => item.title === decodeURIComponent(newsId)
+    );
     if (filteredNews.length > 0) {
       const article = filteredNews[0];
       setLikes(article.likes);
@@ -88,7 +90,9 @@ const SingleNews = () => {
   const handleCommentSubmit = (e) => {
     e.preventDefault();
 
-    const filteredNews = news.filter((item) => item.title === decodeURIComponent(newsId));
+    const filteredNews = news.filter(
+      (item) => item.title === decodeURIComponent(newsId)
+    );
     if (filteredNews.length > 0) {
       const article = filteredNews[0];
       const userMail = user.email;
@@ -111,7 +115,9 @@ const SingleNews = () => {
   let content;
 
   if (newsStatus === "succeeded") {
-    const filteredNews = news.filter((item) => item.title === decodeURIComponent(newsId));
+    const filteredNews = news.filter(
+      (item) => item.title === decodeURIComponent(newsId)
+    );
     if (filteredNews.length > 0) {
       const article = filteredNews[0];
 
@@ -143,6 +149,7 @@ const SingleNews = () => {
                     className="object-cover"
                   />
                 </a>
+              
               </figure>
               <div className="pr-0 lg:p-0 flex flex-col justify-start">
                 <span className="block text-sm text-gray-500 mb-2"></span>
@@ -156,6 +163,14 @@ const SingleNews = () => {
                   <span className="font-semibold">|</span>
                   <span className="posted-on block">{article.publishDate}</span>
                 </div>
+                {article.videoUrl && (
+                 <div className="w-1/2 p-5">
+                 
+                  <MediaPlayer mediaUrl='https://firebasestorage.googleapis.com/v0/b/energynews-bdae3.appspot.com/o/media%2FEpisode.mp3?alt=media&token=4111208f-9c1f-490e-bf9b-3823b2d36e2e' />
+                 </div>
+                )}
+               
+
                 <div className="entry-content">
                   <p>{getShortSummary(article.summary)}</p>
                 </div>
@@ -165,7 +180,7 @@ const SingleNews = () => {
                 ></div>
               </div>
             </article>
-
+           
             {/* Like/Unlike button */}
             <div className="flex justify-center items-center mt-4">
               <button
@@ -221,7 +236,11 @@ const SingleNews = () => {
 
           {/* Right Section Content (Read Next) */}
           <div className=" col-span-1 overflow-y-auto ">
-          <RelatedNews category={filteredNews.category} currentNewsTitle={decodeURIComponent(newsId)} news={news} />
+            <RelatedNews
+              category={filteredNews.category}
+              currentNewsTitle={decodeURIComponent(newsId)}
+              news={news}
+            />
           </div>
         </div>
       );

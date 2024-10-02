@@ -64,7 +64,7 @@ export const navItems = [
       dropdownItems: [
         "Gallery",
         "Videos",
-        "Podcasts",
+        "Podcast",
         
       ],
       special:false,
