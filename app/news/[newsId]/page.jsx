@@ -166,7 +166,7 @@ const SingleNews = () => {
                 {article.videoUrl && (
                  <div className="lg:w-1/2 w-full p-5">
                  
-                  <MediaPlayer mediaUrl='https://firebasestorage.googleapis.com/v0/b/energynews-bdae3.appspot.com/o/media%2FEpisode.mp3?alt=media&token=4111208f-9c1f-490e-bf9b-3823b2d36e2e' />
+                  <MediaPlayer mediaUrl={article.videoUrl} />
                  </div>
                 )}
                
