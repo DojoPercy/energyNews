@@ -94,13 +94,7 @@ const Categories = () => {
             {latestNews && (
               <>
                 <div className="flex flex-col ">
-                  <img
-                    src={latestNews.imageUrl}
-                    className="w-full "
-                    alt={latestNews.id}
-                  />
-                  <div>
-                    <h2 className="entry-title text-xl font-semibold mb-2">
+                <h2 className="entry-title text-xl lg:text-3xl font-semibold mb-2">
                       <a
                         href={`/news/${encodeURIComponent(latestNews.title)}`}
                         className="hover:underline"
@@ -108,6 +102,13 @@ const Categories = () => {
                         {latestNews.title}
                       </a>
                     </h2>
+                  <img
+                    src={latestNews.imageUrl}
+                    className="w-full "
+                    alt={latestNews.id}
+                  />
+                  <div>
+                    
                     <div className="flex space-x-1 lg:space-x-2 lg:text-sm text-xs text-gray-500 mb-4">
                       <span className="by_line block">
                         by{" "}
@@ -169,7 +170,7 @@ const Categories = () => {
                           href={`/news/${encodeURIComponent(article.title)}`}
                           className="hover:underline"
                         >
-                          {encodeURIComponent(article.title) || article.name}
+                          {article.title || article.name}
                         </a>
                       </h2>
                     </header>
@@ -226,8 +227,8 @@ const Categories = () => {
   }
 
   return (
-    <div className="p-2   lg:mx-36 mt-14">
-      <div className="flex items-center text-gray-500 text-sm">
+    <div className="p-2   lg:mx-36 mt-14 ">
+      <div className="flex items-center text-gray-500 text-sm mb-5">
         <a href="/" className="hover:underline">
           Home
         </a>
@@ -237,11 +238,7 @@ const Categories = () => {
         </a>
       </div>
 
-      <h2 className="text-3xl font-bold my-4 capitalize overflow-hidden">
-        <span className="text-2xl sm:text-lg md:text-2xl lg:text-3xl">
-          {convertToCapitalCase(catName)}
-        </span>
-      </h2>
+      
       {content}
     </div>
   );
