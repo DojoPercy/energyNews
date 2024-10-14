@@ -151,23 +151,24 @@ const Header = () => {
 
           <div className=" ni">
             <div className="hidden lg:flex items-center w-full space-x-4  my-0    bg-secondaryBlue text-white justify-between ">
-              <div className="flex justify-start items-center space-x-0 font-normal text-md lg:mx-auto lg:px-36 w-full ">
-                {navItems.map((item, index) =>
-                  !item.special ? (
-                    <NavLink
-                      key={index}
-                      href={item.href}
-                      dropdownItems={item.dropdownItems}
-                    >
-                      {item.title}
-                    </NavLink>
-                  ) : (
-                    <SpecialNavLink key={index} href={item.href}>
-                      {item.title}
-                    </SpecialNavLink>
-                  )
-                )}
-              </div>
+             <div className="relative flex justify-start items-center space-x-0 font-normal text-md lg:mx-auto lg:px-36 w-full">
+  {navItems.map((item, index) =>
+    !item.special ? (
+      <NavLink
+        key={index}
+        href={item.href}
+        dropdownItems={item.dropdownItems}
+      >
+        {item.title}
+      </NavLink>
+    ) : (
+      <SpecialNavLink key={index} href={item.href}>
+        {item.title}
+      </SpecialNavLink>
+    )
+  )}
+</div>
+
             </div>
             <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2  shadow-gray-200 shadow-lg  border-t border-b border-complementaryTheme w-full ${isSticky ? "hidden" : "block"}`}>
               <div className="relative h-full flex items-center z-10">
@@ -318,7 +319,10 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex space-x-10 items-center  px-0 py-2">
+    <div className="flex space-x-10 items-center h-full px-0 py-2"
+    onMouseEnter={() => setIsDropdownOpen(true)}
+        onMouseLeave={() => setIsDropdownOpen(false)}
+    >
       <div
         className="relative"
         onMouseEnter={() => setIsDropdownOpen(true)}
@@ -333,7 +337,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
           {children}
         </a>
         {dropdownItems && isDropdownOpen && (
-          <div className="absolute left-0 mt-0 w-48 z-50 bg-white shadow-lg rounded-md py-2">
+          <div className="absolute left-0 mt-2 w-48 z-50 bg-white shadow-lg  py-2">
             {dropdownItems.map((item, index) => (
               <a
                 key={index}
@@ -343,6 +347,8 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
                   .replace(/ +/g, "_")
                   .replace(/_{2,}/g, "_")}`}
                 className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
+                onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)} 
               >
                 {item}
               </a>
