@@ -29,7 +29,7 @@ const NewsUpdates = ({ news }) => {
               </div>
               <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 hover:cursor-pointer transition-opacity"></div>
             </div>
-            <h4 className="text-lg font-semibold mt-2">
+            <h4 className="text-lg font-normal mt-2">
               <a href={`/news/${encodeURIComponent(article.title)}`} className="hover:underline line-clamp-4">
                 {article.title}
               </a>
