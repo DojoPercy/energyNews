@@ -88,7 +88,7 @@ const CategoryFocus = ({ news }) => {
                   <div className="col-span-1">
                     {firstArticle && (
                       <div className="mb-6 cursor-pointer
-mx-2 rounded-lg overflow-hidden bg-white">
+mx-2 overflow-hidden bg-white">
                         <img
                           src={firstArticle.imageUrl}
                           alt={firstArticle.title}
