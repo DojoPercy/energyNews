@@ -134,6 +134,20 @@ const SingleNews = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const filteredNews = news.filter(
+      (item) => item.title === decodeURIComponent(newsId)
+    );
+    if (filteredNews.length > 0) {
+      const article = filteredNews[0];
+      setLikes(article.likes);
+      setComments(article.comments);
+
+      // Set the page title based on the article's title
+      document.title = article.title || "News Article"; 
+    }
+  }, [news, newsId]);
+
   // You can adjust these values as needed to fine-tune when the element should be pinned
   const pinStyle = isPinned
     ? {
