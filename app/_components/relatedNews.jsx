@@ -28,8 +28,8 @@ const RelatedNews = ({ category, news, currentNewsTitle }) => {
  
 
   return (
-    <div className={`border border-gray-200 shadow-sm w-full ${recentNews.length === 0 ? 'hidden' : 'block'}`}>
-      <div className="bg-blueTheme text-white text-sm font-bold p-4">
+    <div className={`border border-complementaryTheme shadow-sm w-full ${recentNews.length === 0 ? 'hidden' : 'block'}`}>
+      <div className="bg-white text-black  text-sm lg:text-xl font-normal p-4">
         Related News
       </div>
       <div className="bg-white p-1 rounded-b-lg">
@@ -50,7 +50,7 @@ const RelatedNews = ({ category, news, currentNewsTitle }) => {
                     <img
                       src={newsItem.imageUrl}
                       alt="Uploaded"
-                      className="lg:w-48 w-[300px] object-cover mt-2"
+                      className="lg:w-full w-[300px] object-cover mt-2"
                     />
                   </Link>
                   <Link href={`/news/${newsItem.title}`} rel="noopener noreferrer">

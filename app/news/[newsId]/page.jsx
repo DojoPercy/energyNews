@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchNews, updateNews } from "../../_redux/news/newSlice";
@@ -15,6 +15,8 @@ import NewsShimmer from "../../../lib/shimmer/news_shimmer";
 import { FaChevronRight, FaThumbsUp, FaThumbsDown } from "react-icons/fa";
 import RelatedNews from "@/app/_components/relatedNews";
 import MediaPlayer from "@/components/ui/MediaPlayer";
+import RecentCategoryNews from "@/app/_components/recentcategories";
+import RecentDigitalIssue from "@/app/_components/digitalissuebox";
 
 const SingleNews = () => {
   const { newsId } = useParams();
@@ -29,6 +31,9 @@ const SingleNews = () => {
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [isPinned, setIsPinned] = useState(false);
+  const pinEndRef = useRef(null);
+  const pinStartRef = useRef(null); 
 
   useEffect(() => {
     if (newsStatus === "idle") {
@@ -111,6 +116,34 @@ const SingleNews = () => {
       setNewComment("");
     }
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!pinEndRef.current || !pinStartRef.current) return;
+      const pinEndPosition = pinEndRef.current.getBoundingClientRect().top;
+      const pinStartPosition = pinStartRef.current.getBoundingClientRect().bottom;
+
+      // Toggle pinned state based on scroll position
+      if (pinStartPosition <= 0 && pinEndPosition > window.innerHeight) {
+        setIsPinned(true); // Pin when scrolled past start
+      } else {
+        setIsPinned(false); // Unpin otherwise
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // You can adjust these values as needed to fine-tune when the element should be pinned
+  const pinStyle = isPinned
+    ? {
+        position: "fixed",
+        top: "0",
+        right: "0",
+        width: "100%",
+        maxWidth: "300px",
+      }
+    : {};
 
   let content;
 
@@ -122,24 +155,27 @@ const SingleNews = () => {
       const article = filteredNews[0];
 
       content = (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 p-2 lg:gap-6 lg:p-4 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-6 mt-0 lg:mt-0">
           {loading && (
             <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
               <ClipLoader size={50} color={"#123abc"} loading={true} />
             </div>
           )}
-          <div className="col-span-2">
+          <div className="col-span-6">
             <article
               key={article.id}
-              className="bg-white overflow-hidden flex flex-col justify-start space-x-4 w-full mb-4"
+              className="bg-white overflow-hidden flex flex-col justify-start space-x-0 w-full mb-4"
             >
               <figure className="post-thumbnail">
                 <header className="entry-header">
-                  <h2 className="entry-title text-xl font-semibold mb-2">
+                  <h2 className="entry-title text-2xl  font-mont font-semibold mb-4">
                     <a href={`/news/${article.id}`} className="hover:underline">
                       {article.title}
                     </a>
                   </h2>
+                  <div className="entry-content mb-4">
+                  <p className="font-monsterrat font-normal">{getShortSummary(article.summary)}</p>
+                </div>
                 </header>
                 <span className="block text-sm text-gray-500 mb-2"></span>
                 <a className="block w-full" href={`/news/${article.id}`}>
@@ -151,7 +187,7 @@ const SingleNews = () => {
                 </a>
               
               </figure>
-              <div className="pr-0 lg:p-0 flex flex-col justify-start">
+              <div className="pr-0 lg:p-0 flex flex-col  mr-0">
                 <span className="block text-sm text-gray-500 mb-2"></span>
                 <div className="flex space-x-2 text-sm text-gray-500 mb-4">
                   <span className="by_line block">
@@ -171,11 +207,9 @@ const SingleNews = () => {
                 )}
                
 
-                <div className="entry-content">
-                  <p>{getShortSummary(article.summary)}</p>
-                </div>
+               
                 <div
-                  className="entry-content text-sm lg:text-lg"
+                  className="entry-content text-sm lg:text-lg font-montserrat"
                   dangerouslySetInnerHTML={{ __html: article.content }}
                 ></div>
               </div>
@@ -234,13 +268,18 @@ const SingleNews = () => {
             )}
           </div>
 
-          {/* Right Section Content (Read Next) */}
-          <div className=" col-span-1 overflow-y-auto ">
+          <div
+            className="pin-end overflow-clip col-span-2 flex flex-col gap-4 overflow-y-auto"
+            ref={pinEndRef}
+            style={pinStyle} 
+          >
             <RelatedNews
               category={filteredNews.category}
               currentNewsTitle={decodeURIComponent(newsId)}
               news={news}
             />
+             <RecentCategoryNews news={news} category="energy_transition" />
+             <RecentDigitalIssue />
           </div>
         </div>
       );
@@ -253,7 +292,7 @@ const SingleNews = () => {
 
   return (
     <div className="p-2 max-w-7xl mx-auto">
-      <div className="flex items-center text-gray-500 text-xs lg:text-sm">
+      <div className="opacity-0 flex items-center text-gray-500 text-xs lg:text-sm">
         <a href="/" className="hover:underline">
           Home
         </a>
@@ -267,7 +306,7 @@ const SingleNews = () => {
         </a>
       </div>
 
-      <div className="mt-4 text-orange-600 font-semibold text-sm">News</div>
+    
       {content}
     </div>
   );

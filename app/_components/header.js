@@ -300,13 +300,13 @@ const Header = () => {
 const SpecialNavLink = ({ href, children, isSticky }) => {
   console.log(href === 'publications' ? `/${href}` : `/categories/${href}`);
   return (
-    <div className="flex space-x-10 items-center  px-3 py-2">
+    <div className="flex space-x-10 items-center  px-3 py-3">
       <div className="relative">
         <a
           href={href === 'publications' ? `/${href}` : `/categories/${href}`}
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
-          } hover:text-gray-600 flex justify-start flex-col items-center`}
+          } hover:text-gray-600 flex justify-start flex-col items-center font-monsterrat font-bold`}
         >
           {children}
         </a>
@@ -319,7 +319,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="flex space-x-10 items-center h-full px-0 py-2"
+    <div className="flex space-x-10 items-center h-full px-0 py-3"
     onMouseEnter={() => setIsDropdownOpen(true)}
         onMouseLeave={() => setIsDropdownOpen(false)}
     >
@@ -332,7 +332,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
           
           className={`text-black ${
             isSticky ? "text-black" : "text-white"
-          } hover:text-gray-600 flex justify-start flex-col items-center`}
+          } hover:text-gray-600 flex justify-start flex-col items-center font-monsterrat font-bold`}
         >
           {children}
         </a>
@@ -346,7 +346,7 @@ const NavLink = ({ href, children, dropdownItems, isSticky }) => {
                   .replace(/&/g, "_")
                   .replace(/ +/g, "_")
                   .replace(/_{2,}/g, "_")}`}
-                className="block px-4 py-2 text-white hover:bg-gray-500"
+                className="block px-4 py-2 text-white hover:bg-gray-500 font-monsterrat font-bold"
                 onMouseEnter={() => setIsDropdownOpen(true)}
               onMouseLeave={() => setIsDropdownOpen(false)} 
               >
@@ -366,7 +366,7 @@ const MobileNavLink = ({ href, children, dropdownItems }) => {
   return (
     <div className="w-full">
       <div
-        className="flex justify-between items-center py-2 w-full"
+        className="flex justify-between items-center py-3 w-full"
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
       >
         <a href={!dropdownItems ? href === 'publications' ? `/${href}` : `/categories/${href}` : null} className="text-gray-800">

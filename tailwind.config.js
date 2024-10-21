@@ -33,6 +33,7 @@ module.exports = {
         mont: ["var(--font-mont)"],
         proxima: ["var(--font-proxima)"],
         poppins: ["var(--font-poppins)"],
+        monsterrat: ["var(--font-montserrat)"],
       },
       keyframes: {
         marquee: {
