@@ -38,14 +38,14 @@ const RecentDigitalIssue = () => {
         <div className="p-1 ">
           
           {recentIssue.imageUrl && (
-            <a href={recentIssue.imageUrl} target="_blank" rel="noopener noreferrer">
+            <a href={`/magazines/${recentIssue.date}`} target="_blank" rel="noopener noreferrer">
               <img src={recentIssue.imageUrl} alt="Uploaded" className=" w-full object-cover mt-2" />
             </a>
           )}
           <p className="mt-2 text-gray-600">{`${month} ${year}`}</p>
           
           <div className="mt-4">
-            <Link href="/digitaledition" className="text-blue-500 text-center">View All</Link>
+            <Link href="/publications" className="text-blue-500 text-center">View All</Link>
           </div>
         </div>
       </div>
