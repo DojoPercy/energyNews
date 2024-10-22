@@ -17,6 +17,7 @@ import CategoryFocus from "./category_focus";
 import NewsUpdates from "./news_updates";
 import RecentIcon from "./RecentIcon";
 import Homepage from "./homepage";
+import LiveIssue from "./liveIssue";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -124,7 +125,10 @@ const Categories = () => {
           </>
         )}
         <Homepage news={news}/>
-     
+        <div className="fixed z-20 bottom-5 lg:bottom-8  right-3 lg:right-6 w-[7rem]">
+          <LiveIssue />
+        </div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-8 lg:gap-10 p-1 lg:p-2 mt-0 lg:mt-0 lg:px-32">
           <section className="my-0 max-w-7xl mx-auto p-2 px-0 lg:p-0 lg:col-span-6 col-span-1">
             {/* <div className="flex flex-col">

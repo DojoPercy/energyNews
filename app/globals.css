@@ -3,6 +3,21 @@
   @tailwind utilities;
   
 
+  .flip-card {
+    perspective: 1000px; /* This gives the image depth for the 3D effect */
+  }
+  
+  .flip-card img {
+    transition: transform 0.7s;
+    transform-style: preserve-3d;
+  }
+  
+  .flip-card img:hover {
+    transform: rotateY(180deg); /* Flips the image */
+    backface-visibility: hidden; /* Hides the back of the image */
+  }
+  
+
   .animation-marquee {
     animation: marquee 130s linear infinite;
     animation-play-state: running;
