@@ -49,9 +49,15 @@ const PdfViewer = () => {
 
   // Render the Flipbook
   return (
-    <div className="h-auto py-32 w-screen flex flex-col gap-5 justify-center items-center bg-gray-900 overflow-hidden ">
-      <h1 className="text-3xl text-white text-center font-bold">Digital Issue - {date}</h1>
-      <Flipbook pdfUrl={selectedIssue.pdfUrl} /> {/* Ensure correct property is used */}
+    <div className="h-auto py-0 w-screen flex flex-col gap-5 justify-center items-center bg-white overflow-hidden ">
+     
+      <iframe
+  allowFullScreen="allowfullscreen"
+  className="fp-iframe"
+  src={selectedIssue?.pdfUrl}
+  style={{ border: '1px solid lightgray', width: '100%', height: '100vh' }}
+></iframe>
+
     </div>
   );
 };
