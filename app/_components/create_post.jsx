@@ -291,8 +291,7 @@ const CreatePost = () => {
             </div>
           )}
         </div>
-        {category.toLowerCase() === "podcast" ||
-        category.toLowerCase() === "video" ? (
+        {category.toLowerCase() === "podcast" ? (
           uploadingAudioVideo ? (
             <div className="flex items-center justify-between w-full">
               <progress
