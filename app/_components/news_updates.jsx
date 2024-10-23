@@ -18,7 +18,7 @@ const NewsUpdates = ({ news }) => {
                 <img
                   src={article.imageUrl}
                   alt={article.title}
-                  className="w-full h-40 object-cover duration-300 ease-out transform transition-transform group-hover:cursor-pointer "
+                  className="w-full h-40 object-cover duration-300 ease-out transform transition-transform group-hover:cursor-pointer group-hover:scale-105  "
                 />
               </a>
               <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>

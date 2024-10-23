@@ -18,6 +18,7 @@ import NewsUpdates from "./news_updates";
 import RecentIcon from "./RecentIcon";
 import Homepage from "./homepage";
 import LiveIssue from "./liveIssue";
+import MultimediaHub from "./multimedia";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -225,8 +226,10 @@ const Categories = () => {
               </article>
             ))}
             <PersonalityofWeek />
+            <TitleSection title={"Multimedia's Hub"} />
+            <MultimediaHub news={news} />
           </section>
-          <section className="lg:col-span-2 hidden my-6  lg:block w-full">
+          <section className="lg:col-span-2 hidden my-6 lg:my-14 lg:block w-full">
             <RecentIcon news={news} />
 
             <RecentCategoryNews news={news} category="global_news" />

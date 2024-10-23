@@ -33,19 +33,19 @@ const Homepage = ({ news }) => {
   const newsItem4 = recentNews[3];
 
   return (
-    <div className="w-full lg:px-32 px-3 py-5 md:h-[70vh] h-[185vh]">
+    <div className="w-full lg:px-32 px-3 py-5 md:h-[72vh] h-[185vh]">
       <div className="grid lg:grid-cols-9 lg:grid-rows-5 gap-[0.1rem] md:grid-cols-8 md:grid-rows-8 w-full h-full grid-cols-1 grid-rows-12">
         <div className="lg:col-span-5 md:col-span-4 lg:row-span-5 md:row-span-4 relative overflow-hidden row-span-3">
           <a href={`/news/${encodeURIComponent(newsItem1?.title)}`}>
             <img
               src={newsItem1?.imageUrl}
               alt="newsItem1"
-              className="w-full h-full object-cover hover:scale-105 hover:rotate-1 transition ease-in-out duration-300"
+              className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition ease-in-out duration-300"
             />
-            <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 flex flex-col left-0 p-2">
-            <div className="absolute -top-16 left-0 w-full  flex-col p-2">
-                <span className="bg-secondaryBlue text-white  text-xs p-2 ">
+            <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50 hover:opacity-55"></div>
+            <div className="absolute bottom-0 flex flex-col left-0 p-2 lg:pl-6 lg:pb-5">
+            <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-6 lg:pb-5">
+                <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
                   {convertToTitleCase(newsItem1.category)}
                 </span>
                 <div className="flex space-x-1 px-0 py-4 opacity-70">
@@ -69,9 +69,9 @@ const Homepage = ({ news }) => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 left-0 p-2 flex  flex-col">
-              <div className="absolute -top-16 left-0 w-full  flex-col p-2">
-                <span className="bg-secondaryBlue text-white  text-xs p-2 ">
+            <div className="absolute bottom-0 left-0 p-2 lg:pl-5  lg:pb-5 flex  flex-col">
+              <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-5 lg:pb-5">
+                <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
                   {convertToTitleCase(newsItem2.category)}
                 </span>
                 <div className="flex space-x-1 px-0 py-4  opacity-70">
@@ -81,7 +81,7 @@ const Homepage = ({ news }) => {
                   </span>
                 </div>
               </div>
-              <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white">
+              <span className="text-md drop-shadow-lg hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white ">
                 {newsItem2?.title}
               </span>
             </div>
@@ -95,9 +95,9 @@ const Homepage = ({ news }) => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 left-0 flex flex-col p-2">
-              <div className="absolute -top-16 left-0 w-full  flex-col p-2">
-                <span className="bg-secondaryBlue text-white  text-xs p-2 ">
+            <div className="absolute bottom-0 left-0 flex flex-col p-2 lg:pl-4  lg:pb-4">
+              <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-4  lg:pb-4">
+                <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
                   {convertToTitleCase(newsItem3.category)}
                 </span>
                 <div className="flex space-x-1 px-2 py-4 opacity-70">
@@ -121,9 +121,9 @@ const Homepage = ({ news }) => {
               className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50"></div>
-            <div className="absolute bottom-0 left-0 p-2">
-            <div className="absolute -top-16 left-0 w-full  flex-col p-2">
-                <span className="bg-secondaryBlue text-white  text-xs p-2 ">
+            <div className="absolute bottom-0 left-0 p-2 lg:pl-4  lg:pb-4">
+            <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-4  lg:pb-4">
+                <span className="bg-secondaryBlue text-white  uppercase font-monsterrat font-semibold  text-xs p-2 ">
                   {convertToTitleCase(newsItem4.category)}
                 </span>
                 <div className=" flex space-x-1 px-2 py-4  opacity-70">
