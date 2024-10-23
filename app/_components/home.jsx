@@ -126,7 +126,7 @@ const Categories = () => {
           </>
         )}
         <Homepage news={news}/>
-        <div className="fixed z-20 bottom-5 lg:bottom-8  right-3 lg:right-6 w-[7rem]">
+        <div className="fixed z-20 bottom-5 lg:bottom-8  right-3 lg:right-6 w-[5rem] lg:w-[7rem]">
           <LiveIssue />
         </div>
         
