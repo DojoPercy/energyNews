@@ -188,17 +188,21 @@ const SingleNews = () => {
                     </a>
                   </h2>
                   <div className="entry-content mb-4">
-                  <p className="font-monsterrat font-normal">{getShortSummary(article.summary)}</p>
+                  <p className="font-monsterrat font-semibold">{getShortSummary(article.summary)}</p>
                 </div>
                 </header>
                 <span className="block text-sm text-gray-500 mb-2"></span>
-                <a className="block w-full" href={`/news/${article.id}`}>
+               {
+                article.videoUrl === "" && (
+                  <a className="block w-full" href={`/news/${article.id}`}>
                   <img
                     src={article.imageUrl}
                     alt={article.title}
                     className="object-cover"
                   />
                 </a>
+                )
+               }
               
               </figure>
               <div className="pr-0 lg:p-0 flex flex-col  mr-0">

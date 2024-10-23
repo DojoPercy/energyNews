@@ -37,8 +37,8 @@ const MultimediaHub = ({ news }) => {
   const { imageUrl, name, content } = recentNews[0] || {};
 
   return (
-    <div className="h-[120vh] relative">
-      <div className="grid grid-cols-3 grid-rows-10 gap-5 h-full w-full">
+    <div className="h-[90vh] relative">
+      <div className="grid grid-cols-2 grid-rows-10 gap-1 h-full w-full">
         <div className="col-span-3 row-span-6 relative">
           {recentNews[0] && (
             <a href={`/news/${encodeURIComponent(recentNews[0]?.title)}`}>
@@ -50,7 +50,7 @@ const MultimediaHub = ({ news }) => {
               <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50 hover:opacity-55"></div>
               <div className="absolute bottom-0 flex flex-col left-0 p-2 lg:pl-6 lg:pb-5">
                 <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-6 lg:pb-5">
-                  <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
+                  <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-1 ">
                     {convertToTitleCase(recentNews[0].category)}
                   </span>
                   <div className="flex space-x-1 px-0 py-4 opacity-70">
@@ -60,16 +60,70 @@ const MultimediaHub = ({ news }) => {
                     </span>
                   </div>
                 </div>
-                <span className="lg:text-2xl text-md md:text-sm hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white drop-shadow-lg">
+                <span className="lg:text-xl text-md md:text-sm hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white drop-shadow-lg">
                   {recentNews[0]?.title}
                 </span>
               </div>
             </a>
           )}
         </div>
-        <div className="row-span-4 row-start-7">7</div>
-        <div className="row-span-4 row-start-7">8</div>
-        <div className="row-span-4 row-start-7">9</div>
+        <div className="row-span-4 row-start-7 relative my-5 mr-5">
+        {recentNews[0] && (
+            <a href={`/news/${encodeURIComponent(recentNews[0]?.title)}`}>
+              <img
+                src={recentNews[1]?.imageUrl}
+                alt="recentNews[1]"
+                className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition ease-in-out duration-300"
+              />
+              <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50 hover:opacity-55"></div>
+              <div className="absolute bottom-0 flex flex-col left-0 p-2 lg:pl-6 lg:pb-5">
+                <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-6 lg:pb-5">
+                  <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
+                    {convertToTitleCase(recentNews[1].category)}
+                  </span>
+                  <div className="flex space-x-1 px-0 py-4 opacity-70">
+                    <FaClock className="text-white" />
+                    <span className="text-xs  text-white w-full ">
+                      {recentNews[1].publishDate}
+                    </span>
+                  </div>
+                </div>
+                <span className="lg:text-xl text-md md:text-sm hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white drop-shadow-lg">
+                  {recentNews[1]?.title}
+                </span>
+              </div>
+            </a>
+          )}
+        </div>
+        <div className="row-span-4 row-start-7 relative my-5">
+        {recentNews[2] && (
+            <a href={`/news/${encodeURIComponent(recentNews[2]?.title)}`}>
+              <img
+                src={recentNews[2]?.imageUrl}
+                alt="recentNews[2]"
+                className="w-full h-full object-cover group-hover:scale-105 group-hover:rotate-1 transition ease-in-out duration-300"
+              />
+              <div className="absolute  inset-0 bg-gradient-to-t from-black to-transparent opacity-50 hover:opacity-55"></div>
+              <div className="absolute bottom-0 flex flex-col left-0 p-2 lg:pl-6 lg:pb-5">
+                <div className="absolute -top-16 left-0 w-full  flex-col p-2 lg:pl-6 lg:pb-5">
+                  <span className="bg-secondaryBlue text-white uppercase font-monsterrat font-semibold text-xs p-2 ">
+                    {convertToTitleCase(recentNews[2].category)}
+                  </span>
+                  <div className="flex space-x-1 px-0 py-4 opacity-70">
+                    <FaClock className="text-white" />
+                    <span className="text-xs  text-white w-full ">
+                      {recentNews[2].publishDate}
+                    </span>
+                  </div>
+                </div>
+                <span className="lg:text-xl text-md md:text-sm hover:cursor-pointer transition ease-in-out capitalize duration-100 font-semibold mt-2 text-white drop-shadow-lg">
+                  {recentNews[2]?.title}
+                </span>
+              </div>
+            </a>
+          )}
+        </div>
+       
       </div>
     </div>
   );
