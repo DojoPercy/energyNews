@@ -1,3 +1,4 @@
+"use client";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,9 +29,9 @@ const CreatePost = () => {
   const [uploadingAudioVideo, setUploadingAudioVideo] = useState(false);
   const [editorHtml, setEditorHtml] = useState("");
   const [audioVideoType, setAudioVideoType] = useState("");
-  const [iframeString, setIframeString] = useState(""); // New iframe state
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
+  const [iframeString, setIframeString] = useState("");
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showImageUploadNotice, setShowImageUploadNotice] = useState(false);
@@ -52,7 +53,7 @@ const CreatePost = () => {
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    
+
     setImageFile(file);
   };
 
@@ -65,10 +66,9 @@ const CreatePost = () => {
     const file = event.target.files[0];
     if (file) {
       const fileType = file.type.startsWith("audio") ? "audio" : "video";
-      setAudioVideoType(fileType); 
-      setAudioVideoFile(file);  
+      setAudioVideoType(fileType);
+      setAudioVideoFile(file);
     }
-    
   };
 
   const handleAddTag = () => {
@@ -98,7 +98,7 @@ const CreatePost = () => {
           publishDate: new Date().toUTCString(),
           updateDate: new Date().toDateString(),
           imageUrl: imageUrl || "",
-          videoUrl: audioVideoUrl || iframeString || "", // Include iframe if provided
+          videoUrl: audioVideoUrl || iframeString || "", // Video or audio URL
           isPublished: publishImmediately,
           views: 0,
           likes: 0,
@@ -113,8 +113,8 @@ const CreatePost = () => {
         setImageFile(null);
         setImageUrl("");
         setAudioVideoFile(null);
+        setIframeString("");
         setAudioVideoUrl("");
-        setIframeString(""); // Reset iframe field
         setEditorHtml("");
         setTags([]);
       } catch (error) {
@@ -228,7 +228,6 @@ const CreatePost = () => {
           className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
         />
 
-        {/* Conditional iframe input field */}
         {category.toLowerCase() === "video" && (
           <div className="flex flex-col gap-4">
             <TextInput
@@ -253,62 +252,159 @@ const CreatePost = () => {
                 max="100"
                 className="w-full h-2 rounded-lg"
               ></progress>
-              <p className="ml-3">{uploadProgress.toFixed(2)}%</p>
+              <span>{uploadProgress.toFixed(2)}%</span>
             </div>
-          ) : imageFile ? (
-            <p>{imageFile.name}</p>
+          ) : imageUrl ? (
+            <div className="flex items-center gap-4">
+              <img
+                src={imageUrl}
+                alt="Uploaded"
+                className="w-72 h-72 object-cover rounded-md"
+              />
+              <Button
+                type="button"
+                onClick={handleRemoveImage}
+                gradientDuoTone="redToOrange"
+                size="sm"
+              >
+                Remove Image
+              </Button>
+            </div>
           ) : (
-            <p className="text-gray-500">No file chosen</p>
+            <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 w-full">
+              <FileInput
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              <Button
+                type="button"
+                onClick={handleImageUpload}
+                gradientDuoTone="purpleToBlue"
+                size="sm"
+                outline
+                className="w-[200px]"
+              >
+                Upload Image
+              </Button>
+            </div>
           )}
-          <FileInput
-            onChange={handleFileChange}
-            className="ml-2"
-            disabled={uploading}
+        </div>
+        {category.toLowerCase() === "podcast" ||
+        category.toLowerCase() === "video" ? (
+          uploadingAudioVideo ? (
+            <div className="flex items-center justify-between w-full">
+              <progress
+                value={uploadingAudioVideoProgress}
+                max="100"
+                className="w-full h-2 rounded-lg"
+              ></progress>
+              <span>{uploadingAudioVideoProgress.toFixed(2)}%</span>
+            </div>
+          ) : audioVideoUrl ? (
+            // Display audio or video player based on file type
+            <div className="mt-4">
+              {audioVideoType === "audio" ? (
+                <audio controls className="w-full">
+                  <source src={audioVideoUrl} type="audio/mpeg" />
+                  Your browser does not support the audio tag.
+                </audio>
+              ) : (
+                <video controls className="w-full h-auto">
+                  <source src={audioVideoUrl} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              )}
+              <Button
+                type="button"
+                onClick={handleRemoveAudioVideo}
+                gradientDuoTone="redToOrange"
+                size="sm"
+                className="mt-4"
+              >
+                Remove Media
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <p className="text-gray-500 text-sm mt-2 flex items-center pl-3">
+                <IoAlertCircle /> Upload an Audio or Video file if applicable
+              </p>
+              <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3 w-full">
+                <FileInput
+                  id="audio-video-upload"
+                  type="file"
+                  accept="audio/*,video/*"
+                  onChange={handleAudioVideoFileChange}
+                />
+                <Button
+                  type="button"
+                  onClick={handleAudioVideoUpload}
+                  gradientDuoTone="purpleToBlue"
+                  size="sm"
+                  outline
+                  className="w-[200px]"
+                >
+                  Upload Media
+                </Button>
+              </div>
+            </div>
+          )
+        ) : null}
+
+        <div className="border border-gray-300 rounded-md p-3">
+          <ReactQuill
+            value={editorHtml}
+            onChange={setEditorHtml}
+            theme="snow"
+            placeholder="Write your post here..."
+          />
+        </div>
+        <div className="flex items-center gap-2">
+          <TextInput
+            type="text"
+            placeholder="Add Tag"
+            value={newTag}
+            onChange={(e) => setNewTag(e.target.value)}
+            className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
           />
           <Button
-            className="ml-3"
-            onClick={handleImageUpload}
-            disabled={uploading}
+            type="button"
+            onClick={handleAddTag}
+            gradientDuoTone="purpleToBlue"
+            size="sm"
+            outline
           >
-            Upload Image
+            Add Tag
           </Button>
+        </div>
+        <div className="flex gap-2 flex-wrap">
+          {tags.map((tag, index) => (
+            <span
+              key={index}
+              className="bg-teal-200 text-teal-900 rounded-md px-2 py-1"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            id="publish-immediately"
+            checked={publishImmediately}
+            onChange={handleCheckboxChange}
+          />
+          <label htmlFor="publish-immediately">Publish Immediately</label>
         </div>
         {showImageUploadNotice && (
           <p className="text-red-500 text-sm mt-2">
             Please upload an image before submitting.
           </p>
         )}
-
-        <TextInput
-          placeholder="Tags (press enter to add)"
-          value={newTag}
-          onChange={(e) => setNewTag(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              handleAddTag();
-            }
-          }}
-          className="border border-gray-300 rounded-md p-3 focus:outline-none focus:border-teal-500"
-        />
-
-        <div className="flex flex-wrap gap-2">
-          {tags.map((tag, index) => (
-            <span
-              key={index}
-              className="bg-teal-500 text-white px-3 py-1 rounded-full text-sm"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        <div className="mt-4">
-          <ReactQuill value={editorHtml} onChange={setEditorHtml} />
-        </div>
-
-        <Button type="submit" className="mt-4">
-          Submit
+        <Button type="submit" gradientDuoTone="greenToBlue">
+          Submit Post
         </Button>
       </form>
     </div>
