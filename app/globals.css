@@ -19,7 +19,7 @@
   
 
   .animation-marquee {
-    animation: marquee 130s linear infinite;
+    animation: marquee 190s linear infinite;
     animation-play-state: running;
   }
   

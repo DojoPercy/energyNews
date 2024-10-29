@@ -77,24 +77,36 @@ const Header = () => {
           isSticky ? "fixed top-0 z-50 w-full" : "relative"
         }`}
       >
-        <div className="w-full flex flex-col ">
+        <div className="w-full flex flex-col  ">
+          <div className={`bg-blueTheme py- justify-end py-1 lg:px-32 hidden ${isSticky ? "hidden": "lg:flex"}`}>
+         
+                  <div className="flex justify-center gap-3">
+                    <Link href="/">
+                    <FaFacebook className="text-white text-2xl" />
+                    </Link>
+                    <Link href="/">
+                    <FaInstagram className="text-white text-2xl" />
+                    </Link>
+                    <Link href="/">
+                    <FaLinkedin className="text-white text-2xl" />
+                    </Link>
+                  </div>
+          </div>
           <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-1 lg:px-32 ">
             <Link href="/">
               <img
                 src="/logo.png"
                 alt="Logo"
                 className={` flex ${
-                  isSticky ? " h-12" : " h-[7rem]"
+                  isSticky ? " h-12" : " h-[6rem]"
                 } transition-all ease-out duration-100`}
               />
             </Link>
 
             <div>
               <div className="w-full  justify-end gap-5 items-center hidden lg:flex">
-                  <div className="bg-complementaryTheme text-secondaryBlue py-1 px-2 ">
-                    Advertise With Us
-                  </div>
-                  <div className="flex justify-center gap-3">
+                
+              <div className={`${isSticky ? "flex": "hidden"}  justify-center gap-3`}>
                     <Link href="/">
                     <FaFacebook className="text-black text-2xl" />
                     </Link>
@@ -105,7 +117,6 @@ const Header = () => {
                     <FaLinkedin className="text-black text-2xl" />
                     </Link>
                   </div>
-                 
 
               </div>
             <Link href="/" className={`py-3 ${isSticky ? "hidden" : "block"}`}>
@@ -170,7 +181,7 @@ const Header = () => {
 </div>
 
             </div>
-            <div className={`overflow-hidden whitespace-nowrap bg-gray-100 text-gray-900 py-2  shadow-gray-200 shadow-lg  border-t border-b border-complementaryTheme w-full ${isSticky ? "hidden" : "block"}`}>
+            <div className={`overflow-hidden whitespace-nowrap bg-white text-gray-900 py-2  shadow-gray-200 shadow-md  border-t border-b border-blueThme w-full ${isSticky ? "hidden" : "block"}`}>
               <div className="relative h-full flex items-center z-10">
                 <div className="ml-32  animation-marquee text-sm lg:text-base flex"
                 
@@ -179,12 +190,12 @@ const Header = () => {
                 }}>
                   {news.map((headline, index) => (
                     <span className="px-4 relative " key={index}>
-                      <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-complementaryTheme inline-block"></span>
-                      <FaChevronRight className="text-secondaryBlue inline-block text-[10px] opacity-75 " />
+                      <span className=" h-[43px] absolute -top-[10px] left-0 w-[0.5px] -ml-1 bg-white inline-block"></span>
+                      <FaChevronRight className="text-secondaryBlue inline-block text-[8px] opacity-75 " />
 
                       <a
                         href={`/news/${headline.title}`}
-                        className="hover:underline ml-1 text-gray-600 text-[10px] font-semibold lg:text-[12px]"
+                        className="hover:underline ml-1 text-gray-600 text-[10px] font-monsterrat font-semibold lg:text-[12px]"
                       >
                         {headline.title}
                       </a>
