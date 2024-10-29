@@ -78,17 +78,17 @@ const Header = () => {
         }`}
       >
         <div className="w-full flex flex-col  ">
-          <div className={`bg-blueTheme py- justify-end py-1 lg:px-32 hidden ${isSticky ? "hidden": "lg:flex"}`}>
+          <div className={`bg-blueTheme py- justify-end py-2 lg:px-32 hidden ${isSticky ? "hidden": "lg:flex"}`}>
          
                   <div className="flex justify-center gap-3">
                     <Link href="/">
-                    <FaFacebook className="text-white text-2xl" />
+                    <FaFacebook className="text-white text-xl" />
                     </Link>
                     <Link href="/">
-                    <FaInstagram className="text-white text-2xl" />
+                    <FaInstagram className="text-white text-xl" />
                     </Link>
                     <Link href="/">
-                    <FaLinkedin className="text-white text-2xl" />
+                    <FaLinkedin className="text-white text-xl" />
                     </Link>
                   </div>
           </div>
