@@ -92,7 +92,7 @@ const Header = () => {
                     </Link>
                   </div>
           </div>
-          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-1 lg:px-32 ">
+          <div className="container mx-auto  flex-col lg:flex-row items-center justify-center lg:justify-between lg:mx-auto lg:max-w-[1500px] hidden lg:flex py-2 lg:px-32 ">
             <Link href="/">
               <img
                 src="/logo.png"
