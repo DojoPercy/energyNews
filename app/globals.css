@@ -16,8 +16,19 @@
     transform: rotateY(180deg); /* Flips the image */
     backface-visibility: hidden; /* Hides the back of the image */
   }
+  @keyframes zoom {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
   
-
+  .animate-zoom {
+    animation: zoom 1.5s ease-in-out infinite;
+  }
+  
   .animation-marquee {
     animation: marquee 190s linear infinite;
     animation-play-state: running;

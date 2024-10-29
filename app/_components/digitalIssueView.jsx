@@ -38,7 +38,7 @@ const DigitalIssuesByYear = () => {
   }, [digitalIssues]);
 
   if (loading) return <div className="w-full h-full flex jutify-center items-center">
-    <ClipLoader size={30} color={"#123abc"} loading={true} />
+    <ClipLoader size={0} color={"#123abc"} loading={true} />
   </div>;
   if (error) return <p>Error loading issues: {error}</p>;
 

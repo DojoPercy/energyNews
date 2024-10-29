@@ -21,7 +21,17 @@ const RecentIcon = ({ news }) => {
   if (news.length === 0) {
     return (
       <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-75 z-10">
-        <ClipLoader size={50} color={"#123abc"} loading={true} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-90 z-10 lg:pb-20">
+        <ClipLoader color="#262262" className="w-10 text-blueTheme"/>
+      <img
+        src="/logo.png"
+        alt="logo"
+        className="w-[15rem] animate-zoom"
+      />
+      <p className="mt-4 text-sm font-semibold font-monsterrat text-gray-500 animate-pulse">
+        Loading news just for you...
+      </p>
+    </div>
       </div>
     );
   }
