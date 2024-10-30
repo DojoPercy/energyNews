@@ -6,7 +6,7 @@ import { fetchNews } from "../_redux/news/newSlice";
 import { fetchAd } from "../_redux/news/ads";
 import { ClipLoader } from "react-spinners";
 import NewsShimmer from "../../lib/shimmer/news_shimmer";
-import { FaChevronRight } from "react-icons/fa";
+import { FaChevronRight, FaClock } from "react-icons/fa";
 import Slider from "./slider";
 import RecentDigitalIssue from "./digitalissuebox";
 import RecentCategoryNews from "./recentcategories";
@@ -19,6 +19,8 @@ import RecentIcon from "./RecentIcon";
 import Homepage from "./homepage";
 import LiveIssue from "./liveIssue";
 import MultimediaHub from "./multimedia";
+import { PersonIcon } from "@radix-ui/react-icons";
+import { Clock12Icon } from "lucide-react";
 
 const Categories = () => {
   const { catName } = useParams();
@@ -213,13 +215,14 @@ const Categories = () => {
                     <h2 className="entry-title text-xl text-gray-800 font-mont font-semibold mb-2">
                       <a
                         href={`/news/${encodeURIComponent(article.title)}`}
-                        className="hover:underline"
+                        className=""
                       >
                         {article.title}
                       </a>
                     </h2>
                   </header>
-                  <div className="flex space-x-2 text-sm text-gray-500 mb-4">
+                  <div className="flex justify-start items-center space-x-2 text-xs text-gray-500 mb-4">
+                    <PersonIcon width={"11px"} className="text-secondaryBlue"/>
                     <span className="by_line block">
                       by{" "}
                       <strong>
@@ -227,17 +230,19 @@ const Categories = () => {
                       </strong>
                     </span>
                     <span className="font-semibold">|</span>
-                    <span className="posted-on block">
+                    <span className="posted-on  flex justify-center items-center lg:items-center text-xs">
+                      <Clock12Icon width={"11px"} className="text-secondaryBlue text- opacity-90 mr-1" />
                       {article.publishDate}
                     </span>
                   </div>
-                  <div className="entry-content">
+                  <div className="entry-content text-gray-500">
                     <p>{getShortSummary(article.summary)}</p>
                   </div>
                 </div>
               </article>
             ))}
             <PersonalityofWeek />
+            <img src={ads.bannerAds} alt="Lexar" />
             <TitleSection title={"Multimedia's Hub"} />
             <MultimediaHub news={news} />
           </section>
