@@ -38,7 +38,7 @@ const RecentCategoryNews = ({ category, news }) => {
   return (
     <div>
         <div
-      className={`border border-complementaryTheme shadow-sm w-full ${
+      className={`lg:border border-complementaryTheme border-opacity-55 shadow-sm w-full ${
         recentNews.length === 0 ? "hidden" : "block"
       } `}
     >
@@ -87,7 +87,7 @@ const RecentCategoryNews = ({ category, news }) => {
         <div className="mt-4">
           <Link
             href={`/news/category/${category}`}
-            className="text-secondaryBlue text-sm text-center"
+            className="text-gray-500 text-xs text-center"
           >
             View More
           </Link>

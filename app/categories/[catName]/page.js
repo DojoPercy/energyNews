@@ -133,7 +133,7 @@ const Categories = () => {
                       <p>{getShortSummary(latestNews.summary)}</p>
                     </div>
                     <div
-                      className="entry-content my-10 lg:mr-20 mr-2 text-sm lg:text-lg line-clamp-6"
+                      className="entry-content font-poppins my-10 lg:mr-20 mr-2 text-sm lg:text-lg line-clamp-6"
                       dangerouslySetInnerHTML={{ __html: latestNews.content }}
                     ></div>
                   </div>

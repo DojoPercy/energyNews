@@ -44,7 +44,7 @@ const RecentIcon = ({ news }) => {
   const { imageUrl, name, content } = recentNews[0] || {}; 
 
   return (
-    <div className="border mb-10 border-complementaryTheme shadow-sm my-2 p-3 rounded-sm overflow-hidden">
+    <div className="lg:border mb-10 border-complementaryTheme shadow-sm my-2 p-3 rounded-sm overflow-hidden">
       <div className="text-black bg-white w-full text-xl font-normal p-4 ">
         Energy Leadership Icon of the Week
       </div>
