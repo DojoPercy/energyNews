@@ -30,7 +30,7 @@ const RecentDigitalIssue = () => {
   const month = issueDate.toLocaleString('default', { month: 'long' });
 
   return (
-    <div className="border-complementaryTheme border shadow-sm mt-10 mb-2">
+    <div className="lg:border-complementaryTheme lg:border shadow-sm mt-10 mb-2">
       <div className="bg-white text-black font-poppins text-xl font-normal p-4">
         Live Publication
       </div>
@@ -45,7 +45,7 @@ const RecentDigitalIssue = () => {
           <p className="mt-2 text-gray-600">{`${month} ${year}`}</p>
           
           <div className="mt-4">
-            <Link href="/publications" className="text-blue-500 text-center">View All</Link>
+            <Link href="/publications" className="text-gray-500 text-center text-xs">View All</Link>
           </div>
         </div>
       </div>
